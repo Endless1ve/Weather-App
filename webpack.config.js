@@ -1,8 +1,15 @@
 const path = require("path");
+const webpack = require("webpack");
+new webpack.DefinePlugin({
+  NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+});
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const isDev = process.env.NODE_ENV === "development";
 
 module.exports = {
+  mode: "production",
   entry: { main: "./src/index.js" },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -17,7 +24,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        use: [
+          isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+        ],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -44,4 +55,9 @@ module.exports = {
       filename: "index.html",
     }),
   ],
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ],
+  },
 };
