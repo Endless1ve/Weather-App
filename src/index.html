@@ -8,7 +8,57 @@
     <title>Погода</title>
   </head>
   <body class="body">
-    <div class="root"></div>
+    <div class="root">
+      <div class="main">
+        <section class="home">
+          <div class="homeLocation">
+            <div class="locationContent">
+              <p class="locationCity">Moscow</p>
+              <p class="locationInfo">Current location</p>
+            </div>
+          </div>
+          <div class="homeContent">
+            <div class="homeInfo">
+              <p class="infoDate">Friday, 14 november 2023</p>
+              <div class="infoDegrees">
+                <p class="degreesValue">-22</p>
+                <p class="degreesUnit">&degC</p>
+              </div>
+              <div class="degreesRange">
+                <p class="rangeMin">&darr; 16&degC</p>
+                <p class="rangeMax">&uarr; 26&degC</p>
+              </div>
+            </div>
+            <div class="homeConditions">
+              <img
+                src="<%=require('./vendor/images/drizzle.png')%>"
+                alt="Изображение погодного условия"
+                class="congitionsImage"
+              />
+              <p class="conditionsInfo">Light Drizzle</p>
+            </div>
+            <div class="homeSun">
+              <div class="sunPosition sunrise">
+                <img
+                  src="<%=require('./vendor/images/sunrise.png')%>"
+                  alt="Восход"
+                  class="positionImage"
+                />
+                <p class="positionTime sunriseTime">09:18 AM</p>
+              </div>
+              <div class="sunPosition sunset">
+                <img
+                  src="<%=require('./vendor/images/sunset.png')%>"
+                  alt="Закат"
+                  class="positionImage"
+                />
+                <p class="positionTime sunsetTime">06:32 PM</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
     <script src="<%= htmlWebpackPlugin.files.js %>"></script>
   </body>
 </html>

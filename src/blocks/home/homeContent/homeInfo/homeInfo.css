@@ -1,0 +1,9 @@
+@import url('./infoDate/infoDate.css');
+@import url('./infoDegrees/infoDegrees.css');
+@import url('./degreesRange/degreesRange.css');
+
+.homeInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

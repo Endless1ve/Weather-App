@@ -1,0 +1,8 @@
+@import url('./locationContent/locationContent.css');
+
+.homeLocation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

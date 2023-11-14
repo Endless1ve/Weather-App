@@ -1,0 +1,11 @@
+@import url('./sunPosition/sunPosition.css');
+
+.homeSun {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

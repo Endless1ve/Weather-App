@@ -1,0 +1,8 @@
+@import url('./rangeMin/rangeMin.css');
+@import url('./rangeMax/rangeMax.css');
+
+.degreesRange {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}

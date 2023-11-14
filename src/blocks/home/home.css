@@ -1,0 +1,13 @@
+@import url('./homeLocation/homeLocation.css');
+@import url('./homeContent/homeContent.css');
+@import url('./homeConditions/homeConditions.css');
+@import url('./homeSun/homeSun.css');
+
+.home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}

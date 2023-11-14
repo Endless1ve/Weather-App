@@ -1,0 +1,10 @@
+@import url('./congitionsImage/congitionsImage.css');
+@import url('./conditionsInfo/conditionsInfo.css');
+
+.homeConditions {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,8 @@
+@import url('./positionImage/positionImage.css');
+@import url('./positionTime/positionTime.css');
+
+.sunPosition {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
