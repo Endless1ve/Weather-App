@@ -8,7 +8,16 @@
     <title>Погода</title>
   </head>
   <body class="body">
-    <div class="root"></div>
+    <div class="root">
+      <section class="plug">
+        <div class="plugContent">
+          <h1 class="plugTitle">Weather</h1>
+          <img src="<%=require('./vendor/images/preloader.gif')%>" alt="Прелоудер" class="preloader" />
+          <p class="plugError">Какая-то ошибочка, ето плохо</p>
+        </div>
+        <p class="plugSubtitle">A minimal weather app</p>
+      </section>
+    </div>
     <script src="<%= htmlWebpackPlugin.files.js %>"></script>
   </body>
 </html>

@@ -1,0 +1,10 @@
+@import url('./plugTitle/plugTitle.css');
+@import url('./plugError/plugError.css');
+
+.plugContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}

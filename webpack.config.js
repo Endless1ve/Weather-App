@@ -39,11 +39,8 @@ module.exports = {
         },
       },
       {
-        test: /\.(eot|ttf|woff|woff2)$/,
-        loader: "file-loader",
-        options: {
-          outputPath: "vendor/fonts",
-        },
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
       },
     ],
   },
