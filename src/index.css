@@ -1,3 +1,9 @@
 @import url('./blocks/normalize/normalize.css');
 @import url('./vendor/fonts/fonts.css');
 @import url('./blocks/root/root.css');
+@import url('./blocks/main/main.css');
+
+body {
+    min-height: 100vh;
+    height: 100%;
+}
