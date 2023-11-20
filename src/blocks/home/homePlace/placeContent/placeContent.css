@@ -1,3 +1,6 @@
+@import url('./placeIcon/placeIcon.css');
+@import url('./placeText/placeText.css');
+
 .placeContent {
     display: flex;
     flex-direction: row;
