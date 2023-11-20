@@ -12,8 +12,19 @@
 <body class="body">
   <div class="root">
     <div class="main">
+      <div class="home">
+        <div class="homePlace">
+          <div class="placeContent">
+            <img src="<%=require('./vendor/images/location.png')%>" alt="" class="placeIcon">
+            <p class="placeText">Москва</p>
+          </div>
+        </div>
+        <div class="homeForecast">
+        </div>
+      </div>
     </div>
-    <script src="<%= htmlWebpackPlugin.files.js %>"></script>
+  </div>
+  <script src="<%= htmlWebpackPlugin.files.js %>"></script>
 </body>
 
 </html>

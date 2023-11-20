@@ -2,8 +2,10 @@
 @import url("./vendor/fonts/fonts.css");
 @import url("./blocks/root/root.css");
 @import url("./blocks/main/main.css");
+@import url('./blocks/home/home.css');
 
 body {
   min-height: 100vh;
   height: 100%;
+  background-color: rgba(214, 158, 54, 1);
 }

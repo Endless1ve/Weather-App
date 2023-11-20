@@ -1,0 +1,6 @@
+@import url('./homePlace/homePlace.css');
+
+.home {
+    display: flex;
+    flex-direction: column;
+}
