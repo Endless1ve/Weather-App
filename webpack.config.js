@@ -41,6 +41,7 @@ module.exports = {
       {
         test: /\.(eot|ttf|woff|woff2)$/,
         loader: "file-loader",
+        dependency: { not: ["url"] },
         options: {
           outputPath: "vendor/fonts",
         },
@@ -56,8 +57,6 @@ module.exports = {
     }),
   ],
   optimization: {
-    minimizer: [
-      new CssMinimizerPlugin(),
-    ],
+    minimizer: [new CssMinimizerPlugin()],
   },
 };
