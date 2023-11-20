@@ -1,14 +1,16 @@
-.placeText {
+.forecastDate {
     color: #FFF;
+    text-align: center;
     font-family: 'Inter';
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: normal;
+    margin-top: 10px;
 }
 
 @media screen and (min-width: 768px) {
-    .placeText {
+    .forecastDate {
         font-size: 24px;
     }
 }
