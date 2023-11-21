@@ -1,0 +1,10 @@
+@import url('./forecastsTitle/forecastsTitle.css');
+@import url('./hourlyContent/hourlyContent.css');
+@import url('./dailyContent/dailyContent.css');
+@import url('./cardImage/cardImage.css');
+@import url('./cardDegrees/cardDegrees.css');
+@import url('./cardSpeed/cardSpeed.css');
+
+.forecastContent {
+    width: 100%;
+}
