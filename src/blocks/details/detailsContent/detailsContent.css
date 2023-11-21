@@ -1,0 +1,13 @@
+@import url('./detailsCards/detailsCards.css');
+
+.detailsContent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (min-width: 1024px) {
+    .detailsContent {
+        justify-content: space-evenly;
+    }
+}

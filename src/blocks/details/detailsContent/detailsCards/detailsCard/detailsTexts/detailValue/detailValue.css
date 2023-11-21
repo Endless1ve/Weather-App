@@ -1,0 +1,15 @@
+.detailValue {
+    color: #FFF;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+@media screen and (min-width: 500px) {
+
+    .detailValue {
+        font-size: 24px;
+    }
+}
