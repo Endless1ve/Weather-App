@@ -1,5 +1,4 @@
 @import url('./plugTitle/plugTitle.css');
-@import url('./plugError/plugError.css');
 
 .plugContent {
     display: flex;
