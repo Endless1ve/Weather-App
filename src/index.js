@@ -1,4 +1,4 @@
 import "./index.css";
-import { getLocationBrowser } from "./scripts/API/getLocation.js";
+import { getLocation } from "./scripts/components/getLocation/getLocation";
 
-getLocationBrowser();
+getLocation();
