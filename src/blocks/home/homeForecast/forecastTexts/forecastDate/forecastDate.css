@@ -1,16 +1,16 @@
 .forecastDate {
-    color: #FFF;
-    text-align: center;
-    font-family: 'Inter';
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-top: 10px;
+  margin-top: 10px;
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 18px;
+  font-style: normal;
+  line-height: normal;
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {
-    .forecastDate {
-        font-size: 24px;
-    }
+  .forecastDate {
+    font-size: 24px;
+  }
 }

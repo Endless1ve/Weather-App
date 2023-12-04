@@ -1,9 +1,9 @@
 .forecastImage {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 @media screen and (min-width: 1024px) {
-    .forecastImage {
-        width: 321px;
-    }
+  .forecastImage {
+    width: 321px;
+  }
 }

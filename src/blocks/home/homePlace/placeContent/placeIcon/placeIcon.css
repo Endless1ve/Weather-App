@@ -1,9 +1,9 @@
 .placeIcon {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 @media screen and (min-width: 768px) {
-    .placeIcon {
-        width: 30px;
-    }
+  .placeIcon {
+    width: 30px;
+  }
 }
