@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="author" content="Artem 'Endless1ve' Tulupov" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>" />
-  <title>Погода</title>
-</head>
-
-<body class="body">
-  <div class="root">
-    <div class="main">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Artem 'Endless1ve' Tulupov" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>" />
+    <title>Погода</title>
+  </head>
+  <body class="body">
+    <div class="root">
+      <section class="plug">
+        <div class="plugContent">
+          <h1 class="plugTitle">Weather</h1>
+          <span class="preloader"></span>
+        </div>
+        <p class="plugSubtitle">A minimal weather app</p>
+      </section>
+      <div class="main"></div>
     </div>
     <script src="<%= htmlWebpackPlugin.files.js %>"></script>
-</body>
-
+  </body>
 </html>
