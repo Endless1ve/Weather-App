@@ -1,18 +1,17 @@
-@import url('./forecastContent/forecastContent.css');
+@import url("./forecastContent/forecastContent.css");
 
 .forecasts {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 20px;
-    margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 40px;
+  padding: 0 20px;
 }
 
-
 @media screen and (min-width: 1024px) {
-    .forecasts {
-        flex-direction: row;
-    }
+  .forecasts {
+    flex-direction: row;
+  }
 }

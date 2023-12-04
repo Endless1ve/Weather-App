@@ -1,10 +1,10 @@
 .forecastsTitle {
-    margin-bottom: 20px;
-    color: #FFF;
-    text-align: center;
-    font-family: 'Inter';
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+  margin-bottom: 20px;
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 20px;
+  font-style: normal;
+  line-height: normal;
+  text-align: center;
 }
