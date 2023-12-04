@@ -17,6 +17,10 @@
         <p class="plugSubtitle">A minimal weather app</p>
       </section>
       <div class="main"></div>
+      <div class="error">
+        <img src="<%=require('./vendor/images/close.svg')%>" alt="" class="errorClose">
+        <p class="errorText">В данный момент сервер недоступен</p>
+      </div>
     </div>
     <script src="<%= htmlWebpackPlugin.files.js %>"></script>
   </body>

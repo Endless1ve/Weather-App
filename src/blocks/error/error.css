@@ -1,0 +1,52 @@
+@keyframes error {
+  to {
+    transform: translateX(0);
+  }
+}
+
+.error {
+  position: absolute;
+  bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: 300px;
+  border: 1px solid transparent;
+  border-color: #ef5350;
+  border-radius: 10px;
+  padding: 10px 36px;
+  color: #fff;
+  text-align: center;
+  word-wrap: normal;
+  background-color: #ef1c1c;
+  transform: translateX(100vw);
+  animation: error ease-in 1s forwards;
+}
+
+.errorText {
+  color: #fff;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.errorClose {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  width: 16px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .error {
+    max-width: 500px;
+  }
+
+  .errorText {
+    font-size: 18px;
+  }
+}
