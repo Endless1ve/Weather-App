@@ -1,13 +1,13 @@
-@import url('./plugContent/plugContent.css');
-@import url('./plugSubtitle/plugSubtitle.css');
+@import url("./plugContent/plugContent.css");
+@import url("./plugSubtitle/plugSubtitle.css");
 
 .plug {
-    width: 100vw;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 20px;
 }
