@@ -1,0 +1,21 @@
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.preloader {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  margin-top: 50px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  border-bottom-color: transparent;
+  animation: rotation 1s linear infinite;
+}
