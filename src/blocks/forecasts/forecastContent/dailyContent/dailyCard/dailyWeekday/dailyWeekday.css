@@ -1,9 +1,9 @@
 .dailyWeekday {
-    color: #FFF;
-    text-align: center;
-    font-family: 'Inter';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  color: #fff;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+  text-align: center;
 }
