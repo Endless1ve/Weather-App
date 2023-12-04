@@ -1,10 +1,6 @@
 .placeText {
-  color: #fff;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 20px;
-  font-style: normal;
-  line-height: normal;
 }
 
 @media screen and (min-width: 768px) {
