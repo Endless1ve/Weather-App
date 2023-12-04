@@ -1,7 +1,7 @@
-@import url('./detailsImage/detailsImage.css');
-@import url('./detailsTexts/detailsTexts.css');
+@import url("./detailsImage/detailsImage.css");
+@import url("./detailsTexts/detailsTexts.css");
 
 .detailsCard {
-    display: flex;
-    gap: 0 10px;
+  display: flex;
+  gap: 0 10px;
 }
