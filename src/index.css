@@ -3,6 +3,8 @@
 @import url("./blocks/root/root.css");
 @import url("./blocks/main/main.css");
 @import url("./blocks/home/home.css");
+@import url("./blocks/plug/plug.css");
+@import url("./blocks/preloader/preloader.css");
 
 body {
   height: 100%;
