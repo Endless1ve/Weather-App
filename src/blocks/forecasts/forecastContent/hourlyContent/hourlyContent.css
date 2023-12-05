@@ -1,0 +1,31 @@
+@import url("./hourlyCard/hourlyCard.css");
+
+.hourlyContent {
+  display: flex;
+  flex-direction: row;
+  gap: 0 15px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 40px;
+  border-radius: 20px;
+  padding: 15px;
+  overflow-x: scroll;
+  background: rgba(234, 202, 143, 0.7);
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .hourlyContent {
+    gap: 0 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hourlyContent {
+    margin-bottom: 0;
+    padding: 20px;
+  }
+}
