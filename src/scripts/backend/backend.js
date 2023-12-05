@@ -1,6 +1,13 @@
 const http = require("http");
 const port = 5000;
-
+const date = new Date();
+const newDate = `${date.getFullYear()}-${date.getMonth() + 1}-${
+  String(date.getDate()).length < 2 ? "0" + date.getDate() : date.getDate()
+} ${String(
+  new Date(date).getHours().length < 2
+    ? "0" + new Date(date).getHours()
+    : new Date(date).getHours() + 3
+)}:00:00`;
 http
   .createServer((req, res) => {
     const headers = {
@@ -41,6 +48,7 @@ http
   })
   .listen(port, () => {
     console.log(`server started on port: ${port}`);
+    console.log(new Date(new Date(newDate).getTime() + 60 * 60 * 1000));
   });
 
 const hourly = {
@@ -50,7 +58,7 @@ const hourly = {
   },
   data: [
     {
-      time: "2023-12-01 00:00:00",
+      time: new Date(new Date(newDate).getTime() + 1 * 60 * 60 * 1000),
       temp: -4.5,
       dwpt: -8.3,
       rhum: 75.0,
@@ -64,7 +72,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 01:00:00",
+      time: new Date(new Date(newDate).getTime() + 2 * 60 * 60 * 1000),
       temp: -4.4,
       dwpt: -7.0,
       rhum: 82.0,
@@ -78,7 +86,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 02:00:00",
+      time: new Date(new Date(newDate).getTime() + 3 * 60 * 60 * 1000),
       temp: -4.4,
       dwpt: -6.9,
       rhum: 83.0,
@@ -92,7 +100,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-01 03:00:00",
+      time: new Date(new Date(newDate).getTime() + 4 * 60 * 60 * 1000),
       temp: -4.4,
       dwpt: -7.8,
       rhum: 77.0,
@@ -106,7 +114,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-01 04:00:00",
+      time: new Date(new Date(newDate).getTime() + 5 * 60 * 60 * 1000),
       temp: -4.2,
       dwpt: -6.5,
       rhum: 84.0,
@@ -120,7 +128,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-01 05:00:00",
+      time: new Date(new Date(newDate).getTime() + 6 * 60 * 60 * 1000),
       temp: -4.1,
       dwpt: -6.2,
       rhum: 85.0,
@@ -134,7 +142,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-01 06:00:00",
+      time: new Date(new Date(newDate).getTime() + 7 * 60 * 60 * 1000),
       temp: -3.8,
       dwpt: -7.2,
       rhum: 77.0,
@@ -148,7 +156,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-01 07:00:00",
+      time: new Date(new Date(newDate).getTime() + 8 * 60 * 60 * 1000),
       temp: -3.9,
       dwpt: -6.1,
       rhum: 85.0,
@@ -162,7 +170,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-01 08:00:00",
+      time: new Date(new Date(newDate).getTime() + 9 * 60 * 60 * 1000),
       temp: -3.7,
       dwpt: -5.9,
       rhum: 85.0,
@@ -176,7 +184,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-01 09:00:00",
+      time: new Date(new Date(newDate).getTime() + 10 * 60 * 60 * 1000),
       temp: -3.1,
       dwpt: -6.2,
       rhum: 79.0,
@@ -190,7 +198,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-01 10:00:00",
+      time: new Date(new Date(newDate).getTime() + 11 * 60 * 60 * 1000),
       temp: -3.6,
       dwpt: -6.1,
       rhum: 83.0,
@@ -204,7 +212,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 11:00:00",
+      time: new Date(new Date(newDate).getTime() + 12 * 60 * 60 * 1000),
       temp: -3.6,
       dwpt: -5.8,
       rhum: 85.0,
@@ -218,7 +226,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 12:00:00",
+      time: new Date(new Date(newDate).getTime() + 13 * 60 * 60 * 1000),
       temp: -3.6,
       dwpt: -5.6,
       rhum: 86.0,
@@ -232,7 +240,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 13:00:00",
+      time: new Date(new Date(newDate).getTime() + 14 * 60 * 60 * 1000),
       temp: -3.8,
       dwpt: -5.6,
       rhum: 87.0,
@@ -246,7 +254,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 14:00:00",
+      time: new Date(new Date(newDate).getTime() + 15 * 60 * 60 * 1000),
       temp: -4.1,
       dwpt: -5.6,
       rhum: 89.0,
@@ -260,7 +268,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 15:00:00",
+      time: new Date(new Date(newDate).getTime() + 16 * 60 * 60 * 1000),
       temp: -4.3,
       dwpt: -5.5,
       rhum: 91.0,
@@ -274,7 +282,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 16:00:00",
+      time: new Date(new Date(newDate).getTime() + 17 * 60 * 60 * 1000),
       temp: -4.4,
       dwpt: -5.5,
       rhum: 92.0,
@@ -288,7 +296,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 17:00:00",
+      time: new Date(new Date(newDate).getTime() + 18 * 60 * 60 * 1000),
       temp: -4.5,
       dwpt: -5.5,
       rhum: 93.0,
@@ -302,7 +310,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 18:00:00",
+      time: new Date(new Date(newDate).getTime() + 19 * 60 * 60 * 1000),
       temp: -4.6,
       dwpt: -5.6,
       rhum: 93.0,
@@ -316,7 +324,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 19:00:00",
+      time: new Date(new Date(newDate).getTime() + 20 * 60 * 60 * 1000),
       temp: -4.8,
       dwpt: -5.8,
       rhum: 93.0,
@@ -330,7 +338,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 20:00:00",
+      time: new Date(new Date(newDate).getTime() + 21 * 60 * 60 * 1000),
       temp: -4.9,
       dwpt: -5.9,
       rhum: 93.0,
@@ -344,7 +352,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 21:00:00",
+      time: new Date(new Date(newDate).getTime() + 22 * 60 * 60 * 1000),
       temp: -5.1,
       dwpt: -5.9,
       rhum: 94.0,
@@ -358,7 +366,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 22:00:00",
+      time: new Date(new Date(newDate).getTime() + 23 * 60 * 60 * 1000),
       temp: -5.1,
       dwpt: -5.9,
       rhum: 94.0,
@@ -372,7 +380,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-01 23:00:00",
+      time: new Date(new Date(newDate).getTime() + 24 * 60 * 60 * 1000),
       temp: -5.1,
       dwpt: -5.9,
       rhum: 94.0,
@@ -386,7 +394,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-02 00:00:00",
+      time: new Date(new Date(newDate).getTime() + 25 * 60 * 60 * 1000),
       temp: -5.1,
       dwpt: -6.1,
       rhum: 93.0,
@@ -400,7 +408,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-02 01:00:00",
+      time: new Date(new Date(newDate).getTime() + 26 * 60 * 60 * 1000),
       temp: -5.2,
       dwpt: -6.2,
       rhum: 93.0,
@@ -414,7 +422,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-02 02:00:00",
+      time: new Date(new Date(newDate).getTime() + 27 * 60 * 60 * 1000),
       temp: -5.4,
       dwpt: -6.4,
       rhum: 93.0,
@@ -428,7 +436,7 @@ const hourly = {
       coco: 14,
     },
     {
-      time: "2023-12-02 03:00:00",
+      time: new Date(new Date(newDate).getTime() + 28 * 60 * 60 * 1000),
       temp: -5.5,
       dwpt: -6.5,
       rhum: 93.0,
@@ -442,7 +450,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 04:00:00",
+      time: new Date(new Date(newDate).getTime() + 29 * 60 * 60 * 1000),
       temp: -5.5,
       dwpt: -6.5,
       rhum: 93.0,
@@ -456,7 +464,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 05:00:00",
+      time: new Date(new Date(newDate).getTime() + 30 * 60 * 60 * 1000),
       temp: -5.4,
       dwpt: -6.5,
       rhum: 92.0,
@@ -470,7 +478,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 06:00:00",
+      time: new Date(new Date(newDate).getTime() + 31 * 60 * 60 * 1000),
       temp: -5.3,
       dwpt: -6.5,
       rhum: 91.0,
@@ -484,7 +492,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 07:00:00",
+      time: new Date(new Date(newDate).getTime() + 32 * 60 * 60 * 1000),
       temp: -5.0,
       dwpt: -6.5,
       rhum: 89.0,
@@ -498,7 +506,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 08:00:00",
+      time: new Date(new Date(newDate).getTime() + 33 * 60 * 60 * 1000),
       temp: -4.6,
       dwpt: -6.4,
       rhum: 87.0,
@@ -512,7 +520,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 09:00:00",
+      time: new Date(new Date(newDate).getTime() + 34 * 60 * 60 * 1000),
       temp: -4.3,
       dwpt: -6.4,
       rhum: 85.0,
@@ -526,7 +534,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 10:00:00",
+      time: new Date(new Date(newDate).getTime() + 35 * 60 * 60 * 1000),
       temp: -4.4,
       dwpt: -6.7,
       rhum: 84.0,
@@ -540,7 +548,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 11:00:00",
+      time: new Date(new Date(newDate).getTime() + 36 * 60 * 60 * 1000),
       temp: -4.5,
       dwpt: -6.6,
       rhum: 85.0,
@@ -554,7 +562,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 12:00:00",
+      time: new Date(new Date(newDate).getTime() + 37 * 60 * 60 * 1000),
       temp: -4.5,
       dwpt: -6.8,
       rhum: 84.0,
@@ -568,7 +576,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 13:00:00",
+      time: new Date(new Date(newDate).getTime() + 38 * 60 * 60 * 1000),
       temp: -4.8,
       dwpt: -6.9,
       rhum: 85.0,
@@ -582,7 +590,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 14:00:00",
+      time: new Date(new Date(newDate).getTime() + 39 * 60 * 60 * 1000),
       temp: -5.0,
       dwpt: -6.8,
       rhum: 87.0,
@@ -596,7 +604,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 15:00:00",
+      time: new Date(new Date(newDate).getTime() + 40 * 60 * 60 * 1000),
       temp: -5.3,
       dwpt: -6.8,
       rhum: 89.0,
@@ -610,7 +618,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 16:00:00",
+      time: new Date(new Date(newDate).getTime() + 41 * 60 * 60 * 1000),
       temp: -5.4,
       dwpt: -6.9,
       rhum: 89.0,
@@ -624,7 +632,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 17:00:00",
+      time: new Date(new Date(newDate).getTime() + 42 * 60 * 60 * 1000),
       temp: -5.5,
       dwpt: -7.0,
       rhum: 89.0,
@@ -638,7 +646,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 18:00:00",
+      time: new Date(new Date(newDate).getTime() + 43 * 60 * 60 * 1000),
       temp: -5.6,
       dwpt: -7.1,
       rhum: 89.0,
@@ -652,7 +660,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 19:00:00",
+      time: new Date(new Date(newDate).getTime() + 44 * 60 * 60 * 1000),
       temp: -5.7,
       dwpt: -7.1,
       rhum: 90.0,
@@ -666,7 +674,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 20:00:00",
+      time: new Date(new Date(newDate).getTime() + 45 * 60 * 60 * 1000),
       temp: -5.8,
       dwpt: -7.2,
       rhum: 90.0,
@@ -680,7 +688,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 21:00:00",
+      time: new Date(new Date(newDate).getTime() + 46 * 60 * 60 * 1000),
       temp: -5.8,
       dwpt: -7.3,
       rhum: 89.0,
@@ -694,7 +702,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 22:00:00",
+      time: new Date(new Date(newDate).getTime() + 47 * 60 * 60 * 1000),
       temp: -5.9,
       dwpt: -7.3,
       rhum: 90.0,
@@ -708,7 +716,7 @@ const hourly = {
       coco: 4,
     },
     {
-      time: "2023-12-02 23:00:00",
+      time: new Date(new Date(newDate).getTime() + 48 * 60 * 60 * 1000),
       temp: -6.0,
       dwpt: -7.2,
       rhum: 91.0,
