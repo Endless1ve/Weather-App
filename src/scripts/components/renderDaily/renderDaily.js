@@ -1,5 +1,4 @@
 import {
-  weatherPics,
   status,
   forecastDegrees,
   place,
@@ -7,6 +6,7 @@ import {
   forecastPicture,
 } from "../../variables";
 import { getForecastDay } from "../API/dateApi/dateApi";
+import { getForecastPicture } from "../getForecastPicture/getForecastPicture";
 
 export function renderDaily(data) {
   data.then((res) => {
@@ -19,13 +19,4 @@ export function renderDaily(data) {
     forecastPicture.src = getForecastPicture(res.weather[0].id);
     return res;
   });
-}
-function getForecastPicture(id) {
-  let src = "";
-  weatherPics.forEach((item) => {
-    if (item.idArr.includes(id)) {
-      src = item.pic;
-    }
-  });
-  return src;
 }

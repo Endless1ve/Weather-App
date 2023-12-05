@@ -73,16 +73,19 @@ export function getDaysApi() {
   const currDate = new Date();
   const nextDate = new Date(currDate.getTime() + 24 * 60 * 60 * 1000);
   const nextWeekDate = new Date(currDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
   const currDay = `${currDate.getFullYear()}-${currDate.getMonth() + 1}-${
     String(currDate.getDate()).length < 2
       ? "0" + currDate.getDate()
       : currDate.getDate()
   }`;
+
   const nextDay = `${nextDate.getFullYear()}-${nextDate.getMonth() + 1}-${
-    String(currDate.getDate()).length < 2
-      ? "0" + currDate.getDate()
-      : currDate.getDate()
+    String(nextDate.getDate()).length < 2
+      ? "0" + nextDate.getDate()
+      : nextDate.getDate()
   }`;
+
   const nextWeekDay = `${nextWeekDate.getFullYear()}-${
     nextWeekDate.getMonth() + 1
   }-${
@@ -90,5 +93,15 @@ export function getDaysApi() {
       ? "0" + nextWeekDate.getDate()
       : nextWeekDate.getDate()
   }`;
+
+  console.log(nextDay);
   return { currDay, nextDay, nextWeekDay };
+}
+
+export function getHourlyTime(time) {
+  return `${String(
+    new Date(time).getHours().length < 2
+      ? "0" + new Date(time).getHours()
+      : new Date(time).getHours()
+  )}:${String("0" + new Date(time).getMinutes())}`;
 }

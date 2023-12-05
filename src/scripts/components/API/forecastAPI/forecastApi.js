@@ -1,14 +1,16 @@
-import { API_KEY } from "../../../variables";
+import { API_KEY, main } from "../../../variables";
 import { deletePreloader } from "../../preloader/deletePreloader";
 import { removePlug } from "../../removePlug/removePlug";
 import { renderDaily } from "../../renderDaily/renderDaily";
+import { renderHourly } from "../../renderHourly/renderHourly";
+import { renderWeekly } from "../../renderWeekly/renderWeekly";
 import { getDaysApi } from "../dateApi/dateApi";
 
 export function getForecasts(latitude, longitude) {
   const { currDay, nextDay, nextWeekDay } = getDaysApi();
   const urls = [
     {
-      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${currDay}&end=${nextDay}`,
+      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${currDay}&end=${nextWeekDay}`,
       funName: renderWeekly,
       headers: {
         "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
@@ -16,7 +18,7 @@ export function getForecasts(latitude, longitude) {
       },
     },
     {
-      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${currDay}&end=${nextWeekDay}`,
+      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${currDay}&end=${nextDay}`,
       funName: renderHourly,
       headers: {
         "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
@@ -52,14 +54,7 @@ export function getForecasts(latitude, longitude) {
   Promise.all(responses)
     .then((res) => res.forEach((item) => item.funName(item.link)))
     .then(() => removePlug())
+    .then(() => (main.style.display = "block"))
     .catch((err) => console.log(err))
     .finally(() => deletePreloader());
-}
-
-export function renderWeekly(data) {
-  // data.then((data) => console.log(JSON.stringify(data)));
-}
-
-export function renderHourly(data) {
-  // data.then((data) => console.log(JSON.stringify(data)));
 }
