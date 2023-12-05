@@ -1,8 +1,11 @@
-import { API_KEY, currDay, nextDay, nextWeekDay } from "../../../variables";
+import { API_KEY } from "../../../variables";
 import { deletePreloader } from "../../preloader/deletePreloader";
 import { removePlug } from "../../removePlug/removePlug";
+import { renderDaily } from "../../renderDaily/renderDaily";
+import { getDaysApi } from "../dateApi/dateApi";
 
 export function getForecasts(latitude, longitude) {
+  const { currDay, nextDay, nextWeekDay } = getDaysApi();
   const urls = [
     {
       link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${currDay}&end=${nextDay}`,
@@ -21,11 +24,10 @@ export function getForecasts(latitude, longitude) {
       },
     },
     {
-      link: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&lang=ru`,
-      funName: renderHourly,
+      link: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=ru`,
+      funName: renderDaily,
     },
   ];
-
   const mockUrls = [
     {
       link: `http://localhost:5000/weekly`,
@@ -55,13 +57,9 @@ export function getForecasts(latitude, longitude) {
 }
 
 export function renderWeekly(data) {
-  data.then((data) => console.log(JSON.stringify(data)));
+  // data.then((data) => console.log(JSON.stringify(data)));
 }
 
 export function renderHourly(data) {
-  data.then((data) => console.log(JSON.stringify(data)));
-}
-
-export function renderDaily(data) {
-
+  // data.then((data) => console.log(JSON.stringify(data)));
 }

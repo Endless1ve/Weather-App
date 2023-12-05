@@ -1,4 +1,4 @@
-import { getDailyForecast, getForecasts } from "../API/forecastAPI/forecastApi";
+import { getForecasts } from "../API/forecastAPI/forecastApi";
 import { deletePreloader } from "../preloader/deletePreloader";
 
 export function getLocation() {
@@ -10,7 +10,6 @@ function geolocationAPI() {
     .then((res) => {
       const { latitude, longitude } = res;
       getForecasts(latitude, longitude);
-      // getDailyForecast(latitude, longitude);
     })
     .catch((err) => {
       console.log(err);
@@ -21,5 +20,4 @@ function geolocationAPI() {
 function successLocation(position) {
   const { latitude, longitude } = position.coords;
   getForecasts(latitude, longitude);
-  // getDailyForecast(latitude, longitude);
 }
