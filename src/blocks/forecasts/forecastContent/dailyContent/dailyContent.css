@@ -1,0 +1,14 @@
+@import url("./dailyCard/dailyCard.css");
+
+.dailyContent {
+  display: flex;
+  flex-direction: row;
+  gap: 0 15px;
+  overflow-x: scroll;
+}
+
+@media screen and (min-width: 491px) {
+  .dailyContent {
+    justify-content: center;
+  }
+}
