@@ -1,0 +1,11 @@
+.forecastStatus {
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .forecastStatus {
+    font-size: 48px;
+  }
+}

@@ -1,0 +1,14 @@
+@import url("./homePlace/homePlace.css");
+@import url("./homeForecast/homeForecast.css");
+
+.home {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .home {
+    padding: 50px 30px;
+  }
+}
