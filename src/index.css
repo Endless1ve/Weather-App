@@ -2,8 +2,7 @@
 @import url("./vendor/fonts/fonts.css");
 @import url("./blocks/root/root.css");
 @import url("./blocks/main/main.css");
-@import url('./blocks/details/details.css');
-
+@import url("./blocks/details/details.css");
 
 body {
   height: 100%;
