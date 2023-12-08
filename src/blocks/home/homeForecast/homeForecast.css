@@ -1,0 +1,16 @@
+@import url("./forecastTexts/forecastTexts.css");
+@import url("./forecastImage/forecastImage.css");
+
+.homeForecast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+}
+
+@media screen and (min-width: 768px) {
+  .homeForecast {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
