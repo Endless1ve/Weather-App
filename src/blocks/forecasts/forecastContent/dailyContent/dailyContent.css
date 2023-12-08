@@ -5,6 +5,17 @@
   flex-direction: row;
   gap: 0 15px;
   overflow-x: scroll;
+  justify-content: flex-start;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.dailyContent::-webkit-scrollbar {
+  display: none;
+}
+
+.dailyContent::-webkit-scrollbar-thumb {
+  display: none;
 }
 
 @media screen and (min-width: 491px) {
