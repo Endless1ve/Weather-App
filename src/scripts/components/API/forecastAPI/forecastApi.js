@@ -10,7 +10,7 @@ export function getForecasts(latitude, longitude) {
   const { currDay, nextDay, nextWeekDay } = getDaysApi();
   const urls = [
     {
-      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${currDay}&end=${nextWeekDay}`,
+      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${nextDay}&end=${nextWeekDay}`,
       funName: renderWeekly,
       headers: {
         "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",

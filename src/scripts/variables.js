@@ -10,6 +10,10 @@ const forecastDegrees = document.querySelector(".forecastDegrees");
 const place = document.querySelector(".placeText");
 const forecastDate = document.querySelector(".forecastDate");
 const forecastPicture = document.querySelector(".forecastImage");
+//hourly card container
+const hourlyContainer = document.querySelector(".hourlyContent");
+//daily card container
+const weeklyContainer = document.querySelector(".dailyContent");
 //--Cards variables--
 //--API key variables--
 const API_KEY = "15000a2461a052e3387841ebd0b2d6e3";
@@ -58,4 +62,6 @@ export {
   place,
   forecastDate,
   forecastPicture,
+  hourlyContainer,
+  weeklyContainer,
 };
