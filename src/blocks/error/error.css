@@ -1,3 +1,9 @@
+@import url("./errorVisible/errorVisible.css");
+@import url("./errorText/errorText.css");
+@import url("./errorClose/errorClose.css");
+@import url("./errorBar/errorBar.css");
+@import url("./errorProgress/errorProgress.css");
+
 .error {
   position: absolute;
   bottom: 90px;
@@ -11,9 +17,8 @@
   border: 1px solid transparent;
   border-color: #ef5350;
   border-radius: 10px;
-  padding: 10px 36px;
+  padding: 10px 36px 20px;
   color: #fff;
-  text-align: center;
   word-wrap: normal;
   background-color: #ef1c1c;
   transform: translateX(100vw);
@@ -26,23 +31,6 @@
   }
 }
 
-.errorVisible {
-  transform: translateX(0);
-}
-
-.errorText {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.errorClose {
-  position: absolute;
-  top: 12px;
-  right: 10px;
-  width: 16px;
-  cursor: pointer;
-}
-
 @media screen and (min-width: 768px) {
   .error {
     max-width: 500px;
@@ -51,16 +39,4 @@
   .errorText {
     font-size: 18px;
   }
-}
-
-.bar {
-  width: 500px;
-  height: 20px;
-  background: gray;
-}
-
-.progress {
-  width: 0;
-  height: 100%;
-  background: green;
 }
