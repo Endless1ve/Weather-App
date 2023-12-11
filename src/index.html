@@ -15,10 +15,18 @@
           <span class="preloader"></span>
         </div>
         <p class="plugSubtitle">A minimal weather app</p>
+        <div class="bar">
+          <div class="progress"></div>
+        </div>
+        <button class="display">Показать ошибку</button>
       </section>
       <div class="main"></div>
       <div class="error">
-        <img src="<%=require('./vendor/images/close.svg')%>" alt="" class="errorClose">
+        <img
+          src="<%=require('./vendor/images/close.svg')%>"
+          alt=""
+          class="errorClose"
+        />
         <p class="errorText">В данный момент сервер недоступен</p>
       </div>
     </div>

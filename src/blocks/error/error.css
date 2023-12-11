@@ -1,12 +1,6 @@
-@keyframes error {
-  to {
-    transform: translateX(0);
-  }
-}
-
 .error {
   position: absolute;
-  bottom: 70px;
+  bottom: 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,12 +17,20 @@
   word-wrap: normal;
   background-color: #ef1c1c;
   transform: translateX(100vw);
-  animation: error ease-in 1s forwards;
+  transition: transform 0.5s ease-in-out;
+}
+
+@media screen and (min-width: 1024px) {
+  .error {
+    transition: transform 1s ease-in-out;
+  }
+}
+
+.errorVisible {
+  transform: translateX(0);
 }
 
 .errorText {
-  color: #fff;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 16px;
 }
@@ -49,4 +51,16 @@
   .errorText {
     font-size: 18px;
   }
+}
+
+.bar {
+  width: 500px;
+  height: 20px;
+  background: gray;
+}
+
+.progress {
+  width: 0;
+  height: 100%;
+  background: green;
 }
