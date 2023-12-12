@@ -14,6 +14,17 @@
   background: rgba(234, 202, 143, 0.7);
   -ms-overflow-style: none;
   scrollbar-width: none;
+  cursor: grab;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
+.hourlyContent:active {
+  cursor: grabbing;
 }
 
 .hourlyContent::-webkit-scrollbar {
