@@ -5,6 +5,7 @@
 @import url("./blocks/home/home.css");
 @import url("./blocks/plug/plug.css");
 @import url("./blocks/preloader/preloader.css");
+@import url("./blocks/details/details.css");
 
 body {
   height: 100%;
