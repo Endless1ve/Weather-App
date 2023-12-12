@@ -2644,44 +2644,6 @@ if (toString !== ObjectPrototype.toString) {
 
 /***/ }),
 
-/***/ 7727:
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var $ = __webpack_require__(2109);
-var IS_PURE = __webpack_require__(1913);
-var NativePromise = __webpack_require__(3366);
-var getBuiltIn = __webpack_require__(5005);
-var speciesConstructor = __webpack_require__(6707);
-var promiseResolve = __webpack_require__(9478);
-var redefine = __webpack_require__(1320);
-
-// `Promise.prototype.finally` method
-// https://tc39.github.io/ecma262/#sec-promise.prototype.finally
-$({ target: 'Promise', proto: true, real: true }, {
-  'finally': function (onFinally) {
-    var C = speciesConstructor(this, getBuiltIn('Promise'));
-    var isFunction = typeof onFinally == 'function';
-    return this.then(
-      isFunction ? function (x) {
-        return promiseResolve(C, onFinally()).then(function () { return x; });
-      } : onFinally,
-      isFunction ? function (e) {
-        return promiseResolve(C, onFinally()).then(function () { throw e; });
-      } : onFinally
-    );
-  }
-});
-
-// patch native Promise.prototype for native async functions
-if (!IS_PURE && typeof NativePromise == 'function' && !NativePromise.prototype['finally']) {
-  redefine(NativePromise.prototype, 'finally', getBuiltIn('Promise').prototype['finally']);
-}
-
-
-/***/ }),
-
 /***/ 8674:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -3727,6 +3689,11 @@ var __webpack_exports__ = {};
 (() => {
 "use strict";
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  I: () => (/* binding */ renderMain)
+});
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
 var es_object_to_string = __webpack_require__(1539);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
@@ -3739,8 +3706,6 @@ var es_array_concat = __webpack_require__(2222);
 var es_array_map = __webpack_require__(1249);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.link.js
 var es_string_link = __webpack_require__(9254);
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.finally.js
-var es_promise_finally = __webpack_require__(7727);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
 var es_array_iterator = __webpack_require__(6992);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.iterator.js
@@ -4160,13 +4125,11 @@ function getForecasts(latitude, longitude) {
       return item.funName(item.link);
     });
   }).then(function () {
-    return removePlug();
-  }).then(function () {
-    return main.style.display = "block";
+    removePlug();
+    renderMain();
   }).catch(function (err) {
-    return console.log(err);
-  }).finally(function () {
-    return deletePreloader();
+    console.log(err);
+    deletePreloader();
   });
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/getLocation/getLocation.js
@@ -4230,6 +4193,9 @@ function src_scroll(block) {
     e.preventDefault();
     block.scrollLeft += e.deltaY;
   });
+}
+function renderMain() {
+  document.querySelector(".main").style.display = "block";
 }
 })();
 
