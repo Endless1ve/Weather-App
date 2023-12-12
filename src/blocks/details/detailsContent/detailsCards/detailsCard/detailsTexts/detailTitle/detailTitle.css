@@ -1,0 +1,14 @@
+.detailTitle {
+  color: #fff;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 12px;
+  font-style: normal;
+  line-height: normal;
+}
+
+@media screen and (min-width: 500px) {
+  .detailTitle {
+    font-size: 24px;
+  }
+}
