@@ -3792,11 +3792,6 @@ function deletePreloader() {
     preloader.remove();
   }
 }
-;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
-function removePlug() {
-  var plug = document.querySelector('.plug');
-  plug.remove();
-}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
 var es_function_name = __webpack_require__(8309);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
@@ -3991,6 +3986,7 @@ function getForecastPicture(id) {
 
 
 
+
 function renderDaily(data) {
   data.then(function (res) {
     place.textContent = res.name;
@@ -3999,6 +3995,8 @@ function renderDaily(data) {
     forecastDate.textContent = getForecastDay();
     forecastPicture.src = getForecastPicture(res.weather[0].id);
     return res;
+  }).then(function () {
+    return renderMain();
   });
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
@@ -4018,6 +4016,7 @@ function createHourlyCard(data) {
 
 
 
+
 function renderHourly(data) {
   data.then(function (data) {
     return data.data;
@@ -4031,6 +4030,8 @@ function renderHourly(data) {
       var card = createHourlyCard(element);
       hourlyContainer.insertAdjacentHTML("beforeend", card);
     });
+  }).then(function () {
+    return renderMain();
   });
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/createWeeklyCard/createWeeklyCard.js
@@ -4042,6 +4043,7 @@ function createWeeklyCard(data) {
   return card;
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/renderWeekly/renderWeekly.js
+
 
 
 
@@ -4059,6 +4061,8 @@ function renderWeekly(data) {
       var card = createWeeklyCard(element);
       weeklyContainer.insertAdjacentHTML("beforeend", card);
     });
+  }).then(function () {
+    return renderMain();
   });
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/API/forecastAPI/forecastApi.js
@@ -4124,9 +4128,6 @@ function getForecasts(latitude, longitude) {
     return res.forEach(function (item) {
       return item.funName(item.link);
     });
-  }).then(function () {
-    removePlug();
-    renderMain();
   }).catch(function (err) {
     console.log(err);
     deletePreloader();
@@ -4158,7 +4159,13 @@ function successLocation(position) {
     longitude = _position$coords.longitude;
   getForecasts(latitude, longitude);
 }
+;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
+function removePlug() {
+  var plug = document.querySelector('.plug');
+  plug.remove();
+}
 ;// CONCATENATED MODULE: ./src/index.js
+
 
 
 
@@ -4194,8 +4201,14 @@ function src_scroll(block) {
     block.scrollLeft += e.deltaY;
   });
 }
+var counter = 0;
 function renderMain() {
-  document.querySelector(".main").style.display = "block";
+  counter++;
+  console.log(counter);
+  if (counter === 3) {
+    removePlug();
+    document.querySelector(".main").style.display = "block";
+  }
 }
 })();
 
