@@ -1,3 +1,4 @@
+import { renderMain } from "../../..";
 import { hourlyContainer } from "../../variables";
 import { createHourlyCard } from "../createHourlyCard/createHourlyCard";
 export function renderHourly(data) {
@@ -14,5 +15,6 @@ export function renderHourly(data) {
         const card = createHourlyCard(element);
         hourlyContainer.insertAdjacentHTML("beforeend", card);
       });
-    });
+    })
+    .then(() => renderMain());
 }

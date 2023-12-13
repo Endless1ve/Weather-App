@@ -1,3 +1,4 @@
+import { renderMain } from "../../..";
 import { weeklyContainer } from "../../variables";
 import { createWeeklyCard } from "../createWeeklyCard/createWeeklyCard";
 
@@ -10,5 +11,6 @@ export function renderWeekly(data) {
         const card = createWeeklyCard(element);
         weeklyContainer.insertAdjacentHTML("beforeend", card);
       })
-    );
+    )
+    .then(() => renderMain());
 }

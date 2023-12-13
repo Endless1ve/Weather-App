@@ -10,6 +10,10 @@ const forecastDegrees = document.querySelector(".forecastDegrees");
 const place = document.querySelector(".placeText");
 const forecastDate = document.querySelector(".forecastDate");
 const forecastPicture = document.querySelector(".forecastImage");
+const feelsLikeBlock = document.querySelector(".feelsLike");
+const windSpeedBlock = document.querySelector(".windSpeed");
+const humidityBlock = document.querySelector(".humidity");
+const pressureBlock = document.querySelector(".pressure");
 //hourly card container
 const hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
@@ -64,4 +68,8 @@ export {
   forecastPicture,
   hourlyContainer,
   weeklyContainer,
+  feelsLikeBlock,
+  humidityBlock,
+  windSpeedBlock,
+  pressureBlock,
 };

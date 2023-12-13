@@ -1,5 +1,6 @@
 import "./index.css";
 import { getLocation } from "./scripts/components/getLocation/getLocation";
+import { removePlug } from "./scripts/components/removePlug/removePlug";
 getLocation();
 
 const scrollBlocks = document.querySelectorAll(".scroll");
@@ -33,4 +34,12 @@ function scroll(block) {
     e.preventDefault();
     block.scrollLeft += e.deltaY;
   });
+}
+let counter = 0;
+export function renderMain() {
+  counter++;
+  if (counter === 3) {
+    removePlug();
+    document.querySelector(".main").style.display = "block";
+  }
 }

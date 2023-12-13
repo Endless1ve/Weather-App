@@ -1,3 +1,4 @@
+import { renderMain } from "../../../..";
 import { API_KEY, main } from "../../../variables";
 import { deletePreloader } from "../../preloader/deletePreloader";
 import { removePlug } from "../../removePlug/removePlug";
@@ -51,10 +52,11 @@ export function getForecasts(latitude, longitude) {
     }).then((res) => res.json());
     return url;
   });
+
   Promise.all(responses)
     .then((res) => res.forEach((item) => item.funName(item.link)))
-    .then(() => removePlug())
-    .then(() => (main.style.display = "block"))
-    .catch((err) => console.log(err))
-    .finally(() => deletePreloader());
+    .catch((err) => {
+      console.log(err);
+      deletePreloader();
+    });
 }
