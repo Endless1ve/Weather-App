@@ -14,6 +14,8 @@ const feelsLikeBlock = document.querySelector(".feelsLike");
 const windSpeedBlock = document.querySelector(".windSpeed");
 const humidityBlock = document.querySelector(".humidity");
 const pressureBlock = document.querySelector(".pressure");
+//scroll block
+const scrollBlocks = document.querySelectorAll(".scroll");
 //hourly card container
 const hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
@@ -72,4 +74,5 @@ export {
   humidityBlock,
   windSpeedBlock,
   pressureBlock,
+  scrollBlocks,
 };
