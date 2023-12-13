@@ -3746,6 +3746,10 @@ var forecastDegrees = document.querySelector(".forecastDegrees");
 var place = document.querySelector(".placeText");
 var forecastDate = document.querySelector(".forecastDate");
 var forecastPicture = document.querySelector(".forecastImage");
+var feelsLikeBlock = document.querySelector(".feelsLike");
+var windSpeedBlock = document.querySelector(".windSpeed");
+var humidityBlock = document.querySelector(".humidity");
+var pressureBlock = document.querySelector(".pressure");
 //hourly card container
 var hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
@@ -3994,7 +3998,10 @@ function renderDaily(data) {
     forecastDegrees.textContent = Math.round(res.main.temp) + "\xB0C";
     forecastDate.textContent = getForecastDay();
     forecastPicture.src = getForecastPicture(res.weather[0].id);
-    return res;
+    feelsLikeBlock.textContent = Math.round(res.main.feels_like) + "\xB0C";
+    humidityBlock.textContent = Math.round(res.main.humidity) + "%";
+    windSpeedBlock.textContent = Math.round(res.wind.speed) + "\u043A\u043C/\u0447";
+    pressureBlock.textContent = res.main.pressure;
   }).then(function () {
     return renderMain();
   });
@@ -4039,8 +4046,11 @@ function renderHourly(data) {
 
 
 function createWeeklyCard(data) {
-  var card = "\n  <div class=\"dailyCard\">\n    <p class=\"dailyWeekday\">".concat(getWeekDay(data.time), "</p>\n    <p class=\"dailyDate\">").concat(getWeekDate(data.time), ".</p>\n    <img src=\"").concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\"/>\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n  </div>");
+  var card = "\n  <div class=\"dailyCard\">\n    <p class=\"dailyWeekday\">".concat(getWeekDay(data.time), "</p>\n    <p class=\"dailyDate\">12 \u0434\u0435\u043A.</p>\n    <img src=\"").concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\"/>\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n  </div>");
   return card;
+}
+{
+  /* <p class="dailyDate">${getWeekDate(data.time)}.</p> */
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/renderWeekly/renderWeekly.js
 
@@ -4116,7 +4126,7 @@ function getForecasts(latitude, longitude) {
     link: "http://localhost:5000/daily",
     funName: renderDaily
   }];
-  var responses = urls.map(function (url) {
+  var responses = mockUrls.map(function (url) {
     url.link = fetch(url.link, {
       headers: url.headers
     }).then(function (res) {
@@ -4204,7 +4214,6 @@ function src_scroll(block) {
 var counter = 0;
 function renderMain() {
   counter++;
-  console.log(counter);
   if (counter === 3) {
     removePlug();
     document.querySelector(".main").style.display = "block";
