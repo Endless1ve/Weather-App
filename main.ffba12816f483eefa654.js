@@ -3698,6 +3698,33 @@ __webpack_require__.d(__webpack_exports__, {
 var es_object_to_string = __webpack_require__(1539);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__(4747);
+;// CONCATENATED MODULE: ./src/scripts/components/UI/scroll/scroll.js
+function scroll_scroll(block) {
+  var isScrolling = false;
+  var startX, scrollLeft;
+  function startScroll(event) {
+    isScrolling = true;
+    startX = event.clientX;
+    scrollLeft = block.scrollLeft;
+    block.addEventListener("mousemove", handleMouseMove);
+    block.addEventListener("mouseup", stopScroll);
+  }
+  function handleMouseMove(event) {
+    if (!isScrolling) return;
+    var x = event.clientX - startX;
+    block.scrollLeft = scrollLeft - x;
+  }
+  function stopScroll() {
+    isScrolling = false;
+    block.removeEventListener("mousemove", handleMouseMove);
+    block.removeEventListener("mouseup", stopScroll);
+  }
+  block.addEventListener("mousedown", startScroll);
+  block.addEventListener("mousewheel", function (e) {
+    e.preventDefault();
+    block.scrollLeft += e.deltaY;
+  });
+}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
 var es_promise = __webpack_require__(8674);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
@@ -3750,6 +3777,8 @@ var feelsLikeBlock = document.querySelector(".feelsLike");
 var windSpeedBlock = document.querySelector(".windSpeed");
 var humidityBlock = document.querySelector(".humidity");
 var pressureBlock = document.querySelector(".pressure");
+//scroll block
+var scrollBlocks = document.querySelectorAll(".scroll");
 //hourly card container
 var hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
@@ -4126,7 +4155,7 @@ function getForecasts(latitude, longitude) {
     link: "http://localhost:5000/daily",
     funName: renderDaily
   }];
-  var responses = mockUrls.map(function (url) {
+  var responses = urls.map(function (url) {
     url.link = fetch(url.link, {
       headers: url.headers
     }).then(function (res) {
@@ -4180,37 +4209,12 @@ function removePlug() {
 
 
 
+
+
 getLocation();
-var scrollBlocks = document.querySelectorAll(".scroll");
 scrollBlocks.forEach(function (item) {
-  return src_scroll(item);
+  return scroll_scroll(item);
 });
-function src_scroll(block) {
-  var isScrolling = false;
-  var startX, scrollLeft;
-  function startScroll(event) {
-    isScrolling = true;
-    startX = event.clientX;
-    scrollLeft = block.scrollLeft;
-    block.addEventListener("mousemove", handleMouseMove);
-    block.addEventListener("mouseup", stopScroll);
-  }
-  function handleMouseMove(event) {
-    if (!isScrolling) return;
-    var x = event.clientX - startX;
-    block.scrollLeft = scrollLeft - x;
-  }
-  function stopScroll() {
-    isScrolling = false;
-    block.removeEventListener("mousemove", handleMouseMove);
-    block.removeEventListener("mouseup", stopScroll);
-  }
-  block.addEventListener("mousedown", startScroll);
-  block.addEventListener("mousewheel", function (e) {
-    e.preventDefault();
-    block.scrollLeft += e.deltaY;
-  });
-}
 var counter = 0;
 function renderMain() {
   counter++;
