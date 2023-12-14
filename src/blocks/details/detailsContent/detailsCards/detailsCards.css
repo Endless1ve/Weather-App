@@ -9,7 +9,7 @@
 @media screen and (min-width: 1024px) {
   .detailsCards {
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 50%;
   }
 }

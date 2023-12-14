@@ -6,11 +6,10 @@
   align-items: center;
   box-sizing: border-box;
   width: 100%;
-  padding: 0 20px;
-  gap: 20px 0;
+  gap: 20px 20px;
 }
 
-@media screen and (min-width: 1350px) {
+@media screen and (min-width: 1024px) {
   .forecasts {
     flex-direction: row;
   }
