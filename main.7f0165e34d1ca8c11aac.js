@@ -4155,7 +4155,7 @@ function getForecasts(latitude, longitude) {
     link: "http://localhost:5000/daily",
     funName: renderDaily
   }];
-  var responses = urls.map(function (url) {
+  var responses = mockUrls.map(function (url) {
     url.link = fetch(url.link, {
       headers: url.headers
     }).then(function (res) {
