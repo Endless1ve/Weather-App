@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  max-width: 100%;
   gap: 0 15px;
+  max-width: 100%;
   overflow-x: scroll;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -14,7 +14,7 @@
   user-select: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-touch-callout: none;
 }
 
 .dailyContent::-webkit-scrollbar {
@@ -24,9 +24,3 @@
 .dailyContent::-webkit-scrollbar-thumb {
   display: none;
 }
-
-/* @media screen and (min-width: 1024px) {
-  .dailyContent {
-    max-width: 100%;
-  }
-} */
