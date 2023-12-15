@@ -1,0 +1,21 @@
+@import url("./forecastsTitle/forecastsTitle.css");
+@import url("./hourlyContent/hourlyContent.css");
+@import url("./dailyContent/dailyContent.css");
+@import url("./cardImage/cardImage.css");
+@import url("./cardDegrees/cardDegrees.css");
+@import url("./cardSpeed/cardSpeed.css");
+
+.forecastContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 20px;
+}
+
+@media screen and (min-width: 1024px) {
+  .forecastContent {
+    width: 50%;
+  }
+}
