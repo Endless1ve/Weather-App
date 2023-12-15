@@ -1,14 +1,14 @@
 import { weeklyContainer } from "../../variables";
 import { createWeeklyCard } from "../createWeeklyCard/createWeeklyCard";
 
+export function weeklyHandler(data) {
+  data.then((res) => renderWeekly(res.data)).catch((err) => console.log(err));
+}
+
 export function renderWeekly(data) {
-  data
-    .then((data) => data.data)
-    .then((res) => res.filter((item) => new Date(item.time).getHours() === 11))
-    .then((res) =>
-      res.forEach((element) => {
-        const card = createWeeklyCard(element);
-        weeklyContainer.insertAdjacentHTML("beforeend", card);
-      })
-    );
+  const filtered = data.filter((item) => new Date(item.time).getHours() === 11);
+  filtered.forEach((element) => {
+    const card = createWeeklyCard(element);
+    weeklyContainer.insertAdjacentHTML("beforeend", card);
+  });
 }
