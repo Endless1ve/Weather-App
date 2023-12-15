@@ -3,11 +3,18 @@
 .dailyContent {
   display: flex;
   flex-direction: row;
-  gap: 0 15px;
-  overflow-x: scroll;
   justify-content: flex-start;
+  gap: 0 15px;
+  max-width: 100%;
+  overflow-x: scroll;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  -webkit-touch-callout: none;
 }
 
 .dailyContent::-webkit-scrollbar {
@@ -16,10 +23,4 @@
 
 .dailyContent::-webkit-scrollbar-thumb {
   display: none;
-}
-
-@media screen and (min-width: 491px) {
-  .dailyContent {
-    justify-content: center;
-  }
 }
