@@ -6,6 +6,7 @@ import { renderDaily } from "../../renderDaily/renderDaily";
 import { handlerHourly } from "../../handlerHourly/handlerHourly";
 import { handlerWeekly } from "../../handlerWeekly/handlerWeekly";
 import { getDaysApi } from "../dateApi/dateApi";
+import { renderMain } from "../../renderMain/renderMain";
 
 export function getForecasts(latitude, longitude) {
   const { currDay, nextDay, nextWeekDay } = getDaysApi();
@@ -61,7 +62,7 @@ export function getForecasts(latitude, longitude) {
   Promise.all(responses)
     .then((res) => res.forEach((item) => item.renderFun(item.data)))
     .then(() => removePlug())
-    .then(() => (main.style.display = "block"))
+    .then(() => renderMain())
     .catch((err) => console.log(err))
     .finally(() => deletePreloader());
 }
