@@ -2,12 +2,13 @@
 
 .detailsContent {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
 }
 
 @media screen and (min-width: 1024px) {
   .detailsContent {
-    justify-content: space-evenly;
+    gap: 0 100px;
+    justify-content: space-between;
   }
 }
