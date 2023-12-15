@@ -8,15 +8,16 @@ import {
 import { getForecastDay } from "../API/dateApi/dateApi";
 import { getForecastPicture } from "../getForecastPicture/getForecastPicture";
 
+export function dailyHandler(data) {
+  data.then((res) => renderDaily(res)).catch((err) => console.log(err));
+}
+
 export function renderDaily(data) {
-  data.then((res) => {
-    place.textContent = res.name;
-    status.textContent =
-      res.weather[0].description[0].toUpperCase() +
-      res.weather[0].description.slice(1);
-    forecastDegrees.textContent = Math.round(res.main.temp) + `°C`;
-    forecastDate.textContent = getForecastDay();
-    forecastPicture.src = getForecastPicture(res.weather[0].id);
-    return res;
-  });
+  place.textContent = data.name;
+  status.textContent =
+    data.weather[0].description[0].toUpperCase() +
+    data.weather[0].description.slice(1);
+  forecastDegrees.textContent = Math.round(data.main.temp) + `°C`;
+  forecastDate.textContent = getForecastDay();
+  forecastPicture.src = getForecastPicture(data.weather[0].id);
 }
