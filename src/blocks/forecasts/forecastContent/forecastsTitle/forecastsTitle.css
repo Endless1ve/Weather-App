@@ -1,10 +1,12 @@
 .forecastsTitle {
   margin-bottom: 20px;
-  color: #fff;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 20px;
-  font-style: normal;
-  line-height: normal;
   text-align: center;
+}
+
+@media screen and (min-width: 500px) {
+  .forecastsTitle {
+    font-size: 32px;
+  }
 }
