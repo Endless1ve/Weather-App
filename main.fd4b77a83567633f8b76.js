@@ -3698,6 +3698,8 @@ __webpack_require__.d(__webpack_exports__, {
 var es_object_to_string = __webpack_require__(1539);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__(4747);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
+var es_promise = __webpack_require__(8674);
 ;// CONCATENATED MODULE: ./src/scripts/components/UI/scroll/scroll.js
 function scroll_scroll(block) {
   var isScrolling = false;
@@ -3725,8 +3727,6 @@ function scroll_scroll(block) {
     block.scrollLeft += e.deltaY;
   });
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
-var es_promise = __webpack_require__(8674);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__(2222);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
@@ -4211,6 +4211,7 @@ function removePlug() {
 
 
 
+
 getLocation();
 scrollBlocks.forEach(function (item) {
   return scroll_scroll(item);
@@ -4220,9 +4221,12 @@ function renderMain() {
   counter++;
   if (counter === 3) {
     removePlug();
-    document.querySelector(".main").style.display = "flex";
+    document.querySelector(".main").style.display = "block";
   }
 }
+fetch("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v1/?key=6D22DFFB177C9022FC34E56A7FC30A94&account_id=76561198123965062").then(function (res) {
+  return console.log(res.json());
+});
 })();
 
 /******/ })()
