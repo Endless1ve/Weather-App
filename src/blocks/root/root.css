@@ -10,4 +10,8 @@
   min-height: 100vh;
   margin: 0 auto;
   overflow-x: hidden;
+  color: #fff;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  line-height: normal;
 }

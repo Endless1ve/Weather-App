@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>" />
     <title>Погода</title>
   </head>
+
   <body class="body">
     <div class="root">
       <section class="plug">
@@ -17,7 +18,6 @@
         <p class="plugSubtitle">A minimal weather app</p>
         <button class="display">Показать ошибку</button>
       </section>
-      <div class="main"></div>
       <div class="error">
         <img
           src="<%=require('./vendor/images/close.svg')%>"
@@ -27,6 +27,33 @@
         <p class="errorText">Сервер недоступен</p>
         <div class="errorBar">
           <div class="errorProgress"></div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="home">
+          <div class="homePlace">
+            <div class="placeContent">
+              <img
+                src="<%=require('./vendor/images/location.svg')%>"
+                alt="Иконка локации"
+                class="placeIcon"
+              />
+              <p class="placeText">Москва</p>
+            </div>
+          </div>
+          <div class="homeForecast">
+            <div class="forecastTexts">
+              <p class="forecastStatus">Облачно</p>
+              <p class="forecastDegrees">26°C</p>
+              <p class="forecastDate">Вс | 12 Дек 2023</p>
+            </div>
+            <img
+              src="<%=require('./vendor/images/cloudy.svg')%>"
+              alt="Картинка погоды"
+              class="forecastImage"
+            />
+          </div>
         </div>
       </div>
     </div>
