@@ -1,0 +1,26 @@
+@import url("./dailyCard/dailyCard.css");
+
+.dailyContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 0 15px;
+  max-width: 100%;
+  overflow-x: scroll;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-touch-callout: none;
+}
+
+.dailyContent::-webkit-scrollbar {
+  display: none;
+}
+
+.dailyContent::-webkit-scrollbar-thumb {
+  display: none;
+}
