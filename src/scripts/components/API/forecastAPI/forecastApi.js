@@ -46,7 +46,7 @@ export function getForecasts(latitude, longitude) {
     },
   ];
 
-  const responses = urls.map((url) => {
+  const responses = mockUrls.map((url) => {
     url.link = fetch(url.link, {
       headers: url.headers,
     }).then((res) => res.json());
