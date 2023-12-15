@@ -21,8 +21,8 @@
   color: #fff;
   word-wrap: normal;
   background-color: #ef1c1c;
-  transform: translateX(100vw);
   transition: transform 0.5s ease-in-out;
+  transform: translateX(100vw);
 }
 
 @media screen and (min-width: 1024px) {
