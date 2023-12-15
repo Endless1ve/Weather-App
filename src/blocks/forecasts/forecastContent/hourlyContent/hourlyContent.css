@@ -6,14 +6,25 @@
   gap: 0 15px;
   box-sizing: border-box;
   width: 100%;
-  max-width: 700px;
+  max-width: 670px;
   margin: 0 auto 40px;
   border-radius: 20px;
   padding: 15px;
   overflow-x: scroll;
   background: rgba(234, 202, 143, 0.7);
+  cursor: grab;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  -webkit-touch-callout: none;
+}
+
+.hourlyContent:active {
+  cursor: grabbing;
 }
 
 .hourlyContent::-webkit-scrollbar {
@@ -30,7 +41,7 @@
   }
 }
 
-@media screen and (min-width: 1230px) {
+@media screen and (min-width: 1024px) {
   .hourlyContent {
     margin-bottom: 0;
     padding: 20px;
