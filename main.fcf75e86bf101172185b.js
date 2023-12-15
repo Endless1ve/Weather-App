@@ -4224,7 +4224,7 @@ function renderMain() {
     document.querySelector(".main").style.display = "block";
   }
 }
-fetch("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v1/?key=6D22DFFB177C9022FC34E56A7FC30A94&account_id=76561198123965062").then(function (res) {
+fetch("https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v1/?key=4E878786BC5EBC6AFA252711171C1BC7&account_id=76561198123965062").then(function (res) {
   return console.log(res.json());
 });
 })();
