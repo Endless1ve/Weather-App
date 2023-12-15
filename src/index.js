@@ -10,6 +10,6 @@ export function renderMain() {
   counter++;
   if (counter === 3) {
     removePlug();
-    document.querySelector(".main").style.display = "block";
+    document.querySelector(".main").style.display = "flex";
   }
 }
