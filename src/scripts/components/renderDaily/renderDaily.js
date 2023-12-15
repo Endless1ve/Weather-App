@@ -8,10 +8,6 @@ import {
 import { getForecastDay } from "../API/dateApi/dateApi";
 import { getForecastPicture } from "../getForecastPicture/getForecastPicture";
 
-export function dailyHandler(data) {
-  data.then((res) => renderDaily(res)).catch((err) => console.log(err));
-}
-
 export function renderDaily(data) {
   place.textContent = data.name;
   status.textContent =
