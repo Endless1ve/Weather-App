@@ -1,6 +1,7 @@
 import { hourlyContainer } from "../../variables";
 import { createHourlyCard } from "../createHourlyCard/createHourlyCard";
 import { renderCardDom } from "../renderCardDom/renderCardDom";
+import { renderMain } from "../renderMain/renderMain";
 
 export function handlerHourly(data) {
   const newData = data.data.filter((item) => {
@@ -10,4 +11,5 @@ export function handlerHourly(data) {
     const card = createHourlyCard(element);
     renderCardDom(hourlyContainer, card);
   });
+  renderMain();
 }
