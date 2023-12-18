@@ -1,5 +1,3 @@
-import { main } from "../../variables";
-
 let counter = 0;
 export function renderMain() {
   counter++;

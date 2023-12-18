@@ -12,6 +12,7 @@ import {
 } from "../../variables";
 import { getForecastDay } from "../API/dateApi/dateApi";
 import { getForecastPicture } from "../getForecastPicture/getForecastPicture";
+import { renderMain } from "../renderMain/renderMain";
 
 export function renderDaily(data) {
   place.textContent = data.name;
@@ -21,4 +22,5 @@ export function renderDaily(data) {
   forecastDegrees.textContent = Math.round(data.main.temp) + `°C`;
   forecastDate.textContent = getForecastDay();
   forecastPicture.src = getForecastPicture(data.weather[0].id);
+  renderMain();
 }
