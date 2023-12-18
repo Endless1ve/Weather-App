@@ -1,3 +1,5 @@
+import { removePlug } from "../removePlug/removePlug";
+
 let counter = 0;
 export function renderMain() {
   counter++;

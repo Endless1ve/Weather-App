@@ -21,5 +21,10 @@ export function renderDaily(data) {
   forecastDegrees.textContent = Math.round(data.main.temp) + `°C`;
   forecastDate.textContent = getForecastDay();
   forecastPicture.src = getForecastPicture(data.weather[0].id);
+  feelsLikeBlock.textContent = Math.round(data.main.feels_like);
+  humidityBlock.textContent = data.main.humidity + `%`;
+  windSpeedBlock.textContent = Math.round(data.wind.speed) + "км/ч";
+  pressureBlock.textContent = data.main.pressure;
+  console.log(data);
   renderMain();
 }

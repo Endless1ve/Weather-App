@@ -1,11 +1,11 @@
 import { API_KEY, main } from "../../../variables";
 import { deletePreloader } from "../../preloader/deletePreloader";
-import { removePlug } from "../../removePlug/removePlug";
 import { renderDaily } from "../../renderDaily/renderDaily";
 import { handlerHourly } from "../../handlerHourly/handlerHourly";
 import { handlerWeekly } from "../../handlerWeekly/handlerWeekly";
 import { getDaysApi } from "../dateApi/dateApi";
 import { renderMain } from "../../renderMain/renderMain";
+import { removePlug } from "../../removePlug/removePlug";
 
 export function getForecasts(latitude, longitude) {
   const { currDay, nextDay, nextWeekDay } = getDaysApi();
@@ -46,17 +46,21 @@ export function getForecasts(latitude, longitude) {
     },
   ];
 
-  const responses = mockUrls.map((url) => {
-    url.link = fetch(url.link, {
-      headers: url.headers,
-    }).then((res) => res.json());
-    return url;
+  const responses = mockUrls.map((item) => {
+    return fetch(item.link, {
+      headers: item.headers,
+    })
+      .then((res) => res.json())
+      .then((data) => ({
+        data,
+        renderFun: item.renderFun,
+      }))
+      .catch((err) => console.log(err));
   });
 
   Promise.all(responses)
-    .then((res) => res.forEach((item) => item.funName(item.link)))
-    .then(() => removePlug())
-    .then(() => (main.style.display = "block"))
+    .then((res) => res.forEach((item) => item.renderFun(item.data)))
+    .then(() => renderMain())
     .catch((err) => console.log(err))
     .finally(() => deletePreloader());
 }
