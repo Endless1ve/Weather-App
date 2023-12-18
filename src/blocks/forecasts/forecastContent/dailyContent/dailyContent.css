@@ -3,6 +3,8 @@
 .dailyContent {
   display: flex;
   flex-direction: row;
+  gap: 0 15px;
+  overflow-x: scroll;
   justify-content: flex-start;
   gap: 0 15px;
   max-width: 100%;

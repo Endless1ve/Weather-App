@@ -13,10 +13,17 @@
   overflow-x: scroll;
   background: rgba(234, 202, 143, 0.7);
   cursor: grab;
+<<<<<<< HEAD
   -webkit-user-select: none;
+=======
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+>>>>>>> 6af7b8668fd19ddf7b1679a22234e87ae0491fcf
   -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   -ms-overflow-style: none;
   scrollbar-width: none;

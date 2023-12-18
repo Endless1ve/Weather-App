@@ -1,18 +1,18 @@
-import { renderMain } from "../../../..";
 import { API_KEY, main } from "../../../variables";
 import { deletePreloader } from "../../preloader/deletePreloader";
 import { removePlug } from "../../removePlug/removePlug";
 import { renderDaily } from "../../renderDaily/renderDaily";
-import { renderHourly } from "../../renderHourly/renderHourly";
-import { renderWeekly } from "../../renderWeekly/renderWeekly";
+import { handlerHourly } from "../../handlerHourly/handlerHourly";
+import { handlerWeekly } from "../../handlerWeekly/handlerWeekly";
 import { getDaysApi } from "../dateApi/dateApi";
+import { renderMain } from "../../renderMain/renderMain";
 
 export function getForecasts(latitude, longitude) {
   const { currDay, nextDay, nextWeekDay } = getDaysApi();
   const urls = [
     {
       link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${nextDay}&end=${nextWeekDay}`,
-      funName: renderWeekly,
+      renderFun: handlerWeekly,
       headers: {
         "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
         "X-RapidAPI-Host": "meteostat.p.rapidapi.com",
@@ -20,7 +20,7 @@ export function getForecasts(latitude, longitude) {
     },
     {
       link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${currDay}&end=${nextDay}`,
-      funName: renderHourly,
+      renderFun: handlerHourly,
       headers: {
         "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
         "X-RapidAPI-Host": "meteostat.p.rapidapi.com",
@@ -28,25 +28,25 @@ export function getForecasts(latitude, longitude) {
     },
     {
       link: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=ru`,
-      funName: renderDaily,
+      renderFun: renderDaily,
     },
   ];
   const mockUrls = [
     {
       link: `http://localhost:5000/weekly`,
-      funName: renderWeekly,
+      renderFun: handlerWeekly,
     },
     {
       link: `http://localhost:5000/hourly`,
-      funName: renderHourly,
+      renderFun: handlerHourly,
     },
     {
       link: `http://localhost:5000/daily`,
-      funName: renderDaily,
+      renderFun: renderDaily,
     },
   ];
 
-  const responses = urls.map((url) => {
+  const responses = mockUrls.map((url) => {
     url.link = fetch(url.link, {
       headers: url.headers,
     }).then((res) => res.json());
@@ -55,8 +55,8 @@ export function getForecasts(latitude, longitude) {
 
   Promise.all(responses)
     .then((res) => res.forEach((item) => item.funName(item.link)))
-    .catch((err) => {
-      console.log(err);
-      deletePreloader();
-    });
+    .then(() => removePlug())
+    .then(() => (main.style.display = "block"))
+    .catch((err) => console.log(err))
+    .finally(() => deletePreloader());
 }
