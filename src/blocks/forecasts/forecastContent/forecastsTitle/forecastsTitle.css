@@ -1,0 +1,12 @@
+.forecastsTitle {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+}
+
+@media screen and (min-width: 500px) {
+  .forecastsTitle {
+    font-size: 32px;
+  }
+}

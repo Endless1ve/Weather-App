@@ -1,0 +1,16 @@
+@import url("./forecastContent/forecastContent.css");
+
+.forecasts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .forecasts {
+    flex-direction: row;
+  }
+}
