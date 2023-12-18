@@ -1,4 +1,3 @@
-import { renderMain } from "../../..";
 import {
   status,
   forecastDegrees,
