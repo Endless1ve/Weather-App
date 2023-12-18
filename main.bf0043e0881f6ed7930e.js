@@ -2644,6 +2644,44 @@ if (toString !== ObjectPrototype.toString) {
 
 /***/ }),
 
+/***/ 7727:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var $ = __webpack_require__(2109);
+var IS_PURE = __webpack_require__(1913);
+var NativePromise = __webpack_require__(3366);
+var getBuiltIn = __webpack_require__(5005);
+var speciesConstructor = __webpack_require__(6707);
+var promiseResolve = __webpack_require__(9478);
+var redefine = __webpack_require__(1320);
+
+// `Promise.prototype.finally` method
+// https://tc39.github.io/ecma262/#sec-promise.prototype.finally
+$({ target: 'Promise', proto: true, real: true }, {
+  'finally': function (onFinally) {
+    var C = speciesConstructor(this, getBuiltIn('Promise'));
+    var isFunction = typeof onFinally == 'function';
+    return this.then(
+      isFunction ? function (x) {
+        return promiseResolve(C, onFinally()).then(function () { return x; });
+      } : onFinally,
+      isFunction ? function (e) {
+        return promiseResolve(C, onFinally()).then(function () { throw e; });
+      } : onFinally
+    );
+  }
+});
+
+// patch native Promise.prototype for native async functions
+if (!IS_PURE && typeof NativePromise == 'function' && !NativePromise.prototype['finally']) {
+  redefine(NativePromise.prototype, 'finally', getBuiltIn('Promise').prototype['finally']);
+}
+
+
+/***/ }),
+
 /***/ 8674:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -3689,17 +3727,12 @@ var __webpack_exports__ = {};
 (() => {
 "use strict";
 
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  I: () => (/* binding */ renderMain)
-});
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
 var es_object_to_string = __webpack_require__(1539);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__(4747);
-;// CONCATENATED MODULE: ./src/scripts/components/UI/scroll/scroll.js
-function scroll_scroll(block) {
+;// CONCATENATED MODULE: ./src/scripts/components/UI/scrollingBlocks/scrollingBlocks.js
+function scrollingBlocks(block) {
   var isScrolling = false;
   var startX, scrollLeft;
   function startScroll(event) {
@@ -3719,11 +3752,12 @@ function scroll_scroll(block) {
     block.removeEventListener("mousemove", handleMouseMove);
     block.removeEventListener("mouseup", stopScroll);
   }
+  function wheelScroll(event) {
+    event.preventDefault();
+    block.scrollLeft += event.deltaY;
+  }
   block.addEventListener("mousedown", startScroll);
-  block.addEventListener("mousewheel", function (e) {
-    e.preventDefault();
-    block.scrollLeft += e.deltaY;
-  });
+  block.addEventListener("mousewheel", wheelScroll);
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
 var es_promise = __webpack_require__(8674);
@@ -3733,6 +3767,8 @@ var es_array_concat = __webpack_require__(2222);
 var es_array_map = __webpack_require__(1249);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.link.js
 var es_string_link = __webpack_require__(9254);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.finally.js
+var es_promise_finally = __webpack_require__(7727);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
 var es_array_iterator = __webpack_require__(6992);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.iterator.js
@@ -4011,6 +4047,21 @@ function getForecastPicture(id) {
   });
   return src;
 }
+;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
+
+function removePlug() {
+  plug.remove();
+}
+;// CONCATENATED MODULE: ./src/scripts/components/renderMain/renderMain.js
+
+var counter = 0;
+function renderMain() {
+  counter++;
+  if (counter === 3) {
+    removePlug();
+    document.querySelector(".main").style.display = "flex";
+  }
+}
 ;// CONCATENATED MODULE: ./src/scripts/components/renderDaily/renderDaily.js
 
 
@@ -4021,19 +4072,17 @@ function getForecastPicture(id) {
 
 
 function renderDaily(data) {
-  data.then(function (res) {
-    place.textContent = res.name;
-    variables_status.textContent = res.weather[0].description[0].toUpperCase() + res.weather[0].description.slice(1);
-    forecastDegrees.textContent = Math.round(res.main.temp) + "\xB0C";
-    forecastDate.textContent = getForecastDay();
-    forecastPicture.src = getForecastPicture(res.weather[0].id);
-    feelsLikeBlock.textContent = Math.round(res.main.feels_like) + "\xB0C";
-    humidityBlock.textContent = Math.round(res.main.humidity) + "%";
-    windSpeedBlock.textContent = Math.round(res.wind.speed) + "\u043A\u043C/\u0447";
-    pressureBlock.textContent = res.main.pressure;
-  }).then(function () {
-    return renderMain();
-  });
+  place.textContent = data.name;
+  variables_status.textContent = data.weather[0].description[0].toUpperCase() + data.weather[0].description.slice(1);
+  forecastDegrees.textContent = Math.round(data.main.temp) + "\xB0C";
+  forecastDate.textContent = getForecastDay();
+  forecastPicture.src = getForecastPicture(data.weather[0].id);
+  feelsLikeBlock.textContent = Math.round(data.main.feels_like);
+  humidityBlock.textContent = data.main.humidity + "%";
+  windSpeedBlock.textContent = Math.round(data.wind.speed) + "км/ч";
+  pressureBlock.textContent = data.main.pressure;
+  console.log(data);
+  renderMain();
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__(7327);
@@ -4046,29 +4095,27 @@ function createHourlyCard(data) {
   var card = "\n    <div class=\"hourlyCard\">\n    <img src=\"".concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\">\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n    <p class=\"hourlyTime\">").concat(time, "</p>\n    </div>");
   return card;
 }
-;// CONCATENATED MODULE: ./src/scripts/components/renderHourly/renderHourly.js
+;// CONCATENATED MODULE: ./src/scripts/components/renderCardDom/renderCardDom.js
+function renderCardDom(block, card) {
+  block.insertAdjacentHTML("beforeend", card);
+}
+;// CONCATENATED MODULE: ./src/scripts/components/handlerHourly/handlerHourly.js
 
 
 
 
 
 
-function renderHourly(data) {
-  data.then(function (data) {
-    return data.data;
-  }).then(function (data) {
-    var newData = data.filter(function (item) {
-      return new Date(item.time) > new Date();
-    });
-    return newData;
-  }).then(function (res) {
-    res.forEach(function (element) {
-      var card = createHourlyCard(element);
-      hourlyContainer.insertAdjacentHTML("beforeend", card);
-    });
-  }).then(function () {
-    return renderMain();
+
+function handlerHourly(data) {
+  var newData = data.data.filter(function (item) {
+    return new Date(item.time) > new Date();
   });
+  newData.forEach(function (element) {
+    var card = createHourlyCard(element);
+    renderCardDom(hourlyContainer, card);
+  });
+  renderMain();
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/createWeeklyCard/createWeeklyCard.js
 
@@ -4081,30 +4128,26 @@ function createWeeklyCard(data) {
 {
   /* <p class="dailyDate">${getWeekDate(data.time)}.</p> */
 }
-;// CONCATENATED MODULE: ./src/scripts/components/renderWeekly/renderWeekly.js
+;// CONCATENATED MODULE: ./src/scripts/components/handlerWeekly/handlerWeekly.js
 
 
 
 
 
 
-function renderWeekly(data) {
-  data.then(function (data) {
-    return data.data;
-  }).then(function (res) {
-    return res.filter(function (item) {
-      return new Date(item.time).getHours() === 11;
-    });
-  }).then(function (res) {
-    return res.forEach(function (element) {
-      var card = createWeeklyCard(element);
-      weeklyContainer.insertAdjacentHTML("beforeend", card);
-    });
-  }).then(function () {
-    return renderMain();
+
+function handlerWeekly(data) {
+  var filtered = data.data.filter(function (item) {
+    return new Date(item.time).getHours() === 11;
   });
+  filtered.forEach(function (element) {
+    var card = createWeeklyCard(element);
+    renderCardDom(weeklyContainer, card);
+  });
+  renderMain();
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/API/forecastAPI/forecastApi.js
+
 
 
 
@@ -4129,47 +4172,56 @@ function getForecasts(latitude, longitude) {
     nextWeekDay = _getDaysApi.nextWeekDay;
   var urls = [{
     link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(nextDay, "&end=").concat(nextWeekDay),
-    funName: renderWeekly,
+    renderFun: handlerWeekly,
     headers: {
       "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
       "X-RapidAPI-Host": "meteostat.p.rapidapi.com"
     }
   }, {
     link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(currDay, "&end=").concat(nextDay),
-    funName: renderHourly,
+    renderFun: handlerHourly,
     headers: {
       "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
       "X-RapidAPI-Host": "meteostat.p.rapidapi.com"
     }
   }, {
     link: "https://api.openweathermap.org/data/2.5/weather?lat=".concat(latitude, "&lon=").concat(longitude, "&appid=").concat(API_KEY, "&units=metric&lang=ru"),
-    funName: renderDaily
+    renderFun: renderDaily
   }];
   var mockUrls = [{
     link: "http://localhost:5000/weekly",
-    funName: renderWeekly
+    renderFun: handlerWeekly
   }, {
     link: "http://localhost:5000/hourly",
-    funName: renderHourly
+    renderFun: handlerHourly
   }, {
     link: "http://localhost:5000/daily",
-    funName: renderDaily
+    renderFun: renderDaily
   }];
-  var responses = urls.map(function (url) {
-    url.link = fetch(url.link, {
-      headers: url.headers
+  var responses = urls.map(function (item) {
+    return fetch(item.link, {
+      headers: item.headers
     }).then(function (res) {
       return res.json();
+    }).then(function (data) {
+      return {
+        data: data,
+        renderFun: item.renderFun
+      };
+    }).catch(function (err) {
+      return console.log(err);
     });
-    return url;
   });
   Promise.all(responses).then(function (res) {
     return res.forEach(function (item) {
-      return item.funName(item.link);
+      return item.renderFun(item.data);
     });
+  }).then(function () {
+    return renderMain();
   }).catch(function (err) {
-    console.log(err);
-    deletePreloader();
+    return console.log(err);
+  }).finally(function () {
+    return deletePreloader();
   });
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/getLocation/getLocation.js
@@ -4198,13 +4250,7 @@ function successLocation(position) {
     longitude = _position$coords.longitude;
   getForecasts(latitude, longitude);
 }
-;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
-function removePlug() {
-  var plug = document.querySelector('.plug');
-  plug.remove();
-}
 ;// CONCATENATED MODULE: ./src/index.js
-
 
 
 
@@ -4213,16 +4259,8 @@ function removePlug() {
 
 getLocation();
 scrollBlocks.forEach(function (item) {
-  return scroll_scroll(item);
+  return scrollingBlocks(item);
 });
-var counter = 0;
-function renderMain() {
-  counter++;
-  if (counter === 3) {
-    removePlug();
-    document.querySelector(".main").style.display = "flex";
-  }
-}
 })();
 
 /******/ })()
