@@ -1,10 +1,11 @@
 @import url("./blocks/normalize/normalize.css");
 @import url("./vendor/fonts/fonts.css");
 @import url("./blocks/root/root.css");
-@import url("./blocks/main/main.css");
-@import url("./blocks/home/home.css");
 @import url("./blocks/plug/plug.css");
 @import url("./blocks/preloader/preloader.css");
+@import url("./blocks/main/main.css");
+@import url("./blocks/home/home.css");
+@import url("./blocks/forecasts/forecasts.css");
 @import url("./blocks/details/details.css");
 
 body {
