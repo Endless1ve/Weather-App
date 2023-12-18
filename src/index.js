@@ -5,11 +5,3 @@ import { removePlug } from "./scripts/components/removePlug/removePlug";
 import { scrollBlocks } from "./scripts/variables";
 getLocation();
 scrollBlocks.forEach((item) => scroll(item));
-let counter = 0;
-export function renderMain() {
-  counter++;
-  if (counter === 3) {
-    removePlug();
-    document.querySelector(".main").style.display = "flex";
-  }
-}
