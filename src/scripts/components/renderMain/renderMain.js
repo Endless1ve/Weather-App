@@ -1,5 +1,8 @@
 import { main } from "../../variables";
-
+let counter = 0;
 export function renderMain() {
-  main.style.display = "flex";
+  counter++;
+  if (counter === 3) {
+    main.style.display = "flex";
+  }
 }
