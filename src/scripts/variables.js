@@ -25,6 +25,7 @@ import rainAndSnow from "../vendor/images/rainAndSnow.svg";
 import snow from "../vendor/images/snow.svg";
 import sun from "../vendor/images/sun.svg";
 import rain from "../vendor/images/rain.svg";
+import weatherPicError from "../vendor/images/weather-error.svg";
 //--Image forecast variables--
 const weatherPics = [
   { pic: cloudy, idArr: [3, 4, 801, 802, 803, 804] },
@@ -57,6 +58,7 @@ export {
   main,
   API_KEY,
   weatherPics,
+  weatherPicError,
   status,
   forecastDegrees,
   place,
