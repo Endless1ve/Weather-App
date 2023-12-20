@@ -12,7 +12,6 @@ function geolocationAPI() {
       getForecasts(latitude, longitude);
     })
     .catch((err) => {
-      console.log(err);
       deletePreloader();
     });
 }

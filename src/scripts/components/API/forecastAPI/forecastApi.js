@@ -9,10 +9,10 @@ import { getDaysApi } from "../dateApi/dateApi";
 import { renderMain } from "../../renderMain/renderMain";
 
 export function getForecasts(latitude, longitude) {
-  const { currDay, nextDay, nextWeekDay } = getDaysApi();
+  const { newCurrDate, newNextDate, newNextWeekDate } = getDaysApi();
   const urls = [
     {
-      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${nextDay}&end=${nextWeekDay}`,
+      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${newNextDate}&end=${newNextWeekDate}`,
       renderFun: handlerWeekly,
       headers: {
         "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
@@ -20,7 +20,7 @@ export function getForecasts(latitude, longitude) {
       },
     },
     {
-      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${currDay}&end=${nextDay}`,
+      link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${newCurrDate}&end=${newNextDate}`,
       renderFun: handlerHourly,
       headers: {
         "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",

@@ -51,6 +51,23 @@ const weatherPics = [
   },
 ];
 
+//date arrays
+const dayArray = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+const monthArray = [
+  "Янв",
+  "Фев",
+  "Мар",
+  "Апр",
+  "Май",
+  "Июн",
+  "Июл",
+  "Авг",
+  "Сен",
+  "Окт",
+  "Ноя",
+  "Дек",
+];
+
 export {
   plug,
   preloaderBlock,
@@ -66,4 +83,6 @@ export {
   forecastPicture,
   hourlyContainer,
   weeklyContainer,
+  dayArray,
+  monthArray,
 };
