@@ -6,8 +6,7 @@ export function getForecastDay() {
   const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
-  const res = `${dayArray[weekDay]} | ${day} ${monthArray[month]} ${year}`;
-  return res;
+  return `${dayArray[weekDay]} | ${day} ${monthArray[month]} ${year}`;
 }
 
 export function getWeekDay(data) {
@@ -17,11 +16,11 @@ export function getWeekDay(data) {
   return [weekDay, day, month];
 }
 
-function getCorrectDay(data) {
-  const day = String(data.getDate());
-  if (day.length < 2) {
-    return "0" + day;
-  } else return day;
+function getCorrectData(data) {
+  if (String(data).length < 2) {
+    data = "0" + data;
+  }
+  return data;
 }
 
 export function getDaysApi() {
@@ -38,9 +37,9 @@ export function getDaysApi() {
   const nextDayMonth = nextDate.getMonth() + 1;
   const nextWeekDayMonth = nextWeekDate.getMonth() + 1;
   //день сегодня, день завтра, день через неделю
-  const currDay = getCorrectDay(currDate);
-  const nextDay = getCorrectDay(nextDate);
-  const nextWeekDay = getCorrectDay(nextWeekDate);
+  const currDay = getCorrectData(currDate.getDate());
+  const nextDay = getCorrectData(nextDate.getDate());
+  const nextWeekDay = getCorrectData(nextWeekDate.getDate());
 
   const newCurrDate = `${currDayYear}-${currDayMonth}-${currDay}`;
   const newNextDate = `${nextDayYear}-${nextDayMonth}-${nextDay}`;
@@ -50,13 +49,7 @@ export function getDaysApi() {
 }
 
 export function getHourlyTime(time) {
-  let hours = String(new Date(time).getHours());
-  if (hours.length < 2) {
-    hours = "0" + hours;
-  }
-  let minutes = String(new Date(time).getMinutes());
-  if (minutes.length < 2) {
-    minutes = "0" + minutes;
-  }
+  const hours = getCorrectData(new Date(time).getHours());
+  const minutes = getCorrectData(new Date(time).getMinutes());
   return `${hours}:${minutes}`;
 }
