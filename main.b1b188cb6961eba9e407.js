@@ -94,6 +94,56 @@ module.exports = sloppyArrayMethod('forEach') ? function forEach(callbackfn /* ,
 
 /***/ }),
 
+/***/ 8457:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var bind = __webpack_require__(244);
+var toObject = __webpack_require__(7908);
+var callWithSafeIterationClosing = __webpack_require__(3411);
+var isArrayIteratorMethod = __webpack_require__(7659);
+var toLength = __webpack_require__(7466);
+var createProperty = __webpack_require__(6135);
+var getIteratorMethod = __webpack_require__(1246);
+
+// `Array.from` method implementation
+// https://tc39.github.io/ecma262/#sec-array.from
+module.exports = function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
+  var O = toObject(arrayLike);
+  var C = typeof this == 'function' ? this : Array;
+  var argumentsLength = arguments.length;
+  var mapfn = argumentsLength > 1 ? arguments[1] : undefined;
+  var mapping = mapfn !== undefined;
+  var index = 0;
+  var iteratorMethod = getIteratorMethod(O);
+  var length, result, step, iterator, next;
+  if (mapping) mapfn = bind(mapfn, argumentsLength > 2 ? arguments[2] : undefined, 2);
+  // if the target is not iterable or it's an array with the default iterator - use a simple case
+  if (iteratorMethod != undefined && !(C == Array && isArrayIteratorMethod(iteratorMethod))) {
+    iterator = iteratorMethod.call(O);
+    next = iterator.next;
+    result = new C();
+    for (;!(step = next.call(iterator)).done; index++) {
+      createProperty(result, index, mapping
+        ? callWithSafeIterationClosing(iterator, mapfn, [step.value, index], true)
+        : step.value
+      );
+    }
+  } else {
+    length = toLength(O.length);
+    result = new C(length);
+    for (;length > index; index++) {
+      createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+    }
+  }
+  result.length = index;
+  return result;
+};
+
+
+/***/ }),
+
 /***/ 1318:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -1874,6 +1924,92 @@ shared('inspectSource', function (it) {
 
 /***/ }),
 
+/***/ 2261:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var regexpFlags = __webpack_require__(7066);
+
+var nativeExec = RegExp.prototype.exec;
+// This always refers to the native implementation, because the
+// String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
+// which loads this file before patching the method.
+var nativeReplace = String.prototype.replace;
+
+var patchedExec = nativeExec;
+
+var UPDATES_LAST_INDEX_WRONG = (function () {
+  var re1 = /a/;
+  var re2 = /b*/g;
+  nativeExec.call(re1, 'a');
+  nativeExec.call(re2, 'a');
+  return re1.lastIndex !== 0 || re2.lastIndex !== 0;
+})();
+
+// nonparticipating capturing group, copied from es5-shim's String#split patch.
+var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined;
+
+var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED;
+
+if (PATCH) {
+  patchedExec = function exec(str) {
+    var re = this;
+    var lastIndex, reCopy, match, i;
+
+    if (NPCG_INCLUDED) {
+      reCopy = new RegExp('^' + re.source + '$(?!\\s)', regexpFlags.call(re));
+    }
+    if (UPDATES_LAST_INDEX_WRONG) lastIndex = re.lastIndex;
+
+    match = nativeExec.call(re, str);
+
+    if (UPDATES_LAST_INDEX_WRONG && match) {
+      re.lastIndex = re.global ? match.index + match[0].length : lastIndex;
+    }
+    if (NPCG_INCLUDED && match && match.length > 1) {
+      // Fix browsers whose `exec` methods don't consistently return `undefined`
+      // for NPCG, like IE8. NOTE: This doesn' work for /(.?)?/
+      nativeReplace.call(match[0], reCopy, function () {
+        for (i = 1; i < arguments.length - 2; i++) {
+          if (arguments[i] === undefined) match[i] = undefined;
+        }
+      });
+    }
+
+    return match;
+  };
+}
+
+module.exports = patchedExec;
+
+
+/***/ }),
+
+/***/ 7066:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var anObject = __webpack_require__(9670);
+
+// `RegExp.prototype.flags` getter implementation
+// https://tc39.github.io/ecma262/#sec-get-regexp.prototype.flags
+module.exports = function () {
+  var that = anObject(this);
+  var result = '';
+  if (that.global) result += 'g';
+  if (that.ignoreCase) result += 'i';
+  if (that.multiline) result += 'm';
+  if (that.dotAll) result += 's';
+  if (that.unicode) result += 'u';
+  if (that.sticky) result += 'y';
+  return result;
+};
+
+
+/***/ }),
+
 /***/ 4488:
 /***/ ((module) => {
 
@@ -2435,6 +2571,26 @@ $({ target: 'Array', proto: true, forced: !arrayMethodHasSpeciesSupport('filter'
   filter: function filter(callbackfn /* , thisArg */) {
     return $filter(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
   }
+});
+
+
+/***/ }),
+
+/***/ 1038:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+var $ = __webpack_require__(2109);
+var from = __webpack_require__(8457);
+var checkCorrectnessOfIteration = __webpack_require__(7072);
+
+var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function (iterable) {
+  Array.from(iterable);
+});
+
+// `Array.from` method
+// https://tc39.github.io/ecma262/#sec-array.from
+$({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
+  from: from
 });
 
 
@@ -3068,6 +3224,54 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 
 /***/ }),
 
+/***/ 4916:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var $ = __webpack_require__(2109);
+var exec = __webpack_require__(2261);
+
+$({ target: 'RegExp', proto: true, forced: /./.exec !== exec }, {
+  exec: exec
+});
+
+
+/***/ }),
+
+/***/ 9714:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var redefine = __webpack_require__(1320);
+var anObject = __webpack_require__(9670);
+var fails = __webpack_require__(7293);
+var flags = __webpack_require__(7066);
+
+var TO_STRING = 'toString';
+var RegExpPrototype = RegExp.prototype;
+var nativeToString = RegExpPrototype[TO_STRING];
+
+var NOT_GENERIC = fails(function () { return nativeToString.call({ source: 'a', flags: 'b' }) != '/a/b'; });
+// FF44- RegExp#toString has a wrong name
+var INCORRECT_NAME = nativeToString.name != TO_STRING;
+
+// `RegExp.prototype.toString` method
+// https://tc39.github.io/ecma262/#sec-regexp.prototype.tostring
+if (NOT_GENERIC || INCORRECT_NAME) {
+  redefine(RegExp.prototype, TO_STRING, function toString() {
+    var R = anObject(this);
+    var p = String(R.source);
+    var rf = R.flags;
+    var f = String(rf === undefined && R instanceof RegExp && !('flags' in RegExpPrototype) ? flags.call(R) : rf);
+    return '/' + p + '/' + f;
+  }, { unsafe: true });
+}
+
+
+/***/ }),
+
 /***/ 2023:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -3201,6 +3405,18 @@ if (DESCRIPTORS && typeof NativeSymbol == 'function' && (!('description' in Nati
     Symbol: SymbolWrapper
   });
 }
+
+
+/***/ }),
+
+/***/ 2165:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+var defineWellKnownSymbol = __webpack_require__(7235);
+
+// `Symbol.iterator` well-known symbol
+// https://tc39.github.io/ecma262/#sec-symbol.iterator
+defineWellKnownSymbol('iterator');
 
 
 /***/ }),
@@ -3628,6 +3844,13 @@ module.exports = __webpack_require__.p + "vendor/images/48741c4dbb2a8b6cd06d8d4d
 
 module.exports = __webpack_require__.p + "vendor/images/a83e2c8d0dcd127304cc25a091cb5a84.svg";
 
+/***/ }),
+
+/***/ 7616:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "vendor/images/c5d8bb3e8bdc8f7db0656136c4e90f53.svg";
+
 /***/ })
 
 /******/ 	});
@@ -3796,6 +4019,9 @@ var sun_default = /*#__PURE__*/__webpack_require__.n(sun);
 // EXTERNAL MODULE: ./src/vendor/images/rain.svg
 var rain = __webpack_require__(1654);
 var rain_default = /*#__PURE__*/__webpack_require__.n(rain);
+// EXTERNAL MODULE: ./src/vendor/images/weather-error.svg
+var weather_error = __webpack_require__(7616);
+var weather_error_default = /*#__PURE__*/__webpack_require__.n(weather_error);
 ;// CONCATENATED MODULE: ./src/scripts/variables.js
 // --DOM variables--
 var main = document.querySelector(".main");
@@ -3830,6 +4056,7 @@ var API_KEY = "15000a2461a052e3387841ebd0b2d6e3";
 
 
 
+
 //--Image forecast variables--
 var weatherPics = [{
   pic: (cloudy_default()),
@@ -3854,6 +4081,10 @@ var weatherPics = [{
   idArr: [23, 24, 25, 26, 27, 200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
 }];
 
+//date arrays
+var dayArray = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+var monthArray = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"];
+
 ;// CONCATENATED MODULE: ./src/scripts/components/preloader/deletePreloader.js
 function deletePreloader() {
   var preloader = document.querySelector(".preloader");
@@ -3871,180 +4102,108 @@ var es_symbol_description = __webpack_require__(1817);
 var es_array_slice = __webpack_require__(7042);
 ;// CONCATENATED MODULE: ./src/scripts/components/API/dateApi/dateApi.js
 
+
 function getForecastDay() {
   var date = new Date();
   var weekDay = date.getDay();
   var day = date.getDate();
   var month = date.getMonth();
   var year = date.getFullYear();
-  switch (weekDay) {
-    case 0:
-      weekDay = "Вс";
-      break;
-    case 1:
-      weekDay = "Пн";
-      break;
-    case 2:
-      weekDay = "Вт";
-      break;
-    case 3:
-      weekDay = "Ср";
-      break;
-    case 4:
-      weekDay = "Чт";
-      break;
-    case 5:
-      weekDay = "Пт";
-      break;
-    case 6:
-      weekDay = "Сб";
-      break;
-  }
-  switch (month) {
-    case 0:
-      month = "Янв";
-      break;
-    case 1:
-      month = "Фев";
-      break;
-    case 2:
-      month = "Мар";
-      break;
-    case 3:
-      month = "Апр";
-      break;
-    case 4:
-      month = "Май";
-      break;
-    case 5:
-      month = "Июн";
-      break;
-    case 6:
-      month = "Июл";
-      break;
-    case 7:
-      month = "Авг";
-      break;
-    case 8:
-      month = "Сен";
-      break;
-    case 9:
-      month = "Окт";
-      break;
-    case 10:
-      month = "Ноя";
-      break;
-    case 11:
-      month = "Дек";
-      break;
-  }
-  var res = "".concat(weekDay, " | ").concat(day, " ").concat(month, " ").concat(year);
-  return res;
+  return "".concat(dayArray[weekDay], " | ").concat(day, " ").concat(monthArray[month], " ").concat(year);
 }
 function getWeekDay(data) {
-  var weekDay = new Date(data).getDay();
-  switch (weekDay) {
-    case 0:
-      weekDay = "ВС";
-      break;
-    case 1:
-      weekDay = "ПН";
-      break;
-    case 2:
-      weekDay = "ВТ";
-      break;
-    case 3:
-      weekDay = "СР";
-      break;
-    case 4:
-      weekDay = "ЧТ";
-      break;
-    case 5:
-      weekDay = "ПТ";
-      break;
-    case 6:
-      weekDay = "СБ";
-      break;
-  }
-  return weekDay;
-}
-function getWeekDate(data) {
+  var weekDay = dayArray[new Date(data).getDay()];
   var day = new Date(data).getDate();
-  var month = new Date(data).getMonth();
-  switch (month) {
-    case 0:
-      month = "янв";
-      break;
-    case 1:
-      month = "фев";
-      break;
-    case 2:
-      month = "мар";
-      break;
-    case 3:
-      month = "апр";
-      break;
-    case 4:
-      month = "май";
-      break;
-    case 5:
-      month = "июн";
-      break;
-    case 6:
-      month = "июл";
-      break;
-    case 7:
-      month = "авг";
-      break;
-    case 8:
-      month = "сен";
-      break;
-    case 9:
-      month = "окт";
-      break;
-    case 10:
-      month = "ноя";
-      break;
-    case 11:
-      month = "дек";
-      break;
+  var month = monthArray[new Date(data).getMonth()];
+  return [weekDay, day, month];
+}
+function getCorrectData(data) {
+  if (String(data).length < 2) {
+    data = "0" + data;
   }
-  var res = "".concat(day, " ").concat(month);
-  return res;
+  return data;
 }
 function getDaysApi() {
+  //Нынешняя дата, следующий день, дата через неделю
   var currDate = new Date();
   var nextDate = new Date(currDate.getTime() + 24 * 60 * 60 * 1000);
   var nextWeekDate = new Date(currDate.getTime() + 7 * 24 * 60 * 60 * 1000);
-  var currDay = "".concat(currDate.getFullYear(), "-").concat(currDate.getMonth() + 1, "-").concat(String(currDate.getDate()).length < 2 ? "0" + currDate.getDate() : currDate.getDate());
-  var nextDay = "".concat(nextDate.getFullYear(), "-").concat(nextDate.getMonth() + 1, "-").concat(String(nextDate.getDate()).length < 2 ? "0" + nextDate.getDate() : nextDate.getDate());
-  var nextWeekDay = "".concat(nextWeekDate.getFullYear(), "-").concat(nextWeekDate.getMonth() + 1, "-").concat(String(nextWeekDate.getDate()).length < 2 ? "0" + nextWeekDate.getDate() : nextWeekDate.getDate());
+  //Год сегодня, год завтра, год через неделю
+  var currDayYear = currDate.getFullYear();
+  var nextDayYear = nextDate.getFullYear();
+  var nextWeekDayYear = nextWeekDate.getFullYear();
+  //месяц сегодня, месяц завтра, месяц через неделю
+  var currDayMonth = currDate.getMonth() + 1;
+  var nextDayMonth = nextDate.getMonth() + 1;
+  var nextWeekDayMonth = nextWeekDate.getMonth() + 1;
+  //день сегодня, день завтра, день через неделю
+  var currDay = getCorrectData(currDate.getDate());
+  var nextDay = getCorrectData(nextDate.getDate());
+  var nextWeekDay = getCorrectData(nextWeekDate.getDate());
+  var newCurrDate = "".concat(currDayYear, "-").concat(currDayMonth, "-").concat(currDay);
+  var newNextDate = "".concat(nextDayYear, "-").concat(nextDayMonth, "-").concat(nextDay);
+  var newNextWeekDate = "".concat(nextWeekDayYear, "-").concat(nextWeekDayMonth, "-").concat(nextWeekDay);
   return {
-    currDay: currDay,
-    nextDay: nextDay,
-    nextWeekDay: nextWeekDay
+    newCurrDate: newCurrDate,
+    newNextDate: newNextDate,
+    newNextWeekDate: newNextWeekDate
   };
 }
 function getHourlyTime(time) {
-  return "".concat(String(new Date(time).getHours().length < 2 ? "0" + new Date(time).getHours() : new Date(time).getHours()), ":").concat(String("0" + new Date(time).getMinutes()));
+  var hours = getCorrectData(new Date(time).getHours());
+  var minutes = getCorrectData(new Date(time).getMinutes());
+  return "".concat(hours, ":").concat(minutes);
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
 var es_array_includes = __webpack_require__(6699);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
 var es_string_includes = __webpack_require__(2023);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.to-string.js
+var es_regexp_to_string = __webpack_require__(9714);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
+var es_array_from = __webpack_require__(1038);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
+var es_regexp_exec = __webpack_require__(4916);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.iterator.js
+var es_symbol_iterator = __webpack_require__(2165);
 ;// CONCATENATED MODULE: ./src/scripts/components/getForecastPicture/getForecastPicture.js
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
 function getForecastPicture(id) {
   var src = "";
-  weatherPics.forEach(function (item) {
-    if (item.idArr.includes(id)) {
-      src = item.pic;
+  var _iterator = _createForOfIteratorHelper(weatherPics),
+    _step;
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var item = _step.value;
+      if (item.idArr.includes(id)) {
+        src = item.pic;
+        break;
+      } else {
+        src = (weather_error_default());
+      }
     }
-  });
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
   return src;
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
@@ -4122,11 +4281,8 @@ function handlerHourly(data) {
 
 
 function createWeeklyCard(data) {
-  var card = "\n  <div class=\"dailyCard\">\n    <p class=\"dailyWeekday\">".concat(getWeekDay(data.time), "</p>\n    <p class=\"dailyDate\">12 \u0434\u0435\u043A.</p>\n    <img src=\"").concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\"/>\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n  </div>");
+  var card = "\n  <div class=\"dailyCard\">\n    <p class=\"dailyWeekday\">".concat(getWeekDay(data.time)[0], "</p>\n    <p class=\"dailyDate\">").concat(getWeekDay(data.time)[1], " ").concat(getWeekDay(data.time)[2], ".</p>\n    <img src=\"").concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\"/>\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n  </div>");
   return card;
-}
-{
-  /* <p class="dailyDate">${getWeekDate(data.time)}.</p> */
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/handlerWeekly/handlerWeekly.js
 
@@ -4140,6 +4296,7 @@ function handlerWeekly(data) {
   var filtered = data.data.filter(function (item) {
     return new Date(item.time).getHours() === 11;
   });
+  console.log(filtered);
   filtered.forEach(function (element) {
     var card = createWeeklyCard(element);
     renderCardDom(weeklyContainer, card);
@@ -4164,21 +4321,20 @@ function handlerWeekly(data) {
 
 
 
-
 function getForecasts(latitude, longitude) {
   var _getDaysApi = getDaysApi(),
-    currDay = _getDaysApi.currDay,
-    nextDay = _getDaysApi.nextDay,
-    nextWeekDay = _getDaysApi.nextWeekDay;
+    newCurrDate = _getDaysApi.newCurrDate,
+    newNextDate = _getDaysApi.newNextDate,
+    newNextWeekDate = _getDaysApi.newNextWeekDate;
   var urls = [{
-    link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(nextDay, "&end=").concat(nextWeekDay),
+    link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(newNextDate, "&end=").concat(newNextWeekDate),
     renderFun: handlerWeekly,
     headers: {
       "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
       "X-RapidAPI-Host": "meteostat.p.rapidapi.com"
     }
   }, {
-    link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(currDay, "&end=").concat(nextDay),
+    link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(newCurrDate, "&end=").concat(newNextDate),
     renderFun: handlerHourly,
     headers: {
       "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
@@ -4240,7 +4396,6 @@ function geolocationAPI() {
       longitude = res.longitude;
     getForecasts(latitude, longitude);
   }).catch(function (err) {
-    console.log(err);
     deletePreloader();
   });
 }
