@@ -26,5 +26,3 @@ function closeError() {
     bar.style.width = "0";
   }, 500);
 }
-
-displayErrorBtn.addEventListener("click", displayError);
