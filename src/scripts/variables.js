@@ -7,6 +7,10 @@ const preloader = document.querySelector(".preloader");
 //home forecast elements
 const homeForecastBlock = document.querySelector(".homeForecast");
 const homePlaceBlock = document.querySelector(".placeContent");
+const feelsLike = document.querySelector(".feelsLike");
+const humidity = document.querySelector(".humidity");
+const windSpeed = document.querySelector(".windSpeed");
+const pressure = document.querySelector(".pressure");
 //hourly card container
 const hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
@@ -81,4 +85,8 @@ export {
   monthArray,
   homeForecastBlock,
   homePlaceBlock,
+  feelsLike,
+  humidity,
+  windSpeed,
+  pressure,
 };

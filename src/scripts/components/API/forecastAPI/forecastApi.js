@@ -1,8 +1,7 @@
-import { handler } from "../../../..";
 import { FIRST_KEY, SECOND_KEY } from "../../../variables";
 import { deletePreloader } from "../../preloader/deletePreloader";
 import { removePlug } from "../../removePlug/removePlug";
-import { renderDaily } from "../../renderDaily/renderDaily";
+import { handlerDaily } from "../../handlerDaily/handlerDaily";
 import { handlerHourly } from "../../handlerHourly/handlerHourly";
 import { handlerWeekly } from "../../handlerWeekly/handlerWeekly";
 import { getDaysApi } from "../dateApi/dateApi";
@@ -29,7 +28,7 @@ export function getForecasts(latitude, longitude) {
     },
     {
       link: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${FIRST_KEY}&units=metric&lang=ru`,
-      renderFun: renderDaily,
+      renderFun: handlerDaily,
     },
   ];
   const mockUrls = [
@@ -43,7 +42,7 @@ export function getForecasts(latitude, longitude) {
     },
     {
       link: `http://localhost:5000/daily`,
-      renderFun: renderDaily,
+      renderFun: handlerDaily,
     },
   ];
 
