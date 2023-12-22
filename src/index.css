@@ -6,6 +6,7 @@
 @import url("./blocks/main/main.css");
 @import url("./blocks/home/home.css");
 @import url("./blocks/forecasts/forecasts.css");
+@import url("./blocks/details/details.css");
 
 body {
   height: 100%;

@@ -1,0 +1,10 @@
+@import url("./detailsTitle/detailsTitle.css");
+@import url("./detailsContent/detailsContent.css");
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  padding: 0 15px 20px;
+}
