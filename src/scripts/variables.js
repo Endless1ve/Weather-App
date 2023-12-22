@@ -5,18 +5,16 @@ const plug = document.querySelector(".plug");
 const preloaderBlock = document.querySelector(".plugContent");
 const preloader = document.querySelector(".preloader");
 //home forecast elements
-const status = document.querySelector(".forecastStatus");
-const forecastDegrees = document.querySelector(".forecastDegrees");
-const place = document.querySelector(".placeText");
-const forecastDate = document.querySelector(".forecastDate");
-const forecastPicture = document.querySelector(".forecastImage");
+const homeForecastBlock = document.querySelector(".homeForecast");
+const homePlaceBlock = document.querySelector(".placeContent");
 //hourly card container
 const hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 const weeklyContainer = document.querySelector(".dailyContent");
 //--Cards variables--
 //--API key variables--
-const API_KEY = "15000a2461a052e3387841ebd0b2d6e3";
+const FIRST_KEY = FIRST_API_KEY;
+const SECOND_KEY = SECOND_API_KEY;
 //--image variables--
 import cloudy from "../vendor/images/cloudy.svg";
 import fog from "../vendor/images/fog.svg";
@@ -73,16 +71,14 @@ export {
   preloaderBlock,
   preloader,
   main,
-  API_KEY,
+  FIRST_KEY,
+  SECOND_KEY,
   weatherPics,
   weatherPicError,
-  status,
-  forecastDegrees,
-  place,
-  forecastDate,
-  forecastPicture,
   hourlyContainer,
   weeklyContainer,
   dayArray,
   monthArray,
+  homeForecastBlock,
+  homePlaceBlock,
 };

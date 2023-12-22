@@ -1,15 +1,13 @@
 const path = require("path");
+const dotenv = require("dotenv");
 const webpack = require("webpack");
-new webpack.DefinePlugin({
-  NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-});
+const env = dotenv.config().parsed;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const isDev = process.env.NODE_ENV === "development";
 
 module.exports = {
-  mode: "production",
   entry: { main: "./src/index.js" },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -54,6 +52,11 @@ module.exports = {
       inject: false,
       template: "./src/index.html",
       filename: "index.html",
+    }),
+    new webpack.DefinePlugin({
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      FIRST_API_KEY: JSON.stringify(env.FIRST_API_KEY),
+      SECOND_API_KEY: JSON.stringify(env.SECOND_API_KEY),
     }),
   ],
   optimization: {
