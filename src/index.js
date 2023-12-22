@@ -1,5 +1,4 @@
 import "./index.css";
-// require("dotenv").config();
 import { scrollingBlocks } from "./scripts/components/UI/scrollingBlocks/scrollingBlocks";
 import { getLocation } from "./scripts/components/getLocation/getLocation";
 getLocation();

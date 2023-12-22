@@ -1,3 +1,6 @@
+// --API variables--
+const OPENWEATHER_API_KEY = OPENWEATHER_API_KEY;
+const METEOSTAT_API_KEY = METEOSTAT_API_KEY;
 // --DOM variables--
 const main = document.querySelector(".main");
 //plug and preloader
@@ -15,10 +18,6 @@ const pressure = document.querySelector(".pressure");
 const hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 const weeklyContainer = document.querySelector(".dailyContent");
-//--Cards variables--
-//--API key variables--
-const FIRST_KEY = FIRST_API_KEY;
-const SECOND_KEY = SECOND_API_KEY;
 //--image variables--
 import cloudy from "../vendor/images/cloudy.svg";
 import fog from "../vendor/images/fog.svg";
@@ -75,8 +74,6 @@ export {
   preloaderBlock,
   preloader,
   main,
-  FIRST_KEY,
-  SECOND_KEY,
   weatherPics,
   weatherPicError,
   hourlyContainer,
@@ -89,4 +86,6 @@ export {
   humidity,
   windSpeed,
   pressure,
+  OPENWEATHER_API_KEY,
+  METEOSTAT_API_KEY,
 };
