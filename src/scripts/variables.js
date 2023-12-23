@@ -2,6 +2,7 @@
 const OPENWEATHER_API_KEY = OPENWEATHER_API_KEY;
 const METEOSTAT_API_KEY = METEOSTAT_API_KEY;
 // --DOM variables--
+const root = document.querySelector(".root");
 const main = document.querySelector(".main");
 //plug and preloader
 const plug = document.querySelector(".plug");
@@ -70,6 +71,7 @@ const monthArray = [
 ];
 
 export {
+  root,
   plug,
   preloaderBlock,
   preloader,

@@ -4,4 +4,5 @@
   transition: width 0.5s ease;
   background: #ffffff;
   border-radius: 20px;
+  z-index: 1;
 }

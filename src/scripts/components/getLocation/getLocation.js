@@ -1,5 +1,6 @@
 import { getForecasts } from "../API/forecastAPI/forecastApi";
 import { deletePreloader } from "../preloader/deletePreloader";
+import { renderError } from "../renderError/renderError";
 
 export function getLocation() {
   navigator.geolocation.getCurrentPosition(successLocation, geolocationAPI);
@@ -13,6 +14,7 @@ function geolocationAPI() {
     })
     .catch((err) => {
       deletePreloader();
+      renderError();
     });
 }
 

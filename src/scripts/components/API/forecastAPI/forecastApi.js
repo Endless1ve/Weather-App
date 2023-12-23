@@ -55,13 +55,13 @@ export function getForecasts(latitude, longitude) {
         data,
         renderFun: item.renderFun,
       }))
-      .catch((err) => console.log(err));
+      .catch(() => renderError());
   });
 
   Promise.all(responses)
     .then((res) => res.forEach((item) => item.renderFun(item.data)))
     .then(() => removePlug())
     .then(() => renderMain())
-    .catch((err) => console.log(err))
+    .catch(() => renderError())
     .finally(() => deletePreloader());
 }

@@ -1,4 +1,6 @@
-import { errorClose } from "../../variables";
+import { errorClose, root } from "../../variables";
+import { deleteError } from "../deleteError/deleteError";
+import { renderCardDom } from "../renderCardDom/renderCardDom";
 
 export function renderError() {
   const error = ` 
@@ -9,5 +11,25 @@ export function renderError() {
       <div class="errorProgress"></div>
       </div>
   </div>`;
-  document.querySelector(".root").insertAdjacentHTML("beforeend", error);
+  renderCardDom(root, error);
+
+  const bar = document.querySelector(".errorProgress");
+  const closeButton = document.querySelector(".errorClose");
+
+  let progress = 0;
+  const increment = 100 / ((10 * 1000) / 50);
+
+  const interval = setInterval(() => {
+    progress += increment;
+    bar.style.width = progress + "%";
+    if (progress >= 106 || !document.querySelector(".error")) {
+      clearInterval(interval);
+      if (closeButton) {
+        closeButton.removeEventListener("click", deleteError);
+      }
+      deleteError();
+    }
+  }, 50);
+
+  closeButton.addEventListener("click", deleteError);
 }
