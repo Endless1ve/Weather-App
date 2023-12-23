@@ -55,8 +55,8 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      FIRST_API_KEY: JSON.stringify(env.FIRST_API_KEY),
-      SECOND_API_KEY: JSON.stringify(env.SECOND_API_KEY),
+      OPENWEATHER_API_KEY: JSON.stringify(env.OPENWEATHER_API_KEY),
+      METEOSTAT_API_KEY: JSON.stringify(env.METEOSTAT_API_KEY),
     }),
   ],
   optimization: {

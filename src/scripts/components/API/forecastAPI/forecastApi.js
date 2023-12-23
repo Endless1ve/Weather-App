@@ -5,7 +5,11 @@ import { handlerHourly } from "../../handlerHourly/handlerHourly";
 import { handlerWeekly } from "../../handlerWeekly/handlerWeekly";
 import { getDaysApi } from "../dateApi/dateApi";
 import { renderMain } from "../../renderMain/renderMain";
-import { METEOSTAT_API_KEY, OPENWEATHER_API_KEY } from "../../../variables";
+import { renderError } from "../../renderError/renderError";
+import {
+  PRIVATE_KEY_METEOSTAT,
+  PRIVATE_KEY_OPENWEATHER,
+} from "../../../variables";
 
 export function getForecasts(latitude, longitude) {
   const { newCurrDate, newNextDate, newNextWeekDate } = getDaysApi();
@@ -14,7 +18,7 @@ export function getForecasts(latitude, longitude) {
       link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${newNextDate}&end=${newNextWeekDate}`,
       renderFun: handlerWeekly,
       headers: {
-        "X-RapidAPI-Key": METEOSTAT_API_KEY,
+        "X-RapidAPI-Key": PRIVATE_KEY_METEOSTAT,
         "X-RapidAPI-Host": "meteostat.p.rapidapi.com",
       },
     },
@@ -22,12 +26,12 @@ export function getForecasts(latitude, longitude) {
       link: `https://meteostat.p.rapidapi.com/point/hourly?lat=${latitude}&lon=${longitude}&start=${newCurrDate}&end=${newNextDate}`,
       renderFun: handlerHourly,
       headers: {
-        "X-RapidAPI-Key": METEOSTAT_API_KEY,
+        "X-RapidAPI-Key": PRIVATE_KEY_METEOSTAT,
         "X-RapidAPI-Host": "meteostat.p.rapidapi.com",
       },
     },
     {
-      link: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${OPENWEATHER_API_KEY}&units=metric&lang=ru`,
+      link: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${PRIVATE_KEY_OPENWEATHER}&units=metric&lang=ru`,
       renderFun: handlerDaily,
     },
   ];

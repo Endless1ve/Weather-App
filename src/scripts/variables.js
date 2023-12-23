@@ -1,6 +1,8 @@
 // --API variables--
-const OPENWEATHER_API_KEY = OPENWEATHER_API_KEY;
-const METEOSTAT_API_KEY = METEOSTAT_API_KEY;
+// const OPENWEATHER_API_KEY = OPENWEATHER_API_KEY;
+// const METEOSTAT_API_KEY = METEOSTAT_API_KEY;
+const PRIVATE_KEY_OPENWEATHER = OPENWEATHER_API_KEY;
+const PRIVATE_KEY_METEOSTAT = METEOSTAT_API_KEY;
 // --DOM variables--
 const root = document.querySelector(".root");
 const main = document.querySelector(".main");
@@ -88,7 +90,7 @@ export {
   humidity,
   windSpeed,
   pressure,
-  OPENWEATHER_API_KEY,
-  METEOSTAT_API_KEY,
+  PRIVATE_KEY_OPENWEATHER,
+  PRIVATE_KEY_METEOSTAT,
   errorClose,
 };
