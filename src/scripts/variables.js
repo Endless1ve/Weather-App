@@ -27,6 +27,7 @@ import snow from "../vendor/images/snow.svg";
 import sun from "../vendor/images/sun.svg";
 import rain from "../vendor/images/rain.svg";
 import weatherPicError from "../vendor/images/weather-error.svg";
+import errorClose from "../vendor/images/close.svg";
 //--Image forecast variables--
 const weatherPics = [
   { pic: cloudy, idArr: [3, 4, 801, 802, 803, 804] },
@@ -51,7 +52,6 @@ const weatherPics = [
     ],
   },
 ];
-
 //date arrays
 const dayArray = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
 const monthArray = [
@@ -88,4 +88,5 @@ export {
   pressure,
   OPENWEATHER_API_KEY,
   METEOSTAT_API_KEY,
+  errorClose,
 };
