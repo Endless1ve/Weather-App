@@ -3797,6 +3797,13 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 /***/ }),
 
+/***/ 6922:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "vendor/images/199e6e5d3cb8d727f5901d53d738e178.svg";
+
+/***/ }),
+
 /***/ 5275:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -3984,6 +3991,33 @@ function scrollingBlocks(block) {
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
 var es_promise = __webpack_require__(8674);
+;// CONCATENATED MODULE: ./src/scripts/UI/error/error.js
+var closeErrorBtn = document.querySelector(".errorClose");
+var bar = document.querySelector(".errorProgress");
+function displayError() {
+  var root = document.querySelector(".root");
+  var errorBlock = "\n  <div class=\"error\">\n    <img src=\"close\" alt=\"\" class=\"errorClose\"/>\n    <p class=\"errorText\">\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D</p>\n    <div class=\"errorBar\">\n      <div class=\"errorProgress\"></div>\n      </div>\n  </div>";
+  root.insertAdjacentHTML("beforeend", errorBlock);
+  // let progress = 0;
+  // const increment = 100 / ((10 * 1000) / 50);
+  // const interval = setInterval(() => {
+  //   progress += increment;
+  //   bar.style.width = progress + "%";
+  //   if (progress >= 106 || !error.classList.contains("errorVisible")) {
+  //     clearInterval(interval);
+  //     closeError();
+  //   }
+  // }, 50);
+  // closeErrorBtn.addEventListener("click", closeError);
+}
+
+function closeError() {
+  document.querySelector(".error");
+  closeErrorBtn.removeEventListener("click", closeError);
+  setTimeout(function () {
+    bar.style.width = "0";
+  }, 500);
+}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__(2222);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
@@ -3998,6 +4032,13 @@ var es_array_iterator = __webpack_require__(6992);
 var es_string_iterator = __webpack_require__(8783);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.iterator.js
 var web_dom_collections_iterator = __webpack_require__(3948);
+;// CONCATENATED MODULE: ./src/scripts/components/preloader/deletePreloader.js
+function deletePreloader() {
+  var preloader = document.querySelector(".preloader");
+  if (preloader) {
+    preloader.remove();
+  }
+}
 // EXTERNAL MODULE: ./src/vendor/images/cloudy.svg
 var cloudy = __webpack_require__(5275);
 var cloudy_default = /*#__PURE__*/__webpack_require__.n(cloudy);
@@ -4022,33 +4063,41 @@ var rain_default = /*#__PURE__*/__webpack_require__.n(rain);
 // EXTERNAL MODULE: ./src/vendor/images/weather-error.svg
 var weather_error = __webpack_require__(7616);
 var weather_error_default = /*#__PURE__*/__webpack_require__.n(weather_error);
+// EXTERNAL MODULE: ./src/vendor/images/close.svg
+var images_close = __webpack_require__(6922);
+var close_default = /*#__PURE__*/__webpack_require__.n(images_close);
 ;// CONCATENATED MODULE: ./src/scripts/variables.js
+// --API variables--
+// const OPENWEATHER_API_KEY = OPENWEATHER_API_KEY;
+// const METEOSTAT_API_KEY = METEOSTAT_API_KEY;
+var PRIVATE_KEY_OPENWEATHER = "15000a2461a052e3387841ebd0b2d6e3";
+var PRIVATE_KEY_METEOSTAT = "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1";
 // --DOM variables--
+var root = document.querySelector(".root");
 var main = document.querySelector(".main");
 //plug and preloader
 var plug = document.querySelector(".plug");
 var preloaderBlock = document.querySelector(".plugContent");
 var preloader = document.querySelector(".preloader");
 //home forecast elements
-var variables_status = document.querySelector(".forecastStatus");
-var forecastDegrees = document.querySelector(".forecastDegrees");
-var place = document.querySelector(".placeText");
-var forecastDate = document.querySelector(".forecastDate");
-var forecastPicture = document.querySelector(".forecastImage");
 var feelsLikeBlock = document.querySelector(".feelsLike");
 var windSpeedBlock = document.querySelector(".windSpeed");
 var humidityBlock = document.querySelector(".humidity");
 var pressureBlock = document.querySelector(".pressure");
 //scroll block
 var scrollBlocks = document.querySelectorAll(".scroll");
+var homeForecastBlock = document.querySelector(".homeForecast");
+var homePlaceBlock = document.querySelector(".placeContent");
+var feelsLike = document.querySelector(".feelsLike");
+var humidity = document.querySelector(".humidity");
+var windSpeed = document.querySelector(".windSpeed");
+var pressure = document.querySelector(".pressure");
 //hourly card container
 var hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 var weeklyContainer = document.querySelector(".dailyContent");
-//--Cards variables--
-//--API key variables--
-var API_KEY = "15000a2461a052e3387841ebd0b2d6e3";
 //--image variables--
+
 
 
 
@@ -4080,20 +4129,15 @@ var weatherPics = [{
   pic: (lightning_default()),
   idArr: [23, 24, 25, 26, 27, 200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
 }];
-
 //date arrays
 var dayArray = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
 var monthArray = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"];
 
-;// CONCATENATED MODULE: ./src/scripts/components/preloader/deletePreloader.js
-function deletePreloader() {
-  var preloader = document.querySelector(".preloader");
-  if (preloader) {
-    preloader.remove();
-  }
+;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
+
+function removePlug() {
+  plug.remove();
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__(8309);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__(2526);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
@@ -4160,6 +4204,8 @@ var es_array_includes = __webpack_require__(6699);
 var es_string_includes = __webpack_require__(2023);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.to-string.js
 var es_regexp_to_string = __webpack_require__(9714);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__(8309);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
 var es_array_from = __webpack_require__(1038);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
@@ -4206,41 +4252,60 @@ function getForecastPicture(id) {
   }
   return src;
 }
-;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
+;// CONCATENATED MODULE: ./src/scripts/components/renderCardDom/renderCardDom.js
+function renderCardDom(block, card) {
+  block.insertAdjacentHTML("beforeend", card);
+}
+;// CONCATENATED MODULE: ./src/scripts/components/renderDailyForecast/renderDailyForecast.js
 
-function removePlug() {
-  plug.remove();
+
+
+
+
+
+
+
+function renderDailyForecast(data) {
+  var forecastStatus = data.weather[0].description[0].toUpperCase() + data.weather[0].description.slice(1);
+  var forecastContent = "<div class=\"forecastTexts\">\n      <p class=\"forecastStatus\">".concat(forecastStatus, "</p>\n      <p class=\"forecastDegrees\">").concat(Math.round(data.main.temp) + "°C", "</p>\n      <p class=\"forecastDate\">").concat(getForecastDay(), "</p>\n    </div>\n    <img src='").concat(getForecastPicture(data.weather[0].id), "' alt=\"\u041A\u0430\u0440\u0442\u0438\u043D\u043A\u0430 \u043F\u043E\u0433\u043E\u0434\u044B\" class=\"forecastImage\" />");
+  renderCardDom(homeForecastBlock, forecastContent);
+}
+;// CONCATENATED MODULE: ./src/scripts/components/renderDetails/renderDetails.js
+
+function renderDetails(data) {
+  feelsLike.textContent = Math.round(data.main.feels_like) + "°C";
+  humidity.textContent = data.main.humidity + "%";
+  windSpeed.textContent = Math.round(data.wind.speed) + " км/ч";
+  pressure.textContent = data.main.pressure;
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/renderMain/renderMain.js
+
 
 var counter = 0;
 function renderMain() {
   counter++;
   if (counter === 3) {
     removePlug();
-    document.querySelector(".main").style.display = "flex";
+    main.style.display = "flex";
   }
 }
-;// CONCATENATED MODULE: ./src/scripts/components/renderDaily/renderDaily.js
+;// CONCATENATED MODULE: ./src/scripts/components/renderPlace/renderPlace.js
+
+
+
+function renderPlace(data) {
+  var place = "<p class=\"placeText\">".concat(data.name, "</p>");
+  renderCardDom(homePlaceBlock, place);
+}
+;// CONCATENATED MODULE: ./src/scripts/components/handlerDaily/handlerDaily.js
 
 
 
 
-
-
-
-
-function renderDaily(data) {
-  place.textContent = data.name;
-  variables_status.textContent = data.weather[0].description[0].toUpperCase() + data.weather[0].description.slice(1);
-  forecastDegrees.textContent = Math.round(data.main.temp) + "\xB0C";
-  forecastDate.textContent = getForecastDay();
-  forecastPicture.src = getForecastPicture(data.weather[0].id);
-  feelsLikeBlock.textContent = Math.round(data.main.feels_like);
-  humidityBlock.textContent = data.main.humidity + "%";
-  windSpeedBlock.textContent = Math.round(data.wind.speed) + "км/ч";
-  pressureBlock.textContent = data.main.pressure;
-  console.log(data);
+function handlerDaily(data) {
+  renderPlace(data);
+  renderDailyForecast(data);
+  renderDetails(data);
   renderMain();
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
@@ -4253,10 +4318,6 @@ function createHourlyCard(data) {
   var time = getHourlyTime(data.time);
   var card = "\n    <div class=\"hourlyCard\">\n    <img src=\"".concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\">\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n    <p class=\"hourlyTime\">").concat(time, "</p>\n    </div>");
   return card;
-}
-;// CONCATENATED MODULE: ./src/scripts/components/renderCardDom/renderCardDom.js
-function renderCardDom(block, card) {
-  block.insertAdjacentHTML("beforeend", card);
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/handlerHourly/handlerHourly.js
 
@@ -4281,7 +4342,8 @@ function handlerHourly(data) {
 
 
 function createWeeklyCard(data) {
-  var card = "\n  <div class=\"dailyCard\">\n    <p class=\"dailyWeekday\">".concat(getWeekDay(data.time)[0], "</p>\n    <p class=\"dailyDate\">").concat(getWeekDay(data.time)[1], " ").concat(getWeekDay(data.time)[2], ".</p>\n    <img src=\"").concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\"/>\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n  </div>");
+  var weekDay = getWeekDay(data.time);
+  var card = "\n  <div class=\"dailyCard\">\n    <p class=\"dailyWeekday\">".concat(weekDay[0], "</p>\n    <p class=\"dailyDate\">").concat(weekDay[1], " ").concat(weekDay[2], ".</p>\n    <img src=\"").concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\"/>\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n  </div>");
   return card;
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/handlerWeekly/handlerWeekly.js
@@ -4296,14 +4358,46 @@ function handlerWeekly(data) {
   var filtered = data.data.filter(function (item) {
     return new Date(item.time).getHours() === 11;
   });
-  console.log(filtered);
   filtered.forEach(function (element) {
     var card = createWeeklyCard(element);
     renderCardDom(weeklyContainer, card);
   });
   renderMain();
 }
+;// CONCATENATED MODULE: ./src/scripts/components/deleteError/deleteError.js
+function deleteError() {
+  var error = document.querySelector(".error");
+  if (error) {
+    error.remove();
+  }
+}
+;// CONCATENATED MODULE: ./src/scripts/components/renderError/renderError.js
+
+
+
+function renderError() {
+  var error = " \n  <div class=\"error\">\n    <img src=\"".concat((close_default()), "\" alt=\"\" class=\"errorClose\"/>\n    <p class=\"errorText\">\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D</p>\n    <div class=\"errorBar\">\n      <div class=\"errorProgress\"></div>\n      </div>\n  </div>");
+  renderCardDom(root, error);
+  var bar = document.querySelector(".errorProgress");
+  var closeButton = document.querySelector(".errorClose");
+  var progress = 0;
+  var increment = 100 / (10 * 1000 / 50);
+  var interval = setInterval(function () {
+    progress += increment;
+    bar.style.width = progress + "%";
+    if (progress >= 106 || !document.querySelector(".error")) {
+      clearInterval(interval);
+      if (closeButton) {
+        closeButton.removeEventListener("click", deleteError);
+      }
+      deleteError();
+    }
+  }, 50);
+  closeButton.addEventListener("click", deleteError);
+}
 ;// CONCATENATED MODULE: ./src/scripts/components/API/forecastAPI/forecastApi.js
+
+
 
 
 
@@ -4330,19 +4424,19 @@ function getForecasts(latitude, longitude) {
     link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(newNextDate, "&end=").concat(newNextWeekDate),
     renderFun: handlerWeekly,
     headers: {
-      "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
+      "X-RapidAPI-Key": PRIVATE_KEY_METEOSTAT,
       "X-RapidAPI-Host": "meteostat.p.rapidapi.com"
     }
   }, {
     link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(newCurrDate, "&end=").concat(newNextDate),
     renderFun: handlerHourly,
     headers: {
-      "X-RapidAPI-Key": "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1",
+      "X-RapidAPI-Key": PRIVATE_KEY_METEOSTAT,
       "X-RapidAPI-Host": "meteostat.p.rapidapi.com"
     }
   }, {
-    link: "https://api.openweathermap.org/data/2.5/weather?lat=".concat(latitude, "&lon=").concat(longitude, "&appid=").concat(API_KEY, "&units=metric&lang=ru"),
-    renderFun: renderDaily
+    link: "https://api.openweathermap.org/data/2.5/weather?lat=".concat(latitude, "&lon=").concat(longitude, "&appid=").concat(PRIVATE_KEY_OPENWEATHER, "&units=metric&lang=ru"),
+    renderFun: handlerDaily
   }];
   var mockUrls = [{
     link: "http://localhost:5000/weekly",
@@ -4352,7 +4446,7 @@ function getForecasts(latitude, longitude) {
     renderFun: handlerHourly
   }, {
     link: "http://localhost:5000/daily",
-    renderFun: renderDaily
+    renderFun: handlerDaily
   }];
   var responses = urls.map(function (item) {
     return fetch(item.link, {
@@ -4364,8 +4458,8 @@ function getForecasts(latitude, longitude) {
         data: data,
         renderFun: item.renderFun
       };
-    }).catch(function (err) {
-      return console.log(err);
+    }).catch(function () {
+      return renderError();
     });
   });
   Promise.all(responses).then(function (res) {
@@ -4373,14 +4467,18 @@ function getForecasts(latitude, longitude) {
       return item.renderFun(item.data);
     });
   }).then(function () {
+    return removePlug();
+  }).then(function () {
     return renderMain();
-  }).catch(function (err) {
-    return console.log(err);
+  }).catch(function () {
+    return renderError();
   }).finally(function () {
     return deletePreloader();
   });
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/getLocation/getLocation.js
+
+
 
 
 
@@ -4396,7 +4494,9 @@ function geolocationAPI() {
       longitude = res.longitude;
     getForecasts(latitude, longitude);
   }).catch(function (err) {
+    displayError();
     deletePreloader();
+    renderError();
   });
 }
 function successLocation(position) {
