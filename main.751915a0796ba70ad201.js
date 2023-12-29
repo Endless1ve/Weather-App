@@ -4448,7 +4448,7 @@ function getForecasts(latitude, longitude) {
     link: "http://localhost:5000/daily",
     renderFun: handlerDaily
   }];
-  var responses = urls.map(function (item) {
+  var responses = mockUrls.map(function (item) {
     return fetch(item.link, {
       headers: item.headers
     }).then(function (res) {
@@ -4512,10 +4512,12 @@ function successLocation(position) {
 
 
 
+
 getLocation();
 scrollBlocks.forEach(function (item) {
   return scrollingBlocks(item);
 });
+renderError();
 })();
 
 /******/ })()
