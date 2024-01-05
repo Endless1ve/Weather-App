@@ -1,0 +1,34 @@
+@import url("./errorVisible/errorVisible.css");
+@import url("./errorText/errorText.css");
+@import url("./errorClose/errorClose.css");
+@import url("./errorBar/errorBar.css");
+@import url("./errorProgress/errorProgress.css");
+
+.error {
+  position: fixed;
+  bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: 300px;
+  border: 1px solid transparent;
+  border-color: #ef5350;
+  border-radius: 10px;
+  padding: 10px 36px 20px;
+  color: #fff;
+  word-wrap: normal;
+  background-color: #ef1c1c;
+}
+
+@media screen and (min-width: 768px) {
+  .error {
+    max-width: 500px;
+  }
+
+  .errorText {
+    font-size: 18px;
+  }
+}
