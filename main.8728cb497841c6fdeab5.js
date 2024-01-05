@@ -4177,9 +4177,9 @@ function getDaysApi() {
   var nextDayYear = nextDate.getFullYear();
   var nextWeekDayYear = nextWeekDate.getFullYear();
   //месяц сегодня, месяц завтра, месяц через неделю
-  var currDayMonth = currDate.getMonth() + 1;
-  var nextDayMonth = nextDate.getMonth() + 1;
-  var nextWeekDayMonth = nextWeekDate.getMonth() + 1;
+  var currDayMonth = getCorrectData(currDate.getMonth() + 1);
+  var nextDayMonth = getCorrectData(nextDate.getMonth() + 1);
+  var nextWeekDayMonth = getCorrectData(nextWeekDate.getMonth() + 1);
   //день сегодня, день завтра, день через неделю
   var currDay = getCorrectData(currDate.getDate());
   var nextDay = getCorrectData(nextDate.getDate());
@@ -4448,7 +4448,7 @@ function getForecasts(latitude, longitude) {
     link: "http://localhost:5000/daily",
     renderFun: handlerDaily
   }];
-  var responses = mockUrls.map(function (item) {
+  var responses = urls.map(function (item) {
     return fetch(item.link, {
       headers: item.headers
     }).then(function (res) {
