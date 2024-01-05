@@ -33,9 +33,9 @@ export function getDaysApi() {
   const nextDayYear = nextDate.getFullYear();
   const nextWeekDayYear = nextWeekDate.getFullYear();
   //месяц сегодня, месяц завтра, месяц через неделю
-  const currDayMonth = currDate.getMonth() + 1;
-  const nextDayMonth = nextDate.getMonth() + 1;
-  const nextWeekDayMonth = nextWeekDate.getMonth() + 1;
+  const currDayMonth = getCorrectData(currDate.getMonth() + 1);
+  const nextDayMonth = getCorrectData(nextDate.getMonth() + 1);
+  const nextWeekDayMonth = getCorrectData(nextWeekDate.getMonth() + 1);
   //день сегодня, день завтра, день через неделю
   const currDay = getCorrectData(currDate.getDate());
   const nextDay = getCorrectData(nextDate.getDate());
