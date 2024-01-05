@@ -4512,12 +4512,10 @@ function successLocation(position) {
 
 
 
-
 getLocation();
 scrollBlocks.forEach(function (item) {
   return scrollingBlocks(item);
 });
-renderError();
 })();
 
 /******/ })()
