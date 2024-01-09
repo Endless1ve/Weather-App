@@ -4376,23 +4376,12 @@ function deleteError() {
 
 
 function renderError() {
-  var error = " \n  <div class=\"error\">\n    <img src=\"".concat((close_default()), "\" alt=\"\" class=\"errorClose\"/>\n    <p class=\"errorText\">\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D</p>\n    <div class=\"errorBar\">\n      <div class=\"errorProgress\"></div>\n      </div>\n  </div>");
+  var error = " \n  <div class=\"error\">\n    <img src=\"".concat((close_default()), "\" alt=\"\" class=\"errorClose\"/>\n    <p class=\"errorText\">\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D</p>\n  </div>");
   renderCardDom(root, error);
-  var bar = document.querySelector(".errorProgress");
   var closeButton = document.querySelector(".errorClose");
-  var progress = 0;
-  var increment = 100 / (10 * 1000 / 50);
   var interval = setInterval(function () {
-    progress += increment;
-    bar.style.width = progress + "%";
-    if (progress >= 106 || !document.querySelector(".error")) {
-      clearInterval(interval);
-      if (closeButton) {
-        closeButton.removeEventListener("click", deleteError);
-      }
-      deleteError();
-    }
-  }, 50);
+    deleteError();
+  }, 5000);
   closeButton.addEventListener("click", deleteError);
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/API/forecastAPI/forecastApi.js
@@ -4458,8 +4447,6 @@ function getForecasts(latitude, longitude) {
         data: data,
         renderFun: item.renderFun
       };
-    }).catch(function () {
-      return renderError();
     });
   });
   Promise.all(responses).then(function (res) {
