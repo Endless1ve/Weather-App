@@ -1,8 +1,6 @@
 @import url("./errorVisible/errorVisible.css");
 @import url("./errorText/errorText.css");
 @import url("./errorClose/errorClose.css");
-@import url("./errorBar/errorBar.css");
-@import url("./errorProgress/errorProgress.css");
 
 .error {
   position: fixed;

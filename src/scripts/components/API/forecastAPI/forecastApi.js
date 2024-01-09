@@ -58,8 +58,7 @@ export function getForecasts(latitude, longitude) {
       .then((data) => ({
         data,
         renderFun: item.renderFun,
-      }))
-      .catch(() => renderError());
+      }));
   });
 
   Promise.all(responses)
