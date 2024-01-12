@@ -18,7 +18,7 @@
   cursor: grab;
 }
 
-.hourlyContent:active {
+.dailyContent:active {
   cursor: grabbing;
 }
 
