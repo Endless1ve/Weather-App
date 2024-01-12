@@ -1,9 +1,16 @@
 .detailValue {
   font-size: 20px;
+  text-align: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 425px) {
   .detailValue {
     font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .detailValue {
+    text-align: left;
   }
 }
