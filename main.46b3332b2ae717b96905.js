@@ -3971,6 +3971,7 @@ function scrollingBlocks(block) {
     scrollLeft = block.scrollLeft;
     block.addEventListener("mousemove", handleMouseMove);
     block.addEventListener("mouseup", stopScroll);
+    block.addEventListener("mouseleave", stopScroll);
   }
   function handleMouseMove(event) {
     if (!isScrolling) return;
@@ -3981,6 +3982,7 @@ function scrollingBlocks(block) {
     isScrolling = false;
     block.removeEventListener("mousemove", handleMouseMove);
     block.removeEventListener("mouseup", stopScroll);
+    block.removeEventListener("mouseleave", stopScroll);
   }
   function wheelScroll(event) {
     event.preventDefault();
@@ -3989,6 +3991,15 @@ function scrollingBlocks(block) {
   block.addEventListener("mousedown", startScroll);
   block.addEventListener("mousewheel", wheelScroll);
 }
+
+// export function scrollingBlocks(block) {
+//   let isScrolling = false;
+//   let startX, scrollLeft;
+//   block.addEventListener("mouseleave", (event) => {
+//     event.stopPropagation();
+//     console.log(event);
+//   });
+// }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
 var es_promise = __webpack_require__(8674);
 ;// CONCATENATED MODULE: ./src/scripts/UI/error/error.js
@@ -4339,7 +4350,7 @@ var es_array_filter = __webpack_require__(7327);
 
 function createHourlyCard(data) {
   var time = getHourlyTime(data.time);
-  var card = "\n    <div class=\"hourlyCard\">\n    <img src=\"".concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\">\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n    <p class=\"hourlyTime\">").concat(time, "</p>\n    </div>");
+  var card = "\n    <div class=\"hourlyCard\">\n    <img src=\"".concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\" draggable=\"false\">\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n    <p class=\"hourlyTime\">").concat(time, "</p>\n    </div>");
   return card;
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/handlerHourly/handlerHourly.js
@@ -4366,7 +4377,7 @@ function handlerHourly(data) {
 
 function createWeeklyCard(data) {
   var weekDay = getWeekDay(data.time);
-  var card = "\n  <div class=\"dailyCard\">\n    <p class=\"dailyWeekday\">".concat(weekDay[0], "</p>\n    <p class=\"dailyDate\">").concat(weekDay[1], " ").concat(weekDay[2], ".</p>\n    <img src=\"").concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\"/>\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n  </div>");
+  var card = "\n  <div class=\"dailyCard\">\n    <p class=\"dailyWeekday\">".concat(weekDay[0], "</p>\n    <p class=\"dailyDate\">").concat(weekDay[1], " ").concat(weekDay[2], ".</p>\n    <img src=\"").concat(getForecastPicture(data.coco), "\" alt=\"\" class=\"cardImage\" draggable=\"false\"/>\n    <p class=\"cardDegrees\">").concat(Math.round(data.temp), "\xB0\u0421</p>\n    <p class=\"cardSpeed\">").concat(data.wspd, "km/h</p>\n  </div>");
   return card;
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/handlerWeekly/handlerWeekly.js
