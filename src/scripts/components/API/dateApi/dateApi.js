@@ -45,7 +45,14 @@ export function getDaysApi() {
   const newNextDate = `${nextDayYear}-${nextDayMonth}-${nextDay}`;
   const newNextWeekDate = `${nextWeekDayYear}-${nextWeekDayMonth}-${nextWeekDay}`;
 
-  return { newCurrDate, newNextDate, newNextWeekDate };
+  return {
+    newCurrDate,
+    newNextDate,
+    newNextWeekDate,
+    currDay,
+    nextDay,
+    nextWeekDay,
+  };
 }
 
 export function getHourlyTime(time) {
