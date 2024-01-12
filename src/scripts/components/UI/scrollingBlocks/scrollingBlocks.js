@@ -8,6 +8,7 @@ export function scrollingBlocks(block) {
     scrollLeft = block.scrollLeft;
     block.addEventListener("mousemove", handleMouseMove);
     block.addEventListener("mouseup", stopScroll);
+    block.addEventListener("mouseleave", stopScroll);
   }
 
   function handleMouseMove(event) {
@@ -20,6 +21,7 @@ export function scrollingBlocks(block) {
     isScrolling = false;
     block.removeEventListener("mousemove", handleMouseMove);
     block.removeEventListener("mouseup", stopScroll);
+    block.removeEventListener("mouseleave", stopScroll);
   }
 
   function wheelScroll(event) {
@@ -29,3 +31,12 @@ export function scrollingBlocks(block) {
   block.addEventListener("mousedown", startScroll);
   block.addEventListener("mousewheel", wheelScroll);
 }
+
+// export function scrollingBlocks(block) {
+//   let isScrolling = false;
+//   let startX, scrollLeft;
+//   block.addEventListener("mouseleave", (event) => {
+//     event.stopPropagation();
+//     console.log(event);
+//   });
+// }
