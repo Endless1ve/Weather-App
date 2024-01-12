@@ -1,1 +1,5 @@
 @import url("./placeContent/placeContent.css");
+
+.homePlace {
+  border-bottom: 1px solid #ffffff4f;
+}
