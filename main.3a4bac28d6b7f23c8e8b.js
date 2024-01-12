@@ -4190,7 +4190,10 @@ function getDaysApi() {
   return {
     newCurrDate: newCurrDate,
     newNextDate: newNextDate,
-    newNextWeekDate: newNextWeekDate
+    newNextWeekDate: newNextWeekDate,
+    currDay: currDay,
+    nextDay: nextDay,
+    nextWeekDay: nextWeekDay
   };
 }
 function getHourlyTime(time) {
@@ -4308,6 +4311,26 @@ function handlerDaily(data) {
   renderDetails(data);
   renderMain();
 }
+;// CONCATENATED MODULE: ./src/scripts/components/deleteError/deleteError.js
+function deleteError() {
+  var error = document.querySelector(".error");
+  if (error) {
+    error.remove();
+  }
+}
+;// CONCATENATED MODULE: ./src/scripts/components/renderError/renderError.js
+
+
+
+function renderError() {
+  var error = " \n  <div class=\"error\">\n    <img src=\"".concat((close_default()), "\" alt=\"\" class=\"errorClose\"/>\n    <p class=\"errorText\">\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D</p>\n  </div>");
+  renderCardDom(root, error);
+  var closeButton = document.querySelector(".errorClose");
+  var interval = setInterval(function () {
+    deleteError();
+  }, 5000);
+  closeButton.addEventListener("click", deleteError);
+}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__(7327);
 ;// CONCATENATED MODULE: ./src/scripts/components/createHourlyCard/createHourlyCard.js
@@ -4328,7 +4351,7 @@ function createHourlyCard(data) {
 
 
 function handlerHourly(data) {
-  var newData = data.data.filter(function (item) {
+  var newData = data.filter(function (item) {
     return new Date(item.time) > new Date();
   });
   newData.forEach(function (element) {
@@ -4355,7 +4378,7 @@ function createWeeklyCard(data) {
 
 
 function handlerWeekly(data) {
-  var filtered = data.data.filter(function (item) {
+  var filtered = data.filter(function (item) {
     return new Date(item.time).getHours() === 11;
   });
   filtered.forEach(function (element) {
@@ -4364,28 +4387,26 @@ function handlerWeekly(data) {
   });
   renderMain();
 }
-;// CONCATENATED MODULE: ./src/scripts/components/deleteError/deleteError.js
-function deleteError() {
-  var error = document.querySelector(".error");
-  if (error) {
-    error.remove();
-  }
-}
-;// CONCATENATED MODULE: ./src/scripts/components/renderError/renderError.js
+;// CONCATENATED MODULE: ./src/scripts/components/handlerWeather/handlerWeather.js
 
 
 
-function renderError() {
-  var error = " \n  <div class=\"error\">\n    <img src=\"".concat((close_default()), "\" alt=\"\" class=\"errorClose\"/>\n    <p class=\"errorText\">\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D</p>\n  </div>");
-  renderCardDom(root, error);
-  var closeButton = document.querySelector(".errorClose");
-  var interval = setInterval(function () {
-    deleteError();
-  }, 5000);
-  closeButton.addEventListener("click", deleteError);
+
+
+function handlerWeather(data) {
+  var _getDaysApi = getDaysApi(),
+    currDay = _getDaysApi.currDay,
+    nextDay = _getDaysApi.nextDay;
+  var hourly = data.data.filter(function (item) {
+    return new Date(item.time).getDate() === currDay || new Date(item.time).getDate() === nextDay;
+  });
+  var weekly = data.data.filter(function (item) {
+    return new Date(item.time).getDate() !== currDay;
+  });
+  handlerHourly(hourly);
+  handlerWeekly(weekly);
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/API/forecastAPI/forecastApi.js
-
 
 
 
@@ -4407,18 +4428,10 @@ function renderError() {
 function getForecasts(latitude, longitude) {
   var _getDaysApi = getDaysApi(),
     newCurrDate = _getDaysApi.newCurrDate,
-    newNextDate = _getDaysApi.newNextDate,
     newNextWeekDate = _getDaysApi.newNextWeekDate;
   var urls = [{
-    link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(newNextDate, "&end=").concat(newNextWeekDate),
-    renderFun: handlerWeekly,
-    headers: {
-      "X-RapidAPI-Key": PRIVATE_KEY_METEOSTAT,
-      "X-RapidAPI-Host": "meteostat.p.rapidapi.com"
-    }
-  }, {
-    link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(newCurrDate, "&end=").concat(newNextDate),
-    renderFun: handlerHourly,
+    link: "https://meteostat.p.rapidapi.com/point/hourly?lat=".concat(latitude, "&lon=").concat(longitude, "&start=").concat(newCurrDate, "&end=").concat(newNextWeekDate),
+    renderFun: handlerWeather,
     headers: {
       "X-RapidAPI-Key": PRIVATE_KEY_METEOSTAT,
       "X-RapidAPI-Host": "meteostat.p.rapidapi.com"
@@ -4428,16 +4441,13 @@ function getForecasts(latitude, longitude) {
     renderFun: handlerDaily
   }];
   var mockUrls = [{
-    link: "http://localhost:5000/weekly",
-    renderFun: handlerWeekly
-  }, {
-    link: "http://localhost:5000/hourly",
-    renderFun: handlerHourly
+    link: "http://localhost:5000/weather",
+    renderFun: handlerWeather
   }, {
     link: "http://localhost:5000/daily",
     renderFun: handlerDaily
   }];
-  var responses = urls.map(function (item) {
+  var responses = mockUrls.map(function (item) {
     return fetch(item.link, {
       headers: item.headers
     }).then(function (res) {
@@ -4457,8 +4467,9 @@ function getForecasts(latitude, longitude) {
     return removePlug();
   }).then(function () {
     return renderMain();
-  }).catch(function () {
-    return renderError();
+  }).catch(function (err) {
+    console.log(err);
+    renderError();
   }).finally(function () {
     return deletePreloader();
   });
