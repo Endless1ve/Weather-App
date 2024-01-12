@@ -15,6 +15,11 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   -webkit-touch-callout: none;
+  cursor: grab;
+}
+
+.hourlyContent:active {
+  cursor: grabbing;
 }
 
 .dailyContent::-webkit-scrollbar {
