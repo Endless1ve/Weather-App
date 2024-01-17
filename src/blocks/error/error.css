@@ -1,8 +1,6 @@
 @import url("./errorVisible/errorVisible.css");
 @import url("./errorText/errorText.css");
 @import url("./errorClose/errorClose.css");
-@import url("./errorBar/errorBar.css");
-@import url("./errorProgress/errorProgress.css");
 
 .error {
   position: fixed;
@@ -17,7 +15,7 @@
   border: 1px solid transparent;
   border-color: #ef5350;
   border-radius: 10px;
-  padding: 10px 36px 20px;
+  padding: 10px 20px;
   color: #fff;
   word-wrap: normal;
   background-color: #ef1c1c;

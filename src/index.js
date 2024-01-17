@@ -4,5 +4,5 @@ import { scrollingBlocks } from "./scripts/components/UI/scrollingBlocks/scrolli
 import { getLocation } from "./scripts/components/getLocation/getLocation";
 
 getLocation();
-const scrollBlocks = document.querySelectorAll(".scroll");
+const scrollBlocks = document.querySelectorAll("#scroll");
 scrollBlocks.forEach((item) => scrollingBlocks(item));

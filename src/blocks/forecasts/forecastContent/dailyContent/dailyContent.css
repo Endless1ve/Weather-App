@@ -15,6 +15,11 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   -webkit-touch-callout: none;
+  cursor: grab;
+}
+
+.dailyContent:active {
+  cursor: grabbing;
 }
 
 .dailyContent::-webkit-scrollbar {
@@ -23,4 +28,14 @@
 
 .dailyContent::-webkit-scrollbar-thumb {
   display: none;
+}
+
+@media screen and (min-width: 1390px) {
+  .dailyContent {
+    cursor: default;
+  }
+
+  .dailyContent:active {
+    cursor: default;
+  }
 }

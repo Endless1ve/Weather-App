@@ -10,7 +10,6 @@
 @import url("./blocks/details/details.css");
 
 body {
-  height: 100%;
-  min-height: 100vh;
+  height: 100dvh;
   background-color: rgba(214, 158, 54, 1);
 }

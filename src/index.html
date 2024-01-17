@@ -32,63 +32,59 @@
           <div class="forecasts">
             <div class="forecastContent">
               <p class="forecastsTitle">Почасовой прогноз</p>
-              <div class="hourlyContent scroll"></div>
+              <div class="hourlyContent" id="scroll"></div>
             </div>
             <div class="forecastContent">
               <p class="forecastsTitle">Прогноз погоды</p>
-              <div class="dailyContent scroll"></div>
+              <div class="dailyContent" id="scroll"></div>
             </div>
           </div>
         </div>
         <div class="details">
           <p class="detailsTitle">Детали</p>
           <div class="detailsContent">
-            <div class="detailsCards">
-              <div class="detailsCard">
-                <img
-                  src="<%=require('./vendor/images/feel.svg')%>"
-                  alt=""
-                  class="detailsImage"
-                />
-                <div class="detailsTexts">
-                  <p class="detailTitle">Ощущается как</p>
-                  <p class="detailValue feelsLike"></p>
-                </div>
-              </div>
-              <div class="detailsCard">
-                <img
-                  src="<%=require('./vendor/images/humidity.svg')%>"
-                  alt=""
-                  class="detailsImage"
-                />
-                <div class="detailsTexts">
-                  <p class="detailTitle">Влажность</p>
-                  <p class="detailValue humidity"></p>
-                </div>
+            <div class="detailsCard">
+              <img
+                src="<%=require('./vendor/images/feel.svg')%>"
+                alt=""
+                class="detailsImage"
+              />
+              <div class="detailsTexts">
+                <p class="detailTitle">Ощущается</p>
+                <p class="detailValue feelsLike"></p>
               </div>
             </div>
-            <div class="detailsCards">
-              <div class="detailsCard">
-                <img
-                  src="<%=require('./vendor/images/wind.svg')%>"
-                  alt=""
-                  class="detailsImage"
-                />
-                <div class="detailsTexts">
-                  <p class="detailTitle">Ветер</p>
-                  <p class="detailValue windSpeed"></p>
-                </div>
+            <div class="detailsCard">
+              <img
+                src="<%=require('./vendor/images/humidity.svg')%>"
+                alt=""
+                class="detailsImage"
+              />
+              <div class="detailsTexts">
+                <p class="detailTitle">Влажность</p>
+                <p class="detailValue humidity"></p>
               </div>
-              <div class="detailsCard">
-                <img
-                  src="<%=require('./vendor/images/uv.svg')%>"
-                  alt=""
-                  class="detailsImage"
-                />
-                <div class="detailsTexts">
-                  <p class="detailTitle">Давление</p>
-                  <p class="detailValue pressure"></p>
-                </div>
+            </div>
+            <div class="detailsCard">
+              <img
+                src="<%=require('./vendor/images/wind.svg')%>"
+                alt=""
+                class="detailsImage"
+              />
+              <div class="detailsTexts">
+                <p class="detailTitle">Ветер</p>
+                <p class="detailValue windSpeed"></p>
+              </div>
+            </div>
+            <div class="detailsCard">
+              <img
+                src="<%=require('./vendor/images/uv.svg')%>"
+                alt=""
+                class="detailsImage"
+              />
+              <div class="detailsTexts">
+                <p class="detailTitle">Давление</p>
+                <p class="detailValue pressure"></p>
               </div>
             </div>
           </div>
