@@ -9,3 +9,9 @@
   padding: 10px 20px;
   background: rgba(234, 202, 143, 0.7);
 }
+
+/* @media (prefers-color-scheme: dark) {
+  .dailyCard {
+    background-color: #44515a;
+  }
+} */

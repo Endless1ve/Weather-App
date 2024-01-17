@@ -47,3 +47,9 @@
     padding: 20px;
   }
 }
+
+/* @media (prefers-color-scheme: dark) {
+  .hourlyContent {
+    background-color: #44515a;
+  }
+} */

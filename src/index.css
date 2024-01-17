@@ -13,3 +13,52 @@ body {
   height: 100dvh;
   background-color: rgba(214, 158, 54, 1);
 }
+/* 
+@media (prefers-color-scheme: dark) {
+  .body {
+    background-color: #152028;
+  }
+} */
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+}
+
+.toggleCheckbox {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.toggleLabel {
+  width: 60px;
+  height: 30px;
+  background: #fff;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggleLabel:after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  background: #d69e36;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+.toggleCheckbox:checked + .toggleLabel:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+  background: #152028;
+}
+
+.toggleCheckbox:checked + .body {
+  width: 50%;
+}

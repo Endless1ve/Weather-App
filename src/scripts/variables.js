@@ -4,6 +4,7 @@
 const PRIVATE_KEY_OPENWEATHER = OPENWEATHER_API_KEY;
 const PRIVATE_KEY_METEOSTAT = METEOSTAT_API_KEY;
 // --DOM variables--
+const body = document.querySelector(".body");
 const root = document.querySelector(".root");
 const main = document.querySelector(".main");
 //plug and preloader
@@ -21,6 +22,9 @@ const pressure = document.querySelector(".pressure");
 const hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 const weeklyContainer = document.querySelector(".dailyContent");
+//theme variables
+const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+const themeCheckbox = document.querySelector(".toggleCheckbox");
 //--image variables--
 import cloudy from "../vendor/images/cloudy.svg";
 import fog from "../vendor/images/fog.svg";
@@ -73,6 +77,7 @@ const monthArray = [
 ];
 
 export {
+  body,
   root,
   plug,
   preloaderBlock,
@@ -93,4 +98,6 @@ export {
   PRIVATE_KEY_OPENWEATHER,
   PRIVATE_KEY_METEOSTAT,
   errorClose,
+  darkTheme,
+  themeCheckbox,
 };
