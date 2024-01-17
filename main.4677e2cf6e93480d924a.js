@@ -4096,7 +4096,7 @@ var windSpeedBlock = document.querySelector(".windSpeed");
 var humidityBlock = document.querySelector(".humidity");
 var pressureBlock = document.querySelector(".pressure");
 //scroll block
-var scrollBlocks = document.querySelectorAll(".scroll");
+var scrollBlocks = document.querySelectorAll("#scroll");
 var homeForecastBlock = document.querySelector(".homeForecast");
 var homePlaceBlock = document.querySelector(".placeContent");
 var feelsLike = document.querySelector(".feelsLike");
