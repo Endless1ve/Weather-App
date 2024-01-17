@@ -4084,6 +4084,7 @@ var close_default = /*#__PURE__*/__webpack_require__.n(images_close);
 var PRIVATE_KEY_OPENWEATHER = "15000a2461a052e3387841ebd0b2d6e3";
 var PRIVATE_KEY_METEOSTAT = "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1";
 // --DOM variables--
+var body = document.querySelector(".body");
 var root = document.querySelector(".root");
 var main = document.querySelector(".main");
 //plug and preloader
@@ -4107,6 +4108,9 @@ var pressure = document.querySelector(".pressure");
 var hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 var weeklyContainer = document.querySelector(".dailyContent");
+//theme variables
+var darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+var themeCheckbox = document.querySelector(".toggleCheckbox");
 //--image variables--
 
 
@@ -4148,6 +4152,71 @@ var monthArray = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "�
 
 function removePlug() {
   plug.remove();
+}
+;// CONCATENATED MODULE: ./src/scripts/components/UI/toggleTheme/setDark.js
+
+
+function setDark(mainBlock, anotherBlocks) {
+  mainBlock.style.backgroundColor = "#152028";
+  anotherBlocks.forEach(function (item) {
+    if (item.length) {
+      item.forEach(function (newItem) {
+        return newItem.style.backgroundColor = "#44515A";
+      });
+    } else {
+      item.style.backgroundColor = "#44515A";
+    }
+  });
+  localStorage.clear();
+}
+;// CONCATENATED MODULE: ./src/scripts/components/UI/toggleTheme/setLight.js
+
+
+function setLight(mainBlock, anotherBlocks) {
+  mainBlock.style.backgroundColor = "#d69e36";
+  anotherBlocks.forEach(function (item) {
+    if (item.length) {
+      item.forEach(function (newItem) {
+        return newItem.style.backgroundColor = "#EACA8F";
+      });
+    } else {
+      item.style.backgroundColor = "#EACA8F";
+    }
+  });
+}
+;// CONCATENATED MODULE: ./src/scripts/components/UI/toggleTheme/toggleTheme.js
+
+
+
+function toggleTheme() {
+  var daily = document.querySelectorAll(".dailyCard");
+  if (localStorage.theme) {
+    if (localStorage.theme === "dark") {
+      setDark(body, [daily, hourlyContainer]);
+      themeCheckbox.checked = true;
+    } else {
+      setLight(body, [daily, hourlyContainer]);
+    }
+  } else {
+    if (darkTheme.matches) {
+      themeCheckbox.checked = true;
+      setDark(body, [daily, hourlyContainer]);
+    } else {
+      document.querySelector(".body").style.backgroundColor = "#d69e36";
+      setLight(body, [daily, hourlyContainer]);
+    }
+  }
+  themeCheckbox.addEventListener("change", function () {
+    if (themeCheckbox.checked) {
+      localStorage.theme = "dark";
+      themeCheckbox.checked = true;
+      setDark(body, [daily, hourlyContainer]);
+    } else {
+      localStorage.theme = "light";
+      themeCheckbox.checked = false;
+      setLight(body, [daily, hourlyContainer]);
+    }
+  });
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__(2526);
@@ -4316,11 +4385,13 @@ function renderPlace(data) {
 
 
 
+
 function handlerDaily(data) {
   renderPlace(data);
   renderDailyForecast(data);
   renderDetails(data);
   renderMain();
+  toggleTheme();
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/deleteError/deleteError.js
 function deleteError() {
