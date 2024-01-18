@@ -1,12 +1,16 @@
-import { body, hourlyContainer, themeCheckbox } from "../../../variables";
+import {
+  body,
+  darkTheme,
+  hourlyContainer,
+  themeCheckbox,
+} from "../../../variables";
 import { setDark } from "./setDark";
 import { setLight } from "./setLight";
 
 export function toggleTheme() {
   const daily = Array.from(document.querySelectorAll(".dailyCard"));
-
   if (localStorage.theme) {
-    if ((localStorage.theme = "dark")) {
+    if (localStorage.theme === "dark") {
       themeCheckbox.checked = true;
       setDark(body, "#152028");
       setDark(hourlyContainer, "#44515A");

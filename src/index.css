@@ -12,5 +12,12 @@
 
 body {
   height: 100dvh;
-  background-color: rgba(214, 158, 54, 1);
+}
+
+.theme-light {
+  background-color: "#d69e36";
+}
+
+.theme-dark {
+  background-color: #152028;
 }

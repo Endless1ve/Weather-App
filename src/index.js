@@ -5,7 +5,5 @@ import { getLocation } from "./scripts/components/getLocation/getLocation";
 
 const scrollBlocks = document.querySelectorAll("#scroll");
 
-toggleTheme();
 getLocation();
-
 scrollBlocks.forEach((item) => scrollingBlocks(item));

@@ -50,7 +50,6 @@ export function getForecasts(latitude, longitude) {
 
   Promise.all(responses)
     .then((res) => res.forEach((item) => item.renderFun(item.data)))
-    .then(() => removePlug())
     .then(() => renderMain())
     .catch((err) => {
       console.log(err);

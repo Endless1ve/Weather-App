@@ -6,6 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>" />
     <title>Погода</title>
+
+    <style id="themeStyles">
+      body {
+        background-color: #d69e36;
+      }
+    </style>
+    <script>
+      const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+      if (localStorage.theme) {
+        if (localStorage.theme === "dark") {
+          document.getElementById("themeStyles").textContent = `
+        body {
+          background-color: #152028;
+        }
+        `;
+        }
+      } else if (darkTheme.matches) {
+        document.getElementById("themeStyles").textContent = `
+        body {
+          background-color: #152028;
+        }
+        `;
+      }
+    </script>
   </head>
   <body class="body">
     <div class="root">
@@ -16,7 +40,7 @@
         </div>
         <p class="plugSubtitle">A minimal weather app</p>
       </section>
-      <div class="main">
+      <div class="main" style="display: none">
         <div class="home">
           <div class="homePlace">
             <div class="placeContent">
