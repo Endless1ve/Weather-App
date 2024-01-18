@@ -4143,7 +4143,7 @@ function setLight(block, color) {
 function toggleTheme() {
   var daily = Array.from(document.querySelectorAll(".dailyCard"));
   if (localStorage.theme) {
-    if (localStorage.theme = "dark") {
+    if (localStorage.theme === "dark") {
       themeCheckbox.checked = true;
       setDark(body, "#152028");
       setDark(hourlyContainer, "#44515A");
@@ -4382,7 +4382,8 @@ function renderMain() {
   counter++;
   if (counter === 3) {
     toggleTheme();
-    var timer = setTimeout(function () {
+    removePlug();
+    setTimeout(function () {
       main.style.display = "flex";
     }, 0);
   }
@@ -4559,8 +4560,6 @@ function getForecasts(latitude, longitude) {
       return item.renderFun(item.data);
     });
   }).then(function () {
-    return removePlug();
-  }).then(function () {
     return renderMain();
   }).catch(function (err) {
     console.log(err);
@@ -4606,7 +4605,6 @@ function successLocation(position) {
 
 
 
-toggleTheme();
 getLocation();
 scrollBlocks.forEach(function (item) {
   return scrollingBlocks(item);
