@@ -3,6 +3,8 @@ let counter = 0;
 export function renderMain() {
   counter++;
   if (counter === 3) {
-    main.style.display = "flex";
+    const timer = setTimeout(() => {
+      main.style.display = "flex";
+    }, 0);
   }
 }

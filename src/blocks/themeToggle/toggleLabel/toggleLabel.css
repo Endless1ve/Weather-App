@@ -1,0 +1,27 @@
+.toggleLabel {
+  width: 60px;
+  height: 30px;
+  background: #fff;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggleLabel:after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  background: #d69e36;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+.toggleCheckbox:checked + .toggleLabel:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+  background: #152028;
+}

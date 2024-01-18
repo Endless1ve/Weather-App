@@ -1,0 +1,7 @@
+@import url("./toggleCheckbox/toggleCheckbox.css");
+@import url("./toggleLabel/toggleLabel.css");
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+}
