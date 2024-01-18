@@ -13,11 +13,3 @@
 body {
   height: 100dvh;
 }
-
-.theme-light {
-  background-color: "#d69e36";
-}
-
-.theme-dark {
-  background-color: #152028;
-}
