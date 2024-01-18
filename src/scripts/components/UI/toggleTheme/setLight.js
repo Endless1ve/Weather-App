@@ -1,12 +1,5 @@
-export function setLight(mainBlock, anotherBlocks) {
-  mainBlock.style.backgroundColor = "#d69e36";
-  if (anotherBlocks) {
-    anotherBlocks.forEach((item) => {
-      if (item.length) {
-        item.forEach((newItem) => (newItem.style.backgroundColor = "#EACA8F"));
-      } else {
-        item.style.backgroundColor = "#EACA8F";
-      }
-    });
-  }
+export function setLight(block, color) {
+  if (Array.isArray(block)) {
+    block.forEach((item) => (item.style.backgroundColor = color));
+  } else block.style.backgroundColor = color;
 }

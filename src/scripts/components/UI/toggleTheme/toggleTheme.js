@@ -1,41 +1,41 @@
-import {
-  body,
-  darkTheme,
-  hourlyContainer,
-  themeCheckbox,
-} from "../../../variables";
+import { body, hourlyContainer, themeCheckbox } from "../../../variables";
 import { setDark } from "./setDark";
 import { setLight } from "./setLight";
 
 export function toggleTheme() {
-  const daily = document.querySelectorAll(".dailyCard");
+  const daily = Array.from(document.querySelectorAll(".dailyCard"));
 
   if (localStorage.theme) {
-    if (localStorage.theme === "dark") {
-      setDark(body, [daily, hourlyContainer]);
+    if ((localStorage.theme = "dark")) {
       themeCheckbox.checked = true;
+      setDark(body, "#152028");
+      setDark(hourlyContainer, "#44515A");
+      setDark(daily, "#44515A");
     } else {
-      setLight(body, [daily, hourlyContainer]);
+      setLight(body, "#d69e36");
+      setLight(hourlyContainer, "#EACA8F");
+      setLight(daily, "#EACA8F");
     }
   } else {
     if (darkTheme.matches) {
       themeCheckbox.checked = true;
-      setDark(body, [daily, hourlyContainer]);
-    } else {
-      document.querySelector(".body").style.backgroundColor = "#d69e36";
-      setLight(body, [daily, hourlyContainer]);
+      setDark(body, "#152028");
+      setDark(hourlyContainer, "#44515A");
+      setDark(daily, "#44515A");
     }
   }
 
   themeCheckbox.addEventListener("change", () => {
     if (themeCheckbox.checked) {
       localStorage.theme = "dark";
-      themeCheckbox.checked = true;
-      setDark(body, [daily, hourlyContainer]);
+      setDark(body, "#152028");
+      setDark(hourlyContainer, "#44515A");
+      setDark(daily, "#44515A");
     } else {
       localStorage.theme = "light";
-      themeCheckbox.checked = false;
-      setLight(body, [daily, hourlyContainer]);
+      setLight(body, "#d69e36");
+      setLight(hourlyContainer, "#EACA8F");
+      setLight(daily, "#EACA8F");
     }
   });
 }

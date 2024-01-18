@@ -1,8 +1,11 @@
 import "./index.css";
 import { scrollingBlocks } from "./scripts/components/UI/scrollingBlocks/scrollingBlocks";
-import { plugTheme } from "./scripts/components/UI/toggleTheme/plugTheme";
+import { toggleTheme } from "./scripts/components/UI/toggleTheme/toggleTheme";
 import { getLocation } from "./scripts/components/getLocation/getLocation";
-plugTheme();
-getLocation();
+
 const scrollBlocks = document.querySelectorAll("#scroll");
+
+toggleTheme();
+getLocation();
+
 scrollBlocks.forEach((item) => scrollingBlocks(item));

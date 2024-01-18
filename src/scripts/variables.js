@@ -34,6 +34,7 @@ import snow from "../vendor/images/snow.svg";
 import sun from "../vendor/images/sun.svg";
 import rain from "../vendor/images/rain.svg";
 import weatherPicError from "../vendor/images/weather-error.svg";
+import moon from "../vendor/images/moon.svg";
 import errorClose from "../vendor/images/close.svg";
 //--Image forecast variables--
 const weatherPics = [
@@ -43,7 +44,7 @@ const weatherPics = [
     idArr: [14, 15, 16, 21, 22, 600, 601, 602, 611, 612, 613, 620, 621, 622],
   },
   { pic: fog, idArr: [5, 6, 701, 711, 721, 731, 741, 751, 761, 762, 771, 781] },
-  { pic: sun, idArr: [800, 1, 2] },
+  { pic: sun, idArr: [800, 1, 2], nightPic: moon },
   {
     pic: rain,
     idArr: [

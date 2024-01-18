@@ -1,4 +1,3 @@
-import { toggleTheme } from "../UI/toggleTheme/toggleTheme";
 import { renderDailyForecast } from "../renderDailyForecast/renderDailyForecast";
 import { renderDetails } from "../renderDetails/renderDetails";
 import { renderMain } from "../renderMain/renderMain";
@@ -9,5 +8,4 @@ export function handlerDaily(data) {
   renderDailyForecast(data);
   renderDetails(data);
   renderMain();
-  toggleTheme();
 }
