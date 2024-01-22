@@ -10,6 +10,7 @@
   border-radius: 20px;
   padding: 15px;
   overflow-x: scroll;
+  transition: background-color 0.3s ease;
   background: rgba(234, 202, 143, 0.7);
   cursor: grab;
   user-select: none;
@@ -47,9 +48,3 @@
     padding: 20px;
   }
 }
-
-/* @media (prefers-color-scheme: dark) {
-  .hourlyContent {
-    background-color: #44515a;
-  }
-} */

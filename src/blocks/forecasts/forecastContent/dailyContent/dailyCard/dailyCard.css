@@ -8,10 +8,5 @@
   border-radius: 20px;
   padding: 10px 20px;
   background: rgba(234, 202, 143, 0.7);
+  transition: background-color 0.3s ease;
 }
-
-/* @media (prefers-color-scheme: dark) {
-  .dailyCard {
-    background-color: #44515a;
-  }
-} */
