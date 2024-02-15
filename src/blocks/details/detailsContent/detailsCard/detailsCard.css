@@ -1,0 +1,18 @@
+@import url("./detailsImage/detailsImage.css");
+@import url("./detailsTexts/detailsTexts.css");
+
+.detailsCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 340px;
+}
+
+@media screen and (min-width: 1024px) {
+  .detailsCard {
+    flex-direction: row;
+    gap: 0 10px;
+  }
+}

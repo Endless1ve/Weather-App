@@ -1,2 +1,6 @@
 @import url("./detailTitle/detailTitle.css");
 @import url("./detailValue/detailValue.css");
+
+.detailsTexts {
+  white-space: nowrap;
+}

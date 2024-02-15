@@ -1,0 +1,17 @@
+.detailTitle {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media screen and (max-width: 425px) {
+  .detailTitle {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .detailTitle {
+    text-align: left;
+  }
+}
