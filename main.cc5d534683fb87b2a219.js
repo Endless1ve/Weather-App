@@ -4125,6 +4125,7 @@ var hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 var weeklyContainer = document.querySelector(".dailyContent");
 //theme variables
+var darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
 var themeCheckbox = document.querySelector(".toggleCheckbox");
 //--image variables--
 
@@ -4545,6 +4546,10 @@ function initTheme() {
   if (theme) {
     changeTheme(theme);
     if (theme === "dark") {
+      themeCheckbox.checked = true;
+    }
+  } else {
+    if (darkTheme) {
       themeCheckbox.checked = true;
     }
   }
