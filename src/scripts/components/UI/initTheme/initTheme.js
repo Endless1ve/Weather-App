@@ -1,4 +1,5 @@
-import changeTheme from "../toggleTheme/toggleTheme";
+import { themeCheckbox } from "../../../variables";
+import changeTheme from "../changeTheme/changeTheme";
 
 export default function initTheme() {
   const theme = localStorage.getItem("theme");

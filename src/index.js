@@ -1,9 +1,9 @@
 import "./index.css";
 import { scrollingBlocks } from "./scripts/components/UI/scrollingBlocks/scrollingBlocks";
 import { getLocation } from "./scripts/components/getLocation/getLocation";
-import { changeTheme } from "./scripts/components/UI/toggleTheme/toggleTheme";
 import { themeCheckbox } from "./scripts/variables";
-import { initTheme } from "./scripts/components/UI/initTheme/initTheme";
+import initTheme from "./scripts/components/UI/initTheme/initTheme";
+import changeTheme from "./scripts/components/UI/changeTheme/changeTheme";
 
 const scrollBlocks = document.querySelectorAll("#scroll");
 initTheme();

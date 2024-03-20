@@ -10,7 +10,7 @@
   border-radius: 20px;
   padding: 15px;
   overflow-x: scroll;
-  background: rgba(234, 202, 143, 0.7);
+  background: var(--card-bg);
   transition: background-color 0.3s ease;
   cursor: grab;
   user-select: none;
