@@ -1,5 +1,4 @@
 import { deletePreloader } from "../../preloader/deletePreloader";
-import { removePlug } from "../../removePlug/removePlug";
 import { handlerDaily } from "../../handlerDaily/handlerDaily";
 import { getDaysApi } from "../dateApi/dateApi";
 import { renderMain } from "../../renderMain/renderMain";
