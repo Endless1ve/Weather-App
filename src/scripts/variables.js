@@ -5,7 +5,7 @@ const PRIVATE_KEY_OPENWEATHER = OPENWEATHER_API_KEY;
 const PRIVATE_KEY_METEOSTAT = METEOSTAT_API_KEY;
 // --DOM variables--
 const body = document.querySelector(".body");
-const root = document.querySelector(".root");
+const root = document.documentElement;
 const main = document.querySelector(".main");
 //plug and preloader
 const plug = document.querySelector(".plug");
@@ -23,7 +23,6 @@ const hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 const weeklyContainer = document.querySelector(".dailyContent");
 //theme variables
-const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
 const themeCheckbox = document.querySelector(".toggleCheckbox");
 //--image variables--
 import cloudy from "../vendor/images/cloudy.svg";
@@ -99,6 +98,5 @@ export {
   PRIVATE_KEY_OPENWEATHER,
   PRIVATE_KEY_METEOSTAT,
   errorClose,
-  darkTheme,
   themeCheckbox,
 };

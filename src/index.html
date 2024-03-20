@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="author" content="Artem 'Endless1ve' Tulupov" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>" />
     <title>Погода</title>
@@ -12,7 +13,7 @@
         background-color: #d69e36;
       }
     </style>
-    <script>
+    <!-- <script>
       const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
       if (localStorage.theme) {
         if (localStorage.theme === "dark") {
@@ -29,7 +30,7 @@
         }
         `;
       }
-    </script>
+    </script> -->
   </head>
   <body class="body">
     <div class="root">

@@ -1,6 +1,7 @@
 @import url("./blocks/normalize/normalize.css");
 @import url("./vendor/fonts/fonts.css");
 @import url("./blocks/root/root.css");
+@import url("./blocks/themes/themes.css");
 @import url("./blocks/themeToggle/themeToggle.css");
 @import url("./blocks/plug/plug.css");
 @import url("./blocks/preloader/preloader.css");
@@ -13,4 +14,5 @@
 body {
   height: 100dvh;
   transition: background-color 0.3s ease;
+  background-color: var(--bg-color);
 }

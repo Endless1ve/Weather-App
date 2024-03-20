@@ -7,6 +7,6 @@
   align-items: center;
   border-radius: 20px;
   padding: 10px 20px;
-  background: rgba(234, 202, 143, 0.7);
+  background-color: var(--card-bg);
   transition: background-color 0.3s ease;
 }
