@@ -14,3 +14,27 @@
   font-style: normal;
   line-height: normal;
 }
+
+:root.theme-dark {
+  --bg-color: #152028;
+  --card-bg: #44515a;
+}
+
+:root.theme-light {
+  --bg-color: #d69e36;
+  --card-bg: #eaca8f;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #d69e36;
+    --card-bg: #eaca8f;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #152028;
+    --card-bg: #44515a;
+  }
+}
