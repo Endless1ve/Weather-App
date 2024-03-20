@@ -5,11 +5,13 @@
 @import url("./blocks/preloader/preloader.css");
 @import url("./blocks/main/main.css");
 @import url("./blocks/home/home.css");
+@import url("./blocks/themeToggle/themeToggle.css");
 @import url("./blocks/error/error.css");
 @import url("./blocks/forecasts/forecasts.css");
 @import url("./blocks/details/details.css");
 
 body {
   height: 100dvh;
-  background-color: rgba(214, 158, 54, 1);
+  background-color: var(--bg-color) !important;
+  transition: background-color 0.3s ease;
 }

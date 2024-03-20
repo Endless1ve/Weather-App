@@ -1,6 +1,9 @@
 @import url("./placeContent/placeContent.css");
 
 .homePlace {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   border-bottom: 1px solid #ffffff4f;
   padding: 0 0 20px 0;
 }

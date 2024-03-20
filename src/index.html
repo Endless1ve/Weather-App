@@ -6,6 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>" />
     <title>Погода</title>
+    <style id="themeStyles">
+      body {
+        background-color: #d69e36;
+      }
+    </style>
+    <script>
+      const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+      if (localStorage.theme) {
+        if (localStorage.theme === "dark") {
+          document.getElementById("themeStyles").textContent = `
+        body {
+          background-color: #152028;
+        }`;
+        }
+      } else if (darkTheme.matches) {
+        document.getElementById("themeStyles").textContent = `
+        body {
+          background-color: #152028;
+        }`;
+      }
+    </script>
   </head>
   <body class="body">
     <div class="root">
@@ -25,6 +46,10 @@
                 alt="Иконка локации"
                 class="placeIcon"
               />
+            </div>
+            <div class="themeToggle">
+              <input class="toggleCheckbox" type="checkbox" id="switch" />
+              <label class="toggleLabel" for="switch"></label>
             </div>
           </div>
           <div class="homeForecast"></div>
