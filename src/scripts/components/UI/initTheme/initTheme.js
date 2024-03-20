@@ -1,4 +1,4 @@
-import { darkTheme, themeCheckbox } from "../../../variables";
+import { isBrowserThemeDark, themeCheckbox } from "../../../variables";
 import changeTheme from "../changeTheme/changeTheme";
 
 export default function initTheme() {
@@ -9,7 +9,7 @@ export default function initTheme() {
       themeCheckbox.checked = true;
     }
   } else {
-    if (darkTheme) {
+    if (isBrowserThemeDark) {
       themeCheckbox.checked = true;
     }
   }
