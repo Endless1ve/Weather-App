@@ -4057,6 +4057,12 @@ function deletePreloader() {
     preloader.remove();
   }
 }
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__(2526);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
+var es_symbol_description = __webpack_require__(1817);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
+var es_array_slice = __webpack_require__(7042);
 // EXTERNAL MODULE: ./src/vendor/images/cloudy.svg
 var cloudy = __webpack_require__(5275);
 var cloudy_default = /*#__PURE__*/__webpack_require__.n(cloudy);
@@ -4095,7 +4101,7 @@ var PRIVATE_KEY_OPENWEATHER = "15000a2461a052e3387841ebd0b2d6e3";
 var PRIVATE_KEY_METEOSTAT = "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1";
 // --DOM variables--
 var body = document.querySelector(".body");
-var root = document.querySelector(".root");
+var root = document.documentElement;
 var main = document.querySelector(".main");
 //plug and preloader
 var plug = document.querySelector(".plug");
@@ -4119,7 +4125,6 @@ var hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 var weeklyContainer = document.querySelector(".dailyContent");
 //theme variables
-var darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
 var themeCheckbox = document.querySelector(".toggleCheckbox");
 //--image variables--
 
@@ -4160,17 +4165,6 @@ var weatherPics = [{
 var dayArray = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
 var monthArray = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"];
 
-;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
-
-function removePlug() {
-  plug.remove();
-}
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
-var es_symbol = __webpack_require__(2526);
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
-var es_symbol_description = __webpack_require__(1817);
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
-var es_array_slice = __webpack_require__(7042);
 ;// CONCATENATED MODULE: ./src/scripts/components/API/dateApi/dateApi.js
 
 
@@ -4312,76 +4306,18 @@ function renderDetails(data) {
   windSpeed.textContent = Math.round(data.wind.speed) + " км/ч";
   pressure.textContent = data.main.pressure;
 }
-;// CONCATENATED MODULE: ./src/scripts/components/UI/toggleTheme/setDark.js
+;// CONCATENATED MODULE: ./src/scripts/components/removePlug/removePlug.js
 
-
-function setDark(block, color) {
-  if (Array.isArray(block)) {
-    block.forEach(function (item) {
-      return item.style.backgroundColor = color;
-    });
-  } else block.style.backgroundColor = color;
-}
-;// CONCATENATED MODULE: ./src/scripts/components/UI/toggleTheme/setLight.js
-
-
-function setLight(block, color) {
-  if (Array.isArray(block)) {
-    block.forEach(function (item) {
-      return item.style.backgroundColor = color;
-    });
-  } else block.style.backgroundColor = color;
-}
-;// CONCATENATED MODULE: ./src/scripts/components/UI/toggleTheme/toggleTheme.js
-
-
-
-
-
-function toggleTheme() {
-  var daily = Array.from(document.querySelectorAll(".dailyCard"));
-  if (localStorage.theme) {
-    if (localStorage.theme === "dark") {
-      themeCheckbox.checked = true;
-      setDark(body, "#152028");
-      setDark(hourlyContainer, "#44515A");
-      setDark(daily, "#44515A");
-    } else {
-      setLight(body, "#d69e36");
-      setLight(hourlyContainer, "#EACA8F");
-      setLight(daily, "#EACA8F");
-    }
-  } else {
-    if (darkTheme.matches) {
-      themeCheckbox.checked = true;
-      setDark(body, "#152028");
-      setDark(hourlyContainer, "#44515A");
-      setDark(daily, "#44515A");
-    }
-  }
-  themeCheckbox.addEventListener("change", function () {
-    if (themeCheckbox.checked) {
-      localStorage.theme = "dark";
-      setDark(body, "#152028");
-      setDark(hourlyContainer, "#44515A");
-      setDark(daily, "#44515A");
-    } else {
-      localStorage.theme = "light";
-      setLight(body, "#d69e36");
-      setLight(hourlyContainer, "#EACA8F");
-      setLight(daily, "#EACA8F");
-    }
-  });
+function removePlug() {
+  plug.remove();
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/renderMain/renderMain.js
-
 
 
 var counter = 0;
 function renderMain() {
   counter++;
   if (counter === 3) {
-    toggleTheme();
     removePlug();
     main.style.display = "flex";
   }
@@ -4518,7 +4454,6 @@ function handlerWeather(data) {
 
 
 
-
 function getForecasts(latitude, longitude) {
   var _getDaysApi = getDaysApi(),
     newCurrDate = _getDaysApi.newCurrDate,
@@ -4595,6 +4530,25 @@ function successLocation(position) {
     longitude = _position$coords.longitude;
   getForecasts(latitude, longitude);
 }
+;// CONCATENATED MODULE: ./src/scripts/components/UI/changeTheme/changeTheme.js
+
+function changeTheme(theme) {
+  root.className = "";
+  root.classList.add("theme-".concat(theme));
+  localStorage.setItem("theme", theme);
+}
+;// CONCATENATED MODULE: ./src/scripts/components/UI/initTheme/initTheme.js
+
+
+function initTheme() {
+  var theme = localStorage.getItem("theme");
+  if (theme) {
+    changeTheme(theme);
+    if (theme === "dark") {
+      themeCheckbox.checked = true;
+    }
+  }
+}
 ;// CONCATENATED MODULE: ./src/index.js
 
 
@@ -4602,9 +4556,18 @@ function successLocation(position) {
 
 
 
+
+
+var src_scrollBlocks = document.querySelectorAll("#scroll");
+initTheme();
 getLocation();
-scrollBlocks.forEach(function (item) {
+src_scrollBlocks.forEach(function (item) {
   return scrollingBlocks(item);
+});
+themeCheckbox.addEventListener("change", function () {
+  if (themeCheckbox.checked) {
+    changeTheme("dark");
+  } else changeTheme("light");
 });
 })();
 
