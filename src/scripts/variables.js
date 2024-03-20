@@ -23,6 +23,7 @@ const hourlyContainer = document.querySelector(".hourlyContent");
 //daily card container
 const weeklyContainer = document.querySelector(".dailyContent");
 //theme variables
+const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
 const themeCheckbox = document.querySelector(".toggleCheckbox");
 //--image variables--
 import cloudy from "../vendor/images/cloudy.svg";
@@ -99,4 +100,5 @@ export {
   PRIVATE_KEY_METEOSTAT,
   errorClose,
   themeCheckbox,
+  darkTheme,
 };
