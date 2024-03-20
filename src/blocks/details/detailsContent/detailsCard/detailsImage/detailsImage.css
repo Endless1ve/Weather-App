@@ -1,6 +1,6 @@
 .detailsImage {
-  max-width: 50px;
   width: 100%;
+  max-width: 50px;
 }
 @media screen and (max-width: 600px) {
   .detailsImage {
