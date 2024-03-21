@@ -3807,7 +3807,7 @@ module.exports = __webpack_require__.p + "vendor/images/115584750bd9a89dad786f36
 /***/ 5275:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "vendor/images/0619341d2dae35068131b16841282c4a.svg";
+module.exports = __webpack_require__.p + "vendor/images/61f9396a57c43af5154ba7e0587a2072.svg";
 
 /***/ }),
 
@@ -3822,13 +3822,6 @@ module.exports = __webpack_require__.p + "vendor/images/5499bf0a74c04ced25fbc771
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "vendor/images/9980db08da633e506ec6fe13bb7a5e33.svg";
-
-/***/ }),
-
-/***/ 9883:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "vendor/images/ce5f3423db3a9247f0eca50ce569388b.svg";
 
 /***/ }),
 
@@ -3968,6 +3961,120 @@ var __webpack_exports__ = {};
 var es_object_to_string = __webpack_require__(1539);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__(4747);
+// EXTERNAL MODULE: ./src/vendor/images/cloudy.svg
+var cloudy = __webpack_require__(5275);
+var cloudy_default = /*#__PURE__*/__webpack_require__.n(cloudy);
+// EXTERNAL MODULE: ./src/vendor/images/fog.svg
+var fog = __webpack_require__(7145);
+var fog_default = /*#__PURE__*/__webpack_require__.n(fog);
+// EXTERNAL MODULE: ./src/vendor/images/lightning.svg
+var lightning = __webpack_require__(3496);
+var lightning_default = /*#__PURE__*/__webpack_require__.n(lightning);
+// EXTERNAL MODULE: ./src/vendor/images/rainAndSnow.svg
+var rainAndSnow = __webpack_require__(8353);
+var rainAndSnow_default = /*#__PURE__*/__webpack_require__.n(rainAndSnow);
+// EXTERNAL MODULE: ./src/vendor/images/snow.svg
+var snow = __webpack_require__(8720);
+var snow_default = /*#__PURE__*/__webpack_require__.n(snow);
+// EXTERNAL MODULE: ./src/vendor/images/sun.svg
+var sun = __webpack_require__(7104);
+var sun_default = /*#__PURE__*/__webpack_require__.n(sun);
+// EXTERNAL MODULE: ./src/vendor/images/rain.svg
+var rain = __webpack_require__(1654);
+var rain_default = /*#__PURE__*/__webpack_require__.n(rain);
+// EXTERNAL MODULE: ./src/vendor/images/weather-error.svg
+var weather_error = __webpack_require__(7616);
+var weather_error_default = /*#__PURE__*/__webpack_require__.n(weather_error);
+// EXTERNAL MODULE: ./src/vendor/images/close.svg
+var images_close = __webpack_require__(6922);
+var close_default = /*#__PURE__*/__webpack_require__.n(images_close);
+;// CONCATENATED MODULE: ./src/scripts/variables.js
+// --API variables--
+// const OPENWEATHER_API_KEY = OPENWEATHER_API_KEY;
+// const METEOSTAT_API_KEY = METEOSTAT_API_KEY;
+var PRIVATE_KEY_OPENWEATHER = "15000a2461a052e3387841ebd0b2d6e3";
+var PRIVATE_KEY_METEOSTAT = "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1";
+// --DOM variables--
+var root = document.documentElement;
+var main = document.querySelector(".main");
+//plug and preloader
+var plug = document.querySelector(".plug");
+var preloaderBlock = document.querySelector(".plugContent");
+var preloader = document.querySelector(".preloader");
+//home forecast elements
+var homeForecastBlock = document.querySelector(".homeForecast");
+var homePlaceBlock = document.querySelector(".placeContent");
+var feelsLike = document.querySelector(".feelsLike");
+var humidity = document.querySelector(".humidity");
+var windSpeed = document.querySelector(".windSpeed");
+var pressure = document.querySelector(".pressure");
+//theme variables
+var isBrowserThemeDark = window.matchMedia("(prefers-color-scheme: dark)");
+var themeCheckbox = document.querySelector(".toggleCheckbox");
+//hourly card container
+var hourlyContainer = document.querySelector(".hourlyContent");
+//daily card container
+var weeklyContainer = document.querySelector(".dailyContent");
+//--image variables--
+
+
+
+
+
+
+
+
+
+//--Image forecast variables--
+var weatherPics = [{
+  pic: (cloudy_default()),
+  idArr: [3, 4, 801, 802, 803, 804]
+}, {
+  pic: (snow_default()),
+  idArr: [14, 15, 16, 21, 22, 600, 601, 602, 611, 612, 613, 620, 621, 622]
+}, {
+  pic: (fog_default()),
+  idArr: [5, 6, 701, 711, 721, 731, 741, 751, 761, 762, 771, 781]
+}, {
+  pic: (sun_default()),
+  idArr: [800, 1, 2]
+}, {
+  pic: (rain_default()),
+  idArr: [7, 8, 9, 12, 13, 17, 18, 19, 20, 300, 301, 302, 310, 311, 312, 313, 314, 321, 500, 501, 502, 503, 504, 511, 520, 521, 522, 531]
+}, {
+  pic: (rainAndSnow_default()),
+  idArr: [615, 616, 10, 11]
+}, {
+  pic: (lightning_default()),
+  idArr: [23, 24, 25, 26, 27, 200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
+}];
+//date arrays
+var dayArray = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+var monthArray = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"];
+
+;// CONCATENATED MODULE: ./src/scripts/components/UI/changeTheme/changeTheme.js
+
+function changeTheme(theme) {
+  root.className = "";
+  root.classList.add("theme-".concat(theme));
+  localStorage.setItem("theme", theme);
+}
+;// CONCATENATED MODULE: ./src/scripts/components/UI/initTheme/initTheme.js
+
+
+function initTheme() {
+  var theme = localStorage.getItem("theme");
+  if (theme) {
+    changeTheme(theme);
+    if (theme === "dark") {
+      themeCheckbox.checked = true;
+    }
+  } else {
+    if (isBrowserThemeDark) {
+      themeCheckbox.checked = true;
+    }
+  }
+}
 ;// CONCATENATED MODULE: ./src/scripts/components/UI/scrollingBlocks/scrollingBlocks.js
 function scrollingBlocks(block) {
   var isScrolling = false;
@@ -3998,44 +4105,8 @@ function scrollingBlocks(block) {
   block.addEventListener("mousedown", startScroll);
   block.addEventListener("mousewheel", wheelScroll);
 }
-
-// export function scrollingBlocks(block) {
-//   let isScrolling = false;
-//   let startX, scrollLeft;
-//   block.addEventListener("mouseleave", (event) => {
-//     event.stopPropagation();
-//     console.log(event);
-//   });
-// }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
 var es_promise = __webpack_require__(8674);
-;// CONCATENATED MODULE: ./src/scripts/UI/error/error.js
-var closeErrorBtn = document.querySelector(".errorClose");
-var bar = document.querySelector(".errorProgress");
-function displayError() {
-  var root = document.querySelector(".root");
-  var errorBlock = "\n  <div class=\"error\">\n    <img src=\"close\" alt=\"\" class=\"errorClose\"/>\n    <p class=\"errorText\">\u0421\u0435\u0440\u0432\u0435\u0440 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D</p>\n    <div class=\"errorBar\">\n      <div class=\"errorProgress\"></div>\n      </div>\n  </div>";
-  root.insertAdjacentHTML("beforeend", errorBlock);
-  // let progress = 0;
-  // const increment = 100 / ((10 * 1000) / 50);
-  // const interval = setInterval(() => {
-  //   progress += increment;
-  //   bar.style.width = progress + "%";
-  //   if (progress >= 106 || !error.classList.contains("errorVisible")) {
-  //     clearInterval(interval);
-  //     closeError();
-  //   }
-  // }, 50);
-  // closeErrorBtn.addEventListener("click", closeError);
-}
-
-function closeError() {
-  document.querySelector(".error");
-  closeErrorBtn.removeEventListener("click", closeError);
-  setTimeout(function () {
-    bar.style.width = "0";
-  }, 500);
-}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__(2222);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
@@ -4063,109 +4134,6 @@ var es_symbol = __webpack_require__(2526);
 var es_symbol_description = __webpack_require__(1817);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
 var es_array_slice = __webpack_require__(7042);
-// EXTERNAL MODULE: ./src/vendor/images/cloudy.svg
-var cloudy = __webpack_require__(5275);
-var cloudy_default = /*#__PURE__*/__webpack_require__.n(cloudy);
-// EXTERNAL MODULE: ./src/vendor/images/fog.svg
-var fog = __webpack_require__(7145);
-var fog_default = /*#__PURE__*/__webpack_require__.n(fog);
-// EXTERNAL MODULE: ./src/vendor/images/lightning.svg
-var lightning = __webpack_require__(3496);
-var lightning_default = /*#__PURE__*/__webpack_require__.n(lightning);
-// EXTERNAL MODULE: ./src/vendor/images/rainAndSnow.svg
-var rainAndSnow = __webpack_require__(8353);
-var rainAndSnow_default = /*#__PURE__*/__webpack_require__.n(rainAndSnow);
-// EXTERNAL MODULE: ./src/vendor/images/snow.svg
-var snow = __webpack_require__(8720);
-var snow_default = /*#__PURE__*/__webpack_require__.n(snow);
-// EXTERNAL MODULE: ./src/vendor/images/sun.svg
-var sun = __webpack_require__(7104);
-var sun_default = /*#__PURE__*/__webpack_require__.n(sun);
-// EXTERNAL MODULE: ./src/vendor/images/rain.svg
-var rain = __webpack_require__(1654);
-var rain_default = /*#__PURE__*/__webpack_require__.n(rain);
-// EXTERNAL MODULE: ./src/vendor/images/weather-error.svg
-var weather_error = __webpack_require__(7616);
-var weather_error_default = /*#__PURE__*/__webpack_require__.n(weather_error);
-// EXTERNAL MODULE: ./src/vendor/images/moon.svg
-var moon = __webpack_require__(9883);
-var moon_default = /*#__PURE__*/__webpack_require__.n(moon);
-// EXTERNAL MODULE: ./src/vendor/images/close.svg
-var images_close = __webpack_require__(6922);
-var close_default = /*#__PURE__*/__webpack_require__.n(images_close);
-;// CONCATENATED MODULE: ./src/scripts/variables.js
-// --API variables--
-// const OPENWEATHER_API_KEY = OPENWEATHER_API_KEY;
-// const METEOSTAT_API_KEY = METEOSTAT_API_KEY;
-var PRIVATE_KEY_OPENWEATHER = "15000a2461a052e3387841ebd0b2d6e3";
-var PRIVATE_KEY_METEOSTAT = "afc8a65e30msh735c1f0c55d4ab9p129605jsn48c2e1f0afc1";
-// --DOM variables--
-var body = document.querySelector(".body");
-var root = document.documentElement;
-var main = document.querySelector(".main");
-//plug and preloader
-var plug = document.querySelector(".plug");
-var preloaderBlock = document.querySelector(".plugContent");
-var preloader = document.querySelector(".preloader");
-//home forecast elements
-var feelsLikeBlock = document.querySelector(".feelsLike");
-var windSpeedBlock = document.querySelector(".windSpeed");
-var humidityBlock = document.querySelector(".humidity");
-var pressureBlock = document.querySelector(".pressure");
-//scroll block
-var scrollBlocks = document.querySelectorAll("#scroll");
-var homeForecastBlock = document.querySelector(".homeForecast");
-var homePlaceBlock = document.querySelector(".placeContent");
-var feelsLike = document.querySelector(".feelsLike");
-var humidity = document.querySelector(".humidity");
-var windSpeed = document.querySelector(".windSpeed");
-var pressure = document.querySelector(".pressure");
-//hourly card container
-var hourlyContainer = document.querySelector(".hourlyContent");
-//daily card container
-var weeklyContainer = document.querySelector(".dailyContent");
-//theme variables
-var darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
-var themeCheckbox = document.querySelector(".toggleCheckbox");
-//--image variables--
-
-
-
-
-
-
-
-
-
-
-//--Image forecast variables--
-var weatherPics = [{
-  pic: (cloudy_default()),
-  idArr: [3, 4, 801, 802, 803, 804]
-}, {
-  pic: (snow_default()),
-  idArr: [14, 15, 16, 21, 22, 600, 601, 602, 611, 612, 613, 620, 621, 622]
-}, {
-  pic: (fog_default()),
-  idArr: [5, 6, 701, 711, 721, 731, 741, 751, 761, 762, 771, 781]
-}, {
-  pic: (sun_default()),
-  idArr: [800, 1, 2],
-  nightPic: (moon_default())
-}, {
-  pic: (rain_default()),
-  idArr: [7, 8, 9, 12, 13, 17, 18, 19, 20, 300, 301, 302, 310, 311, 312, 313, 314, 321, 500, 501, 502, 503, 504, 511, 520, 521, 522, 531]
-}, {
-  pic: (rainAndSnow_default()),
-  idArr: [615, 616, 10, 11]
-}, {
-  pic: (lightning_default()),
-  idArr: [23, 24, 25, 26, 27, 200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
-}];
-//date arrays
-var dayArray = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
-var monthArray = ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"];
-
 ;// CONCATENATED MODULE: ./src/scripts/components/API/dateApi/dateApi.js
 
 
@@ -4257,8 +4225,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 function getForecastPicture(id) {
-  var hours = new Date().getHours();
-  hours = 21;
   var src = "";
   var _iterator = _createForOfIteratorHelper(weatherPics),
     _step;
@@ -4266,9 +4232,7 @@ function getForecastPicture(id) {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var item = _step.value;
       if (item.idArr.includes(id)) {
-        if ((hours >= 21 || hours <= 4) && "nightPic" in item) {
-          src = item.nightPic;
-        } else src = item.pic;
+        src = item.pic;
         break;
       } else {
         src = (weather_error_default());
@@ -4319,8 +4283,8 @@ var counter = 0;
 function renderMain() {
   counter++;
   if (counter === 3) {
-    removePlug();
     main.style.display = "flex";
+    removePlug();
   }
 }
 ;// CONCATENATED MODULE: ./src/scripts/components/renderPlace/renderPlace.js
@@ -4508,7 +4472,6 @@ function getForecasts(latitude, longitude) {
 
 
 
-
 function getLocation() {
   navigator.geolocation.getCurrentPosition(successLocation, geolocationAPI);
 }
@@ -4520,7 +4483,6 @@ function geolocationAPI() {
       longitude = res.longitude;
     getForecasts(latitude, longitude);
   }).catch(function (err) {
-    displayError();
     deletePreloader();
     renderError();
   });
@@ -4531,29 +4493,6 @@ function successLocation(position) {
     longitude = _position$coords.longitude;
   getForecasts(latitude, longitude);
 }
-;// CONCATENATED MODULE: ./src/scripts/components/UI/changeTheme/changeTheme.js
-
-function changeTheme(theme) {
-  root.className = "";
-  root.classList.add("theme-".concat(theme));
-  localStorage.setItem("theme", theme);
-}
-;// CONCATENATED MODULE: ./src/scripts/components/UI/initTheme/initTheme.js
-
-
-function initTheme() {
-  var theme = localStorage.getItem("theme");
-  if (theme) {
-    changeTheme(theme);
-    if (theme === "dark") {
-      themeCheckbox.checked = true;
-    }
-  } else {
-    if (darkTheme) {
-      themeCheckbox.checked = true;
-    }
-  }
-}
 ;// CONCATENATED MODULE: ./src/index.js
 
 
@@ -4563,10 +4502,10 @@ function initTheme() {
 
 
 
-var src_scrollBlocks = document.querySelectorAll("#scroll");
 initTheme();
 getLocation();
-src_scrollBlocks.forEach(function (item) {
+var scrollBlocks = document.querySelectorAll("#scroll");
+scrollBlocks.forEach(function (item) {
   return scrollingBlocks(item);
 });
 themeCheckbox.addEventListener("change", function () {
