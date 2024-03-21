@@ -1,5 +1,5 @@
 import { plug } from "../../variables";
 
-export function removePlug() {
+export default function removePlug() {
   plug.remove();
 }
