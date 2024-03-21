@@ -3,8 +3,8 @@ import { createHourlyCard } from "../createHourlyCard/createHourlyCard";
 import { renderCardDom } from "../renderCardDom/renderCardDom";
 import { renderMain } from "../renderMain/renderMain";
 
-export function handlerHourly(data) {
-  const newData = data.data.filter((item) => {
+export default function handlerHourly(data) {
+  const newData = data.filter((item) => {
     return new Date(item.time) > new Date();
   });
   newData.forEach((element) => {
